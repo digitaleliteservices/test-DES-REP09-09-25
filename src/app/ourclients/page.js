@@ -1,4 +1,6 @@
 "use client";
+import { useEffect, useRef } from "react";
+import "./ourclients.css";
 
 const clients = [
   {
@@ -21,35 +23,73 @@ const clients = [
     src: "/assets/SriMathru2.jpg",
     url: "https://srimatru.in/",
   },
-  {
-    name: "Gnanasamrudhi",
-    src: "/assets/gnanasamrudhi.png",
-    // url: "https://gnanasamrudhicharitabletrust.com/",
-  },
+  { name: "Gnanasamrudhi", src: "/assets/gnanasamrudhi.png" },
 ];
 
-const OurClients = () => {
+export default function OurClients() {
+  const containerRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    cardsRef.current = cardsRef.current.slice(0, clients.length);
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) {
+      cardsRef.current.forEach((el) => el && el.classList.add("in-view"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target;
+          if (entry.isIntersecting) el.classList.add("in-view");
+          else el.classList.remove("in-view");
+        });
+      },
+      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.18 }
+    );
+
+    cardsRef.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="mt-16 md:mt-20">
-      <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8">
-        {clients.map((client, idx) => (
-          <a
-            key={idx}
-            href={client.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex justify-center items-center p-4 bg-white/10 backdrop-blur-md rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
-          >
-            <img
-              src={client.src}
-              alt={client.name}
-              className="h-12 sm:h-16 md:h-20 object-contain"
-            />
-          </a>
-        ))}
+      <div
+        ref={containerRef}
+        className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 px-4"
+      >
+        {clients.map((client, idx) => {
+          const directionClass = idx % 2 === 0 ? "from-left" : "from-right";
+          const delay = `${0.08 * idx}s`;
+          return (
+            <a
+              key={idx}
+              href={client.url || "#"}
+              target={client.url ? "_blank" : undefined}
+              rel={client.url ? "noopener noreferrer" : undefined}
+              className={`client-card ${directionClass}`}
+              ref={(el) => (cardsRef.current[idx] = el)}
+              style={{ transitionDelay: delay }}
+            >
+              {/* inner wrapper handles float (up/down) so outer card can handle entrance */}
+              <div className="glow-rim" aria-hidden="true"></div>{" "}
+              {/* <--- add this line */}
+              <div className="client-inner animate-float">
+                <img
+                  src={client.src}
+                  alt={client.name}
+                  className="client-logo"
+                  draggable={false}
+                />
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   );
-};
-
-export default OurClients;
+}
