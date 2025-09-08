@@ -200,9 +200,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 110px;
-  max-width: 220px;
-  padding: 0 4px;
+  /* min-width: 100px; */
+  max-width: 200px;
+  padding: 0 2px;
 }
 .industry-pill {
   transform-origin: center;

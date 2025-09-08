@@ -1,8 +1,8 @@
 "use client";
 
 import { Users, Briefcase, Building, Layers, CheckCircle2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useRef } from "react";
 import OurClients from "../ourclients/page";
 import "./work.css";
 
@@ -49,7 +49,7 @@ const partners = [
   },
 ];
 
-const initialIndustries = [
+const industries = [
   "E-Commerce",
   "Charitable Trust",
   "Tech",
@@ -92,71 +92,38 @@ const rightItem = {
 
 export default function WhoWeWorkWith() {
   const cardRefs = useRef([]);
-  const [industries, setIndustries] = useState(initialIndustries);
-  const intervalRef = useRef(null);
-  const pausedRef = useRef(false);
 
-  // gentle tilt using rAF for smoothness (write CSS vars)
-  const rafRef = useRef(null);
-  const pointerStateRef = useRef({ rx: 0, ry: 0, s: 1 });
-
+  // subtle mouse-follow tilt (writes css vars)
   const handleMouseMove = (e, idx) => {
     const el = cardRefs.current[idx];
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const relX = (e.clientX - rect.left) / Math.max(rect.width, 1) - 0.5;
     const relY = (e.clientY - rect.top) / Math.max(rect.height, 1) - 0.5;
-    const ry = relX * 6;
-    const rx = -relY * 4;
-    pointerStateRef.current = { rx, ry, s: 1.02 };
-
-    if (rafRef.current == null) {
-      rafRef.current = requestAnimationFrame(() => {
-        const { rx: rrx, ry: rry, s } = pointerStateRef.current;
-        el.style.setProperty("--rx", `${rrx}deg`);
-        el.style.setProperty("--ry", `${rry}deg`);
-        el.style.setProperty("--s", `${s}`);
-        rafRef.current = null;
-      });
+    const rotateY = relX * 6;
+    const rotateX = -relY * 4;
+    // write GPU-friendly transform via CSS var or direct transform depending on your CSS:
+    // here we set css vars used by .card-inner, if present; fallback to transform inline
+    if (el.style.setProperty) {
+      el.style.setProperty("--ry", `${rotateY}deg`);
+      el.style.setProperty("--rx", `${rotateX}deg`);
+      el.style.setProperty("--s", "1.02");
+    } else {
+      el.style.transform = `translateZ(0) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     }
   };
 
   const handleMouseLeave = (idx) => {
     const el = cardRefs.current[idx];
     if (!el) return;
-    el.style.setProperty("--rx", `0deg`);
-    el.style.setProperty("--ry", `0deg`);
-    el.style.setProperty("--s", `1`);
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
+    if (el.style.removeProperty) {
+      el.style.setProperty("--ry", `0deg`);
+      el.style.setProperty("--rx", `0deg`);
+      el.style.setProperty("--s", `1`);
+    } else {
+      el.style.transform = "";
     }
   };
-
-  // rotate industries periodically (gentle) - optional
-  useEffect(() => {
-    const intervalMs = 3000;
-    function start() {
-      if (intervalRef.current) return;
-      intervalRef.current = setInterval(() => {
-        if (pausedRef.current) return;
-        setIndustries((prev) => {
-          if (!prev || prev.length <= 1) return prev;
-          const next = [...prev];
-          const first = next.shift();
-          next.push(first);
-          return next;
-        });
-      }, intervalMs);
-    }
-    start();
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    };
-  }, []);
 
   return (
     <section className="who-section relative py-16 md:py-20 bg-white">
@@ -176,58 +143,43 @@ export default function WhoWeWorkWith() {
           </h2>
         </div>
 
-        {/* INDUSTRIES - animate from left/right when in view */}
-        <div
-          className="industries-section"
-          onMouseEnter={() => (pausedRef.current = true)}
-          onMouseLeave={() => (pausedRef.current = false)}
-        >
+        {/* INDUSTRIES - static list, single entrance (no swapping) */}
+        <div className="industries-section">
           <motion.div
             className="industry-list-container"
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.18 }}
+            viewport={{ once: true, amount: 0.18 }} // animate once only
             variants={{
               hidden: {},
               show: { transition: { staggerChildren: 0.06 } },
             }}
           >
-            <AnimatePresence initial={false}>
-              {industries.map((industry, idx) => (
-                <motion.span
-                  key={`${industry}-${idx}`}
-                  className="industry-pill-slot"
-                  custom={idx}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: false, amount: 0.18 }}
-                  variants={{
-                    hidden: (i) => ({
-                      x: i % 2 === 0 ? -48 : 48,
-                      y: 10,
-                      opacity: 0,
-                      scale: 0.97,
-                    }),
-                    show: {
-                      x: 0,
-                      y: 0,
-                      opacity: 1,
-                      scale: 1,
-                      transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1] },
-                    },
-                  }}
+            {industries.map((industry, idx) => (
+              <motion.span
+                key={`${industry}-${idx}`}
+                className="industry-pill-slot"
+                custom={idx}
+                initial={{ x: idx % 2 === 0 ? -48 : 48, opacity: 0, y: 8 }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1] },
+                }}
+                // no exit or re-ordering animation; static afterwards
+              >
+                <span
+                  className="interactive-pill industry-pill bg-gradient-to-r from-[#00E5FF] via-[#2C6DF6] to-[#FF8A00] text-white px-1 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={industry}
                 >
-                  <span
-                    className="interactive-pill industry-pill bg-gradient-to-r from-[#00E5FF] via-[#2C6DF6] to-[#FF8A00] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow"
-                    role="button"
-                    tabIndex={0}
-                    aria-label={industry}
-                  >
-                    <span className="pill-text">{industry}</span>
-                  </span>
-                </motion.span>
-              ))}
-            </AnimatePresence>
+                  <span className="pill-text">{industry}</span>
+                </span>
+              </motion.span>
+            ))}
           </motion.div>
         </div>
 
@@ -255,13 +207,12 @@ export default function WhoWeWorkWith() {
                     className="relative group card-inner flex items-start gap-4 bg-white/95 rounded-xl shadow-md p-4 sm:p-5 transition-shadow duration-300 will-change-transform"
                     style={{ "--rx": "0deg", "--ry": "0deg", "--s": "1" }}
                   >
-                    {/* left icon stays left */}
                     <div className="icon-wrap mt-1">
                       <Icon className="w-6 h-6 text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] via-[#2C6DF6] to-[#FF8A00]" />
                     </div>
 
-                    {/* content: centered title, left bullets */}
                     <div className="flex-1">
+                      {/* partner title is static (no scroll-driven changes) */}
                       <h3 className="partner-title text-center">
                         {partner.title}
                       </h3>
