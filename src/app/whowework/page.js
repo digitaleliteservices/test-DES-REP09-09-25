@@ -213,7 +213,7 @@ export default function WhoWeWorkWith() {
 
                     <div className="flex-1">
                       {/* partner title is static (no scroll-driven changes) */}
-                      <h3 className="partner-title text-center">
+                      <h3 className="partner-title">
                         {partner.title}
                       </h3>
 
@@ -303,7 +303,7 @@ export default function WhoWeWorkWith() {
                     </div>
 
                     <div className="flex-1">
-                      <h3 className="partner-title text-center">
+                      <h3 className="partner-title">
                         {partner.title}
                       </h3>
 
