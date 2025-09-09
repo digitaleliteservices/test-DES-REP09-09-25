@@ -73,6 +73,7 @@ import bannerImage from "../../../public/assets/bannerimage.png";
 import { useState, useRef, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { TextGenerateEffect } from "../_components/ui/text-generate-effect";
+import Head from "next/head";
 
 export default function Hero() {
   const [isLoading, setIsLoading] = useState(true);
@@ -147,6 +148,23 @@ export default function Hero() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
+          <Head>
+        <title>Digital Elite Services | Web Development, Graphic Design & Digital Marketing</title>
+        <meta name="description" content="Digital Elite Services offers expert web development, graphic design, and digital marketing solutions to grow your business effectively." />
+        <meta name="keywords" content="Web development, Graphic design, Digital marketing, SEO services, Social media marketing, E-commerce solutions, Branding services, Online advertising" />
+        <meta name="author" content="Digital Elite Services" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Digital Elite Services - Your All In One Digital Partner" />
+        <meta property="og:description" content="Professional web development, graphic design, and digital marketing services to boost your brand's online presence." />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Digital Elite Services - Web Development & Marketing Experts" />
+        <meta name="twitter:description" content="Grow your business with expert solutions in web development, design, and digital marketing from Digital Elite Services." />
+      </Head>
       {/* Loading overlay */}
       {isLoading && (
         <motion.div

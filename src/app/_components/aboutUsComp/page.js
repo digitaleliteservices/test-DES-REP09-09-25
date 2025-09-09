@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Poppins } from "next/font/google";
+import Head from "next/head";
+
 import "./about.css";
 
 // Google Font
@@ -138,6 +140,23 @@ const AboutUsComp = () => {
 
   return (
     <div className={`${poppins.className} bg-black text-white`}>
+           <Head>
+      <title>About Us - Digital Solutions & Branding Experts</title>
+      <meta name="description" content="Learn about our mission and vision at Digital Elite Services. We provide innovative digital solutions, creative branding, web development, and marketing strategies to help businesses grow." />
+      <meta name="keywords" content="digital solutions, branding, web development, marketing strategies, creative design, SEO, digital marketing, business growth, custom websites, UI/UX design" />
+      <meta name="author" content="Digital Elite Services" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      {/* Open Graph */}
+      <meta property="og:title" content="About Us - Digital Elite Services" />
+      <meta property="og:description" content="Discover how we empower businesses with creative branding, web development, and tailored digital solutions to achieve measurable growth." />
+      <meta property="og:type" content="website" />
+
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="About Us - Digital Solutions & Branding Experts" />
+      <meta name="twitter:description" content="Explore our vision and mission at Digital Elite Services. We offer tailored solutions for web development, design, and marketing to drive growth and innovation." />
+    </Head>
       {/* HERO */}
       <section className="relative flex items-center justify-center min-h-screen overflow-hidden">
         {/* Animated background */}
