@@ -73,6 +73,7 @@ import bannerImage from "../../../public/assets/bannerimage.png";
 import { useState, useRef, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { TextGenerateEffect } from "../_components/ui/text-generate-effect";
+import Head from "next/head";
 
 export default function Hero() {
   const [isLoading, setIsLoading] = useState(true);
