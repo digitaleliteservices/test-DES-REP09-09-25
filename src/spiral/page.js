@@ -54,7 +54,7 @@ export default function Spiral() {
       {/* Headline */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 text-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-          One practical, holistic Service
+          One practical, holistic service
         </h1>
         <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
           <span className="bg-gradient-to-r from-sky-500 via-indigo-400 to-amber-500 bg-clip-text text-transparent">
