@@ -1,4 +1,5 @@
 "use client";
+import Head from 'next/head';
 
 import { useState } from "react";
 import axios from "axios";
@@ -72,6 +73,25 @@ const OurContact = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#181625] relative overflow-hidden pt-32 mt-5 pb-20 ">
+     {/* Add SEO Head */}
+      <Head>
+        <title>Contact Us | Digital Elite Services - Best Digital Marketing Agency in Bangalore</title>
+        <meta name="description" content="Get expert digital marketing services including SEO, PPC, social media marketing, and web development from Digital Elite Services in Bangalore." />
+        <meta name="keywords" content="Digital marketing services, Social media marketing, SEO services, PPC advertising, Web development, Branding services, Online marketing, E-commerce marketing, Lead generation, Email marketing" />
+        <meta name="author" content="Digital Elite Services" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Contact Us | Digital Elite Services - Digital Marketing Experts in Bangalore" />
+        <meta property="og:description" content="Reach out to Digital Elite Services for professional web development and digital marketing solutions in Bangalore." />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Us | Digital Elite Services" />
+        <meta name="twitter:description" content="Get expert digital marketing services from Digital Elite Services in Bangalore." />
+      </Head>
+    
       {/* Purple glow at bottom */}
       <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-blue-400/50 to-transparent pointer-events-none" />
 
