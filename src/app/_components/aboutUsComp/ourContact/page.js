@@ -72,7 +72,7 @@ const OurContact = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#181625] relative overflow-hidden pt-32 mt-5 pb-20 ">
+    <div className="min-h-screen flex items-center justify-center bg-[#181625] relative overflow-hidden  ">
      {/* Add SEO Head */}
       <Head>
         <title>Contact Us | Digital Elite Services - Best Digital Marketing Agency in Bangalore</title>
@@ -96,7 +96,7 @@ const OurContact = () => {
       <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-blue-400/50 to-transparent pointer-events-none" />
 
       {/* Content wrapper */}
-      <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-stretch gap-12 z-10 px-4">
+      <div className="w-full pt-32 mt-5 pb-20 max-w-6xl mx-auto flex flex-col md:flex-row items-stretch gap-12 z-10 px-4">
         {/* Left Side Content */}
         <div className="flex-1 flex flex-col justify-center">
           <h4 className="text-xl font-semibold mb-2 bg-gradient-to-r from-blue-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">

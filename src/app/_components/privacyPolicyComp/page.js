@@ -5,9 +5,9 @@ import DESLogo from "../../../../public/assets/DES_LOGO4.png"; // Adjust path if
 
 const PrivacyPolicyComp = () => {
   return (
-    <div className="min-h-screen text-gray-200 px-6 py-12 mt-15">
+    <div className="min-h-screen bg-black text-gray-200 px-6 py-12 ">
       {/* Header */}
-      <div className="text-center max-w-4xl mx-auto">
+      <div className="text-center max-w-4xl mx-auto mt-15">
         <div className="flex justify-center mb-4">
           <Image
             src={DESLogo}
