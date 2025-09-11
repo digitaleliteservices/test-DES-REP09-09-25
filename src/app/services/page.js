@@ -70,9 +70,10 @@ const Services = () => {
             <div
               key={index}
               className={`group w-10/12 sm:w-11/12 min-h-[340px] mx-auto 
-        rounded-3xl bg-gradient-to-b from-[#1a0b2e]/90 
-        to-[#0a0014]/90 p-6 shadow-lg hover:shadow-orange-400/40 
-        transition relative overflow-hidden flex flex-col
+    rounded-3xl bg-gradient-to-b from-[#1a0b2e]/90 
+    to-[#0a0014]/90 p-6 shadow-lg shadow-orange-400/40 hover:shadow-2xl hover:shadow-green-400/60 
+    hover:[box-shadow:0_0_20px_4px_rgba(59,130,246,0.7)]
+    transition relative overflow-hidden flex flex-col
         ${
           services.length === 3 && index === 2
             ? "md:col-span-2 md:mx-auto md:w-1/2 lg:col-span-1 lg:w-11/12"
@@ -105,7 +106,8 @@ const Services = () => {
                 </ul>
 
                 {/* Hover Button */}
-                <div className="flex justify-center  opacity-100 md:opacity-100 lg:opacity-0 min-[786px]:opacity-100 group-hover:opacity-100 transition-opacity duration-500">
+                
+                <div className="flex justify-center  opacity-100 md:opacity-100 lg:opacity-100 min-[786px]:opacity-100 group-hover:opacity-100 transition-opacity duration-500">
                   <button
                     onClick={() => setActiveService(service)}
                     className="px-6 py-2 rounded-full bg-gradient-to-r from-orange-500 via-yellow-400 to-blue-500 text-white font-medium shadow-lg hover:opacity-90"
@@ -113,6 +115,7 @@ const Services = () => {
                     Get More
                   </button>
                 </div>
+
               </div>
             </div>
           ))}
