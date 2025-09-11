@@ -124,7 +124,7 @@ const Footer = () => {
 
       <footer className="relative overflow-hidden  text-white">
         {/* Background video */}
-        <div className="absolute inset-0 -z-20">
+        <div className="absolute inset-0 -z-10">
           <video
             // src="/assets/footer_video.webm"
             src="/assets/bgfooter4.mp4"
@@ -177,8 +177,8 @@ const Footer = () => {
           <div className="mx-auto mt-8 h-px w-24 bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400/90 rounded-full" />
 
           {/* Address & Contact Info */}
-     <div className="mt-8 md:mt-1 mx-auto max-w-xl space-y-4 text-[15px] sm:text-base leading-relaxed text-white/85 group">
-    <p className="font-bold leading-relaxed transform transition-all duration-700 ease-out animate-fade-in-up hover:translate-x-2 hover:text-white cursor-default p-3 rounded-lg hover:bg-white/5 backdrop-blur-sm border border-transparent hover:border-white/10">
+     {/* <div className="mt-8 md:mt-1 mx-auto max-w-xl space-y-4 text-[15px] sm:text-base leading-relaxed text-white/85 group">
+    <p className="font-bold leading-relaxed transform transition-all duration-700 ease-out animate-fade-in-up hover:translate-x-2 hover:text-white cursor-default p- rounded-lg hover:bg-white/5 backdrop-blur-sm border border-transparent hover:border-white/10">
       No 35 A, Kowdi, 2nd Floor, 1st Main Road, <br />
       Chiranjeevi Layout, Hebbal, Kempapura, <br />
       Bengaluru – 560024
@@ -204,7 +204,37 @@ const Footer = () => {
     </a>
   </p>
 </div>
-        
+         */}
+         <div className="mt-8 md:mt-1 mx-auto max-w-xl space-y-1 text-[15px] sm:text-base leading-relaxed text-white/85 group">
+
+  <p className="font-bold leading-relaxed transform transition-all duration-700 ease-out animate-fade-in-up hover:translate-x-2 hover:text-white cursor-default p-1 rounded-lg hover:bg-white/5 backdrop-blur-sm border border-transparent hover:border-white/10">
+    No 35 A, Kowdi, 2nd Floor, 1st Main Road, <br />
+    Chiranjeevi Layout, Hebbal, Kempapura, <br />
+    Bengaluru – 560024
+  </p>
+
+  <p className="text-white/75 transform transition-all duration-700 ease-out animate-fade-in-up [animation-delay:200ms] hover:translate-x-2 hover:text-white/90 p-0 rounded-lg hover:bg-white/5 backdrop-blur-sm border border-transparent hover:border-white/10 font-bold">
+    Email:{" "}
+    <a 
+      href="mailto:info@digitaleliteservices.in" 
+      className="underline underline-offset-4 decoration-white/40 hover:decoration-white transition-all duration-300 hover:text-white hover:scale-105 inline-block hover:shadow-lg hover:shadow-white/20 px-1 py-0.5 rounded hover:bg-white/10"
+    >
+      info@digitaleliteservices.in
+    </a>
+  </p>
+
+  <p className="font-bold text-white/75 transform transition-all duration-700 ease-out animate-fade-in-up [animation-delay:400ms] hover:translate-x-2 hover:text-white/90 p-1 rounded-lg hover:bg-white/5 backdrop-blur-sm border border-transparent hover:border-white/10">
+    Phone:{" "}
+    <a 
+      href="tel:+916366930174" 
+      className="underline underline-offset-4 decoration-white/40 hover:decoration-white transition-all duration-300 hover:text-white hover:scale-105 inline-block hover:shadow-lg hover:shadow-white/20 px-1 py-0.5 rounded hover:bg-white/10"
+    >
+      +91 6366930174
+    </a>
+  </p>
+
+</div>
+
           <div className="mt-10 md:mt-2 flex flex-col md:flex-row items-center justify-center gap-6 w-full">
   <Link
     href="/privacy-policy"
