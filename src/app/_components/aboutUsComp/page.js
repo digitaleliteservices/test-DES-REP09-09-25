@@ -174,72 +174,77 @@ const AboutUsComp = () => {
       {/* Page background gradient with subtle noise + bobbing vignette */}
       <div className="absolute inset-0 -z-20" aria-hidden>
         <div
-          style={{
-            // background:
-            //   "linear-gradient(90deg,#1c103f 0%, #3b2979 28%, #fdd835 58%, #ff7e19 100%)",
-            // filter: "saturate(1.05) contrast(1.02)",
-
-            // Deep Ocean to Electric Blue--good
-            // background:
-            //   "linear-gradient(90deg, #0a1640 0%, #1a237e 30%, #2196f3 70%, #4fc3f7 100%)",
-            // filter: "saturate(1.1) contrast(1.1)",
-
-            // Cyber Neon (Purple to Cyan)--good
-            // background:
-            //   "linear-gradient(90deg, #240b36 0%, #c3147c 35%, #00d2ff 100%)",
-            // filter: "saturate(1.2)",
-
-            //deep space
-            // background:
-            //   "linear-gradient(90deg, #000428 0%, #203a43 50%, #2c5364 100%)",
-            // filter: "saturate(1.05)",
-
-            // Fiery Sunset--good
-            // background:
-            //   "linear-gradient(90deg, #33001b 0%, #ff0080 35%, #ff8c00 70%, #f9f047 100%)",
-            // filter: "saturate(1.1) contrast(1.05)",
-
-            // Vibrant Coral & Peach
-            // background:
-            //   "linear-gradient(90deg, #ff416c 0%, #ff4b2b 50%, #ffc371 100%)",
-
-            // Mango Sunrise--good
-            // background:
-            //   "linear-gradient(90deg, #283c86 0%, #45a247 50%, #fbd786 100%)", // A unique twist with a touch of green
-
-            // Desert Dusk
-            // background:
-            //   "linear-gradient(90deg, #2c3e50 0%, #4ca1af 50%, #c06c84 100%)",
-            // filter: "saturate(1.05)", // Keep the filter subtle here
-
-            // Earthy Terracotta --good
-            // background:
-            //   "linear-gradient(90deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%)",
-
-            // Electric Purple-Pink --good
-            // background:
-            //   "linear-gradient(90deg, #141E30 0%, #53346D 35%, #C06C84 65%, #F67280 100%)",
-            // filter: "saturate(1.1) contrast(1.1)",
-
-            // Neon Green & Purple
-            // background:
-            //   "linear-gradient(90deg, #3a1c71 0%, #8e24aa 30%, #00f2fe 70%, #4facfe 100%)",
-
-            // Tropical Punch
-            // background:
-            //   "linear-gradient(90deg, #00416a 0%, #e4e5e6 50%, #ff7e5f 100%)",
-
-            // Deep Blues---v.good
-            // background: "linear-gradient(90deg, #000428 0%, #004e92 100%)",
-            // filter: "contrast(1.1)",
-
-            // Rich Purples --v.good
-            background: "linear-gradient(90deg, #240b36 0%, #c3147c 100%)",
-
-            // Emerald Greens
-            // background:
-            //   "linear-gradient(90deg, #022c12 0%, #064e3b 50%, #059669 100%)",
-          }}
+          style={
+            {
+              // background:
+              //   "linear-gradient(90deg,#1c103f 0%, #3b2979 28%, #fdd835 58%, #ff7e19 100%)",
+              // filter: "saturate(1.05) contrast(1.02)",
+              // Deep Ocean to Electric Blue--good
+              // background:
+              //   "linear-gradient(90deg, #0a1640 0%, #1a237e 30%, #2196f3 70%, #4fc3f7 100%)",
+              // filter: "saturate(1.1) contrast(1.1)",
+              // Cyber Neon (Purple to Cyan)--good
+              // background:
+              //   "linear-gradient(90deg, #240b36 0%, #c3147c 35%, #00d2ff 100%)",
+              // filter: "saturate(1.2)",
+              //deep space
+              // background:
+              //   "linear-gradient(90deg, #000428 0%, #203a43 50%, #2c5364 100%)",
+              // filter: "saturate(1.05)",
+              // Fiery Sunset--good
+              // background:
+              //   "linear-gradient(90deg, #33001b 0%, #ff0080 35%, #ff8c00 70%, #f9f047 100%)",
+              // filter: "saturate(1.1) contrast(1.05)",
+              // Vibrant Coral & Peach
+              // background:
+              //   "linear-gradient(90deg, #ff416c 0%, #ff4b2b 50%, #ffc371 100%)",
+              // Mango Sunrise--good
+              // background:
+              //   "linear-gradient(90deg, #283c86 0%, #45a247 50%, #fbd786 100%)", // A unique twist with a touch of green
+              // Desert Dusk
+              // background:
+              //   "linear-gradient(90deg, #2c3e50 0%, #4ca1af 50%, #c06c84 100%)",
+              // filter: "saturate(1.05)", // Keep the filter subtle here
+              // Earthy Terracotta --good
+              // background:
+              //   "linear-gradient(90deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%)",
+              // Electric Purple-Pink --good
+              // background:
+              //   "linear-gradient(90deg, #141E30 0%, #53346D 35%, #C06C84 65%, #F67280 100%)",
+              // filter: "saturate(1.1) contrast(1.1)",
+              // Neon Green & Purple
+              // background:
+              //   "linear-gradient(90deg, #3a1c71 0%, #8e24aa 30%, #00f2fe 70%, #4facfe 100%)",
+              // Tropical Punch
+              // background:
+              //   "linear-gradient(90deg, #00416a 0%, #e4e5e6 50%, #ff7e5f 100%)",
+              // Deep Blues---v.good
+              background: "linear-gradient(90deg, #000428 0%, #004e92 100%)",
+              filter: "contrast(1.1)",
+              // Rich Purples --v.good--->selected
+              // background: "linear-gradient(90deg, #240b36 0%, #c3147c 100%)",
+              //emarald gray
+              // background: "linear-gradient(90deg, #134e5e 0%, #71b280 100%)"
+              // Emerald Greens
+              // background:
+              //   "linear-gradient(90deg, #022c12 0%, #064e3b 50%, #059669 100%)",
+              //rich purple--very good
+              // background:
+              //   "linear-gradient(90deg, #240b36 0%, #6a3093 50%, #c3147c 100%)",
+              // filter: "saturate(1.12) contrast(1.08)",
+              //ocean-teal
+              // background: "linear-gradient(90deg, #2b5876 0%, #4e4376 100%)"
+              //magenta
+              // background:
+              //   "linear-gradient(90deg, #240b36 0%, #6a3093 50%, #c3147c 100%)",
+              //neon--good
+              // background: "linear-gradient(90deg, #0f0c29 0%, #302b63 50%, #c86dd7 100%)"
+              //sunrise warm
+              // background: "linear-gradient(90deg, #ff5f6d 0%, #ffc371 100%)"
+              //deep-ocean
+              // background: "linear-gradient(90deg, #0f2027 0%, #2c5364 100%)",
+            }
+          }
           className="w-full h-full"
         />
         {/* Vignette blobs that bob gently across the page to create 'bob screen' effect */}

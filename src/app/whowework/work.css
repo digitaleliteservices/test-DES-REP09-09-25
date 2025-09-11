@@ -1,70 +1,197 @@
-/* -------------------------
-  WHO WE WORK WITH - refined & smooth (spacing fix)
--------------------------- */
+/* ========================================================================== 
+   work.css — WHO WE WORK WITH (complete)
+   - deep-ocean blue on small screens; original desktop look preserved
+   - centered icon + title (card-head)
+   - tilt/hover, glow, accent blob, industry pills, accessible focus
+   - animated golden rim on hover/focus
+   - increased description font-size and responsive tweaks
+   ========================================================================== */
 
-/* root color shortcuts */
+/* ---------- THEME (logo-matched / fallbacks) ---------- */
 :root {
+  --logo-grad: linear-gradient(
+    90deg,
+    #00e5ff 0%,
+    #2c6df6 32%,
+    #8a2be2 56%,
+    #ff7a3d 78%,
+    #ffd100 100%
+  );
+
+  --logo-hover-grad: linear-gradient(
+    90deg,
+    #00f3ff 0%,
+    #3b7af7 34%,
+    #9a3ef0 58%,
+    #ff9156 80%,
+    #ffe055 100%
+  );
+
   --c-cyan: #00e5ff;
   --c-blue: #2c6df6;
   --c-orange: #ff8a00;
   --card-radius: 12px;
-  --card-bg: rgba(255, 255, 255, 0.98);
+
+  /* gold rim colors (tweak to taste) */
+  --gold-1: #ffd873;
+  --gold-2: #ffb300;
+  --gold-3: #ffd873;
+
+  /* deep ocean blue (used on small screens) */
+  --ocean-1: #021e3a; /* very deep blue */
+  --ocean-2: #063a6b; /* slightly brighter */
+  --ocean-hover: linear-gradient(90deg, #063a6b 0%, #0b63b7 100%);
 }
 
 /* base section */
 .who-section {
   position: relative;
+  /* If you put a background image behind cards, keep it here */
 }
 
-/* gradient frame (helper) */
-.gradient-frame {
-  padding: 3px;
-  border-radius: var(--card-radius);
+/* -------------------------------------------------------------------------
+   COLORED CARD (default behavior)
+   - Per-card inline styles in JSX may set --card-bg, --card-hover, --fg, --icon
+   - By default we fall back to logo-grad so new cards have a nice theme.
+------------------------------------------------------------------------- */
+.colored-card {
+  background: var(--card-bg, var(--logo-grad));
+  color: var(--fg, #ffffff);
+  border-radius: calc(var(--card-radius) - 2px);
+  padding: 14px;
+  box-shadow: 0 10px 30px rgba(8, 14, 28, 0.06);
+  transform-style: preserve-3d;
+  transition: transform 260ms cubic-bezier(0.18, 0.9, 0.32, 1),
+    box-shadow 260ms ease, background 340ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    color 240ms ease;
+  position: relative;
+  overflow: visible; /* allow rim to show slightly outside */
+  will-change: transform, background;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- GOLDEN RIM pseudo-element ---------- */
+/* Animated gold rim that becomes visible on hover/focus */
+.colored-card::before {
+  content: "";
+  position: absolute;
+  inset: -3px; /* thickness + outside offset */
+  z-index: 3;
+  border-radius: calc(var(--card-radius) + 1px);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 320ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    transform 320ms cubic-bezier(0.2, 0.9, 0.3, 1);
   background: linear-gradient(
     90deg,
-    rgba(0, 229, 255, 0.1),
-    rgba(44, 109, 246, 0.06),
-    rgba(255, 138, 0, 0.06)
+    var(--gold-1),
+    var(--gold-2),
+    var(--gold-3)
   );
+  background-size: 200% 200%;
+  box-shadow: 0 6px 30px rgba(255, 180, 50, 0.06),
+    0 2px 10px rgba(0, 0, 0, 0.08);
+
+  /* mask to create a ring. Works in modern browsers. */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+
+  /* rim thickness */
+  padding: 3px;
+
+  /* motion */
+  animation: goldShift 4.6s linear infinite;
 }
 
-/* ------------------------------------
-   CARD INNER (transform via CSS vars)
--------------------------------------*/
-.card-inner {
+.title-point{
+  margin-top: 9px;
+}
+
+@keyframes goldShift {
+  0% {
+    background-position: 0% 50%;
+    filter: saturate(1);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: saturate(1.05);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: saturate(1);
+  }
+}
+
+/* show rim on hover/focus */
+.group:hover .colored-card::before,
+.group:focus-within .colored-card::before,
+.colored-card:hover::before,
+.colored-card:focus::before,
+.colored-card:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* reduced-motion fallback for rim */
+@media (prefers-reduced-motion: reduce) {
+  .colored-card::before {
+    animation: none;
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* stronger hover state (background can also be overridden via --card-hover) */
+.group:hover .colored-card,
+.group:focus-within .colored-card,
+.colored-card:hover,
+.colored-card:focus {
+  background: var(--card-hover, var(--logo-hover-grad));
+  box-shadow: 0 28px 60px rgba(8, 14, 28, 0.18),
+    0 10px 36px rgba(2, 6, 23, 0.06);
+  outline: none;
+}
+
+/* ensure content sits above overlays & rim */
+.colored-card > * {
   position: relative;
-  overflow: visible;
-  transform-style: preserve-3d;
-  background: var(--card-bg);
-  border-radius: calc(var(--card-radius) - 2px);
-  box-shadow: 0 10px 30px rgba(8, 14, 28, 0.06);
-
-  --rx: 0deg;
-  --ry: 0deg;
-  --ty: 0px;
-  --s: 1;
-
-  transform: translateZ(0) translateY(var(--ty)) rotateX(var(--rx))
-    rotateY(var(--ry)) scale(var(--s));
-
-  transition: transform 260ms cubic-bezier(0.18, 0.9, 0.32, 1),
-    box-shadow 260ms ease;
-  will-change: transform, box-shadow;
-  padding: 14px;
-}
-.card-inner:hover,
-.card-inner:focus-within {
-  --ty: -6px;
-  --s: 1.02;
-  box-shadow: 0 22px 48px rgba(8, 14, 28, 0.12);
+  z-index: 4; /* content above rim (::before is z-index:3) */
 }
 
-/* glow rim */
-.glow-rim {
+/* overlay for subtle contrast */
+.colored-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.02));
+  transition: opacity 320ms ease;
+}
+.group:hover .colored-card::after,
+.colored-card:hover::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.06));
+}
+
+/* check-bubble tweak */
+.colored-card .check-bubble {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+.colored-card .check-bubble svg {
+  color: var(--fg, #fff);
+}
+
+/* glow rim tuned for colored cards (subtle animated inner rim) */
+.colored-card .glow-rim {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
   background: linear-gradient(
     90deg,
@@ -95,6 +222,42 @@
   }
 }
 
+/* keyboard focus-visible ring */
+.colored-card:focus-visible {
+  box-shadow: 0 28px 60px rgba(8, 14, 28, 0.18),
+    0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+/* ---------------------------
+   CARD INNER - tilt & hover lift (parent supplies gradient)
+----------------------------*/
+.card-inner {
+  position: relative;
+  overflow: visible;
+  transform-style: preserve-3d;
+  background: transparent; /* desktop default: parent gradient shows through */
+  border-radius: calc(var(--card-radius) - 2px);
+  box-shadow: none;
+
+  --rx: 0deg;
+  --ry: 0deg;
+  --ty: 0px;
+  --s: 1;
+
+  transform: translateZ(0) translateY(var(--ty)) rotateX(var(--rx))
+    rotateY(var(--ry)) scale(var(--s));
+  transition: transform 260ms cubic-bezier(0.18, 0.9, 0.32, 1),
+    box-shadow 260ms ease;
+  will-change: transform, box-shadow;
+  padding: 14px;
+}
+.card-inner:hover,
+.card-inner:focus-within {
+  --ty: -6px;
+  --s: 1.02;
+  box-shadow: 0 22px 48px rgba(8, 14, 28, 0.12);
+}
+
 /* accent blob */
 .accent-blob {
   position: absolute;
@@ -120,71 +283,125 @@
   transform: translateY(-4px);
 }
 
-/* icon wrapper */
-.icon-wrap {
+/* ---------------------------
+   CENTERED ICON + TITLE (card-head)
+----------------------------*/
+.card-head {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 1.5rem;
+  gap: 0.5rem;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  z-index: 4;
+  pointer-events: none; /* decorative (prevents blocking hover/tilt) */
 }
 
-/* check bubble */
-.check-bubble {
-  background: linear-gradient(180deg, var(--c-cyan), var(--c-blue));
-  box-shadow: 0 6px 18px rgba(44, 109, 246, 0.12);
-  transform-origin: center;
-  transition: transform 260ms cubic-bezier(0.18, 0.9, 0.32, 1),
-    filter 260ms ease;
+/* bigger icon container */
+.icon-wrap.big-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0;
-  will-change: transform, filter;
-}
-.group:hover .check-bubble,
-.group:focus-within .check-bubble {
-  transform: scale(1.08);
-  filter: drop-shadow(0 10px 18px rgba(44, 109, 246, 0.12));
-}
-.check-bubble svg {
-  stroke: rgba(255, 255, 255, 1);
-  transform: translateY(1px);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
 }
 
-/* list alignment */
-.motion-list-item {
+/* scale SVG icon and use CSS var color */
+.icon-wrap.big-icon svg,
+.icon-wrap.big-icon > svg {
+  width: 34px;
+  height: 34px;
+  color: var(--icon, #fff);
+  stroke: var(--icon, #fff);
+  display: block;
+}
+
+/* centered + larger partner title — single-line with ellipsis */
+.partner-title.centered-title {
+  font-weight: 800;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  pointer-events: none;
+
+  /* force single line + ellipsis */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 88%;
+}
+
+/* scale title for bigger screens */
+@media (min-width: 640px) {
+  .partner-title.centered-title {
+    font-size: 1.25rem;
+  }
+}
+@media (min-width: 1024px) {
+  .partner-title.centered-title {
+    font-size: 1.375rem;
+  }
+}
+
+/* ---------------------------------------
+   DESCRIPTION: increased font size + spacing
+----------------------------------------*/
+.card-inner .flex-1,
+.card-inner .flex-1 ul,
+.card-inner .flex-1 li,
+.card-inner .flex-1 li .motion-bullet-underline {
+  font-size: 1rem; /* base: 16px */
+  line-height: 1.45;
+  color: inherit;
+}
+
+/* slightly larger check-bubble to match text size */
+.card-inner .check-bubble {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+}
+.card-inner .check-bubble svg {
+  width: 14px;
+  height: 14px;
 }
 
-/* bullet underline reveal */
-.motion-bullet-underline {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 6px;
+/* bigger gap between bullet and text for clarity */
+.card-inner .flex-1 li {
+  gap: 0.75rem;
 }
-.motion-bullet-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  height: 2px;
-  width: 0%;
-  background: linear-gradient(
-    90deg,
-    var(--c-cyan),
-    var(--c-blue),
-    var(--c-orange)
-  );
-  transition: width 360ms cubic-bezier(0.2, 0.9, 0.3, 1);
-  border-radius: 999px;
-}
-.group:hover .motion-bullet-underline::after,
-.group:focus-within .motion-bullet-underline::after {
-  width: 100%;
+
+/* large screens: scale text a touch up */
+@media (min-width: 1024px) {
+  .card-inner .flex-1,
+  .card-inner .flex-1 ul,
+  .card-inner .flex-1 li {
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+  .card-inner .check-bubble {
+    width: 30px;
+    height: 30px;
+  }
+  .card-inner .check-bubble svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* ---------------------------
-   INDUSTRY PILL STYLES & STABLE SLOTS
+   INDUSTRY PILLS
 ----------------------------*/
 .industry-list-container {
   display: flex;
@@ -200,16 +417,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* min-width: 100px; */
   max-width: 200px;
   padding: 0 2px;
-}
-.industry-pill {
-  transform-origin: center;
-  transition: transform 280ms ease, box-shadow 280ms ease, background 280ms ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 .interactive-pill {
   position: relative;
@@ -221,14 +430,6 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
-.industry-pill .pill-text {
-  display: inline-block;
-  line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 2px;
-}
 .interactive-pill:hover,
 .interactive-pill:focus {
   box-shadow: 0 12px 28px rgba(44, 109, 246, 0.12),
@@ -237,26 +438,22 @@
   filter: saturate(115%);
   outline: none;
 }
-.interactive-pill:focus {
-  box-shadow: 0 14px 32px rgba(44, 109, 246, 0.14),
-    0 2px 6px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(44, 109, 246, 0.08);
-  border-radius: 999px;
-}
-@keyframes pillFloat {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
+
+/* subtle floating animation on larger screens */
 @media (min-width: 768px) {
+  @keyframes pillFloat {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
   .interactive-pill {
     animation: pillFloat 8s ease-in-out infinite;
-    animation-delay: 0.2s;
   }
   .interactive-pill:nth-child(3n + 1) {
     animation-delay: 0.12s;
@@ -269,108 +466,144 @@
   }
 }
 
-/* -------------------------
-   PARTNERS GRID ADJUSTMENT
---------------------------*/
-.partners-grid {
-  margin-top: 0.75rem;
-}
-@media (min-width: 768px) {
-  .partners-grid {
-    margin-top: 1.25rem;
+/* ---------------------------
+   ACCESSIBILITY / REDUCED MOTION
+----------------------------*/
+@media (prefers-reduced-motion: reduce) {
+  .card-inner,
+  .card-inner::before,
+  .card-inner::after,
+  .glow-rim,
+  .accent-blob,
+  .interactive-pill {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .card-head,
+  .icon-wrap.big-icon,
+  .partner-title.centered-title {
+    transition: none !important;
+    transform: none !important;
+  }
+  .colored-card::before {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
   }
 }
 
-/* video ring */
-.video-ring {
-  border-radius: 9999px;
-  position: relative;
-  filter: drop-shadow(0 8px 28px rgba(10, 15, 25, 0.08));
-  transition: transform 320ms ease;
-  z-index: 2;
-  animation: ringPulse 6.6s ease-in-out infinite;
-}
-.video-ring::before {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 9999px;
-  background: radial-gradient(
-      circle at 30% 20%,
-      rgba(0, 229, 255, 0.06),
-      transparent 20%
-    ),
-    radial-gradient(circle at 80% 80%, rgba(255, 138, 0, 0.04), transparent 18%);
-  z-index: -1;
-  filter: blur(10px);
-  opacity: 1;
-}
-@keyframes ringPulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
+/* ---------------------------
+   RESPONSIVE: MOBILE SOLID CARDS (override)
+   - On small screens (<768px) we use deep ocean blue as the card background
+   - desktop keeps the original transparent-inner behavior
+----------------------------*/
+@media (max-width: 768px) {
+  /* Force deep ocean blue on small devices */
+  .colored-card {
+    --card-bg: linear-gradient(
+      180deg,
+      var(--ocean-1) 0%,
+      var(--ocean-2) 100%
+    ) !important;
+    --card-hover: var(--ocean-hover) !important;
+    --fg: #ffffff !important;
+    --icon: #ffffff !important;
+    padding: 12px;
   }
-  50% {
-    transform: scale(1.02);
-    opacity: 0.92;
+
+  /* Make the visible card surface solid on mobile (not transparent) */
+  .card-inner {
+    background: var(--card-bg) !important; /* use the ocean grad */
+    box-shadow: 0 10px 30px rgba(2, 14, 34, 0.18); /* slightly stronger elevation for mobile */
+    border-radius: calc(var(--card-radius) - 2px);
+    padding: 12px;
   }
-  100% {
-    transform: scale(1);
-    opacity: 1;
+
+  /* Slightly larger description for mobile (still constrained) */
+  .card-inner .flex-1,
+  .card-inner .flex-1 ul,
+  .card-inner .flex-1 li {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  /* icon / title scale down for small devices */
+  .icon-wrap.big-icon {
+    width: 48px;
+    height: 48px;
+  }
+  .icon-wrap.big-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  .partner-title.centered-title {
+    font-size: 1.05rem;
+  }
+
+  /* ensure rim thickness is balanced on mobile */
+  .colored-card::before {
+    inset: -2px;
+    padding: 2px;
   }
 }
 
-/* -------------------------
-   PARTNER TITLE (new)
---------------------------*/
-.partner-title {
-  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol";
-  font-weight: bold;
-  font-size: 1rem;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 2rem;
-
-  /* Apply logo gradient to text */
-  background: linear-gradient(#00e5ff, #2c6df6, #ff8a00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-
-  text-shadow: none; /* let gradient shine */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-@media (min-width: 640px) {
-  .partner-title {
-    font-size: 1.125rem;
+/* very small screens */
+@media (max-width: 420px) {
+  .icon-wrap.big-icon {
+    width: 42px;
+    height: 42px;
   }
-}
-@media (min-width: 1024px) {
-  .partner-title {
-    font-size: 1.25rem;
+  .icon-wrap.big-icon svg {
+    width: 24px;
+    height: 24px;
   }
-}
-
-@media (min-width: 640px) {
-  .partner-title {
-    font-size: 1.0625rem;
+  .partner-title.centered-title {
+    font-size: 1rem;
   }
-}
-@media (min-width: 1024px) {
-  .partner-title {
-    font-size: 1.125rem;
+  .card-inner {
+    padding: 10px;
+  }
+  .colored-card {
+    padding: 10px;
+  }
+  .card-inner .flex-1,
+  .card-inner .flex-1 ul,
+  .card-inner .flex-1 li {
+    font-size: 0.95rem;
+  }
+  .card-inner .check-bubble {
+    width: 24px;
+    height: 24px;
+  }
+  .card-inner .check-bubble svg {
+    width: 12px;
+    height: 12px;
   }
 }
 
-/* alignment tweaks for list icons */
-.motion-list-item > .check-bubble {
-  margin-top: 2px;
+/* ---------------------------
+   FALLBACKS / LEGACY BROWSERS
+----------------------------*/
+@supports not (
+  (
+    --fake: 0,
+  )
+) {
+  .colored-card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #0b1220;
+  }
+  .colored-card::before {
+    display: none;
+  }
+  .group:hover .colored-card,
+  .group:focus-within .colored-card,
+  .colored-card:hover,
+  .colored-card:focus {
+    box-shadow: 0 28px 60px rgba(8, 14, 28, 0.18),
+      0 0 0 3px rgba(255, 183, 0, 0.12);
+  }
 }
-.icon-wrap svg,
-.check-bubble svg {
-  display: block;
-}
+
+/* --- keep any additional CSS (video-ring, partners-grid spacing, etc.) below --- */
