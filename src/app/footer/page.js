@@ -205,8 +205,8 @@ const Footer = () => {
   </p>
 </div>
          */}
-         <div className="mt-8 md:mt-1 mx-auto max-w-xl space-y-1 text-[15px] sm:text-base leading-relaxed text-white/85 group">
 
+         <div className="mt-8 md:mt-1 mx-auto max-w-[300px] space-y-1 text-[15px] sm:text-base leading-relaxed text-white/85 group">
   <p className="font-bold leading-relaxed transform transition-all duration-700 ease-out animate-fade-in-up hover:translate-x-2 hover:text-white cursor-default p-1 rounded-lg hover:bg-white/5 backdrop-blur-sm border border-transparent hover:border-white/10">
     No 35 A, Kowdi, 2nd Floor, 1st Main Road, <br />
     Chiranjeevi Layout, Hebbal, Kempapura, <br />
@@ -227,12 +227,10 @@ const Footer = () => {
     Phone:{" "}
     <a 
       href="tel:+916366930174" 
-      className="underline underline-offset-4 decoration-white/40 hover:decoration-white transition-all duration-300 hover:text-white hover:scale-105 inline-block hover:shadow-lg hover:shadow-white/20 px-1 py-0.5 rounded hover:bg-white/10"
-    >
+      className="underline underline-offset-4 decoration-white/40 hover:decoration-white transition-all duration-300 hover:text-white hover:scale-105 inline-block hover:shadow-lg hover:shadow-white/20 px-1 py-0.5 rounded hover:bg-white/10">
       +91 6366930174
     </a>
   </p>
-
 </div>
 
           <div className="mt-10 md:mt-2 flex flex-col md:flex-row items-center justify-center gap-6 w-full">
