@@ -429,7 +429,7 @@ const OurServicesComp = () => {
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* left: overview card */}
           <div className="lg:col-span-2">
-            <div className="relative rounded-3xl bg-[#0f0f18]/80 p-6 sm:p-8 overflow-hidden ring-1 ring-white/10">
+            <div className="relative rounded-3xl bg-[#0f0f18]/80 p-6 sm:p-8 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.7),0_0_30px_6px_rgba(0,212,255,0.6),0_0_40px_8px_rgba(255,110,0,0.65),0_0_50px_10px_rgba(255,184,0,0.6)]">
               {/* gradient border sheen */}
               <div className="absolute inset-0 rounded-3xl pointer-events-none">
                 <div
@@ -491,7 +491,7 @@ const OurServicesComp = () => {
             {approach.slice(0, 2).map((item, i) => (
               <div
                 key={i}
-                className="group relative rounded-3xl bg-[#10101a]/80 p-6 overflow-hidden ring-1 ring-white/10"
+                className="group relative rounded-3xl bg-[#10101a]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.7),0_0_30px_6px_rgba(0,212,255,0.6),0_0_40px_8px_rgba(255,110,0,0.65),0_0_50px_10px_rgba(255,184,0,0.6)]"
               >
                 <div className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400 opacity-90" />
                 <div className="flex items-start gap-4">
@@ -520,8 +520,7 @@ const OurServicesComp = () => {
           {approach.slice(2).map((item, i) => (
             <div
               key={i}
-              className="group relative rounded-3xl bg-[#0e0e17]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:ring-white/20 transition"
-            >
+              className="group relative rounded-3xl bg-[#0e0e17]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.7),0_0_30px_6px_rgba(0,212,255,0.6),0_0_40px_8px_rgba(255,110,0,0.65),0_0_50px_10px_rgba(255,184,0,0.6)]">
               <div className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400 opacity-80 group-hover:opacity-100" />
               <div className="flex items-start gap-4">
                 <div className="shrink-0 text-white/70 group-hover:text-white transition">
