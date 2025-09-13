@@ -261,8 +261,8 @@ const OurServicesComp = () => {
       </div>
 
       {/* === SERVICES GRID === */}
-      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-14 md:mt-16 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-7">
+      <section className="    relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-14 md:mt-16 pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-7 ">
           {services.map((svc, idx) => {
             const preview = svc.points.slice(0, 1);
             const hasMore = svc.points.length > 1;
@@ -270,7 +270,7 @@ const OurServicesComp = () => {
             return (
               <article
                 key={idx}
-                className="relative group rounded-[26px] overflow-hidden border border-white/5 shadow-2xl shadow-black/40 min-h-[280px]"
+                className="relative group rounded-[26px] overflow-hidden border hover:shadow-xl hover:shadow-green-400/60 hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)] border-white/5 shadow-2xl shadow-black/40 min-h-[280px]"
               >
                 {/* Card background */}
                 <img
@@ -287,7 +287,7 @@ const OurServicesComp = () => {
                 <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400 opacity-90 group-hover:opacity-100" />
 
                 {/* Content */}
-                <div className="relative p-6 sm:p-7">
+                <div className="relative p-6 sm:p-7  ">
                   <div className="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-sm text-white/90 ring-1 ring-white/10">
                     <span className="inline-flex w-3.5 h-3.5 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400 ring-2 ring-white/20" />
                     <span className="font-medium">{svc.label}</span>
