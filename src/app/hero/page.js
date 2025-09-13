@@ -222,6 +222,7 @@ export default function Hero() {
             <br className="sm:hidden" />
             Design and Growth
           </motion.h1> */}
+          
           <TextGenerateEffect duration={2} filter={false} words={words} />
 
           {/* Subtext (fades up) */}

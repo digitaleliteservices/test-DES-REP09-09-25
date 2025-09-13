@@ -67,14 +67,15 @@ const FeatureCard = ({ icon, title, desc, delay = 0 }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.28 }}
     transition={{ duration: 0.6, delay }}
-    className="group h-full rounded-2xl overflow-hidden text-left flex flex-col items-stretch
-               bg-gradient-to-br from-white/6 via-white/4 to-black/20
-               ring-1 ring-white/8
-               border border-white/6
-               backdrop-blur-md
-               shadow-[0_12px_30px_rgba(2,6,23,0.6)]
-               hover:shadow-[0_20px_50px_rgba(99,102,241,0.18)]
-               hover:-translate-y-1 transition-all duration-300"
+    className="group h-full rounded-2xl
+  overflow-hidden text-left flex flex-col items-stretch
+  bg-gradient-to-br from-white/6 via-white/4 to-black/20
+  ring-1 ring-white/8
+  border border-white/6
+  backdrop-blur-md
+  shadow-[0_12px_30px_rgba(2,6,23,0.6)]
+  hover:shadow-[-24px_0px_48px_0px_rgba(34,197,94,0.32),24px_0px_48px_0px_rgba(255,130,0,0.32)]
+  hover:-translate-y-1 transition-all duration-300"
   >
     <div className="p-6 flex items-center justify-center text-4xl mb-2">
       {icon}
@@ -137,8 +138,8 @@ const WhatSetsUsApart = () => {
         </h3>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr">
+      <div className="relative z-10 max-w-6xl mx-auto ">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr ">
           {features.map((f, i) => (
             <FeatureCard
               key={f.title}
@@ -146,6 +147,7 @@ const WhatSetsUsApart = () => {
               title={f.title}
               desc={f.desc}
               delay={i * 0.06}
+              
             />
           ))}
         </div>
@@ -364,7 +366,9 @@ const AboutUsComp = () => {
                 serviceInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
               }
               transition={{ duration: 0.9, delay: i * 0.14 }}
-              className="rounded-2xl overflow-hidden text-left bg-gradient-to-b from-black/20 to-black/6 shadow-[0_18px_40px_rgba(2,6,23,0.55)]"
+              className="rounded-2xl overflow-hidden text-left bg-gradient-to-b from-black/20 to-black/6 shadow-[0_18px_40px_rgba(2,6,23,0.55)] hover:shadow-2xl hover:shadow-green-400/60 
+    hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)]
+    transition relative  flex flex-col"
             >
               <div className="relative">
                 <img
@@ -410,7 +414,7 @@ const AboutUsComp = () => {
 
       {/* MISSION & VISION */}
       <section className="relative isolate overflow-hidden px-6 pt-10 md:pt-12 pb-16 md:pb-24">
-        <div className="relative z-10 max-w-6xl mx-auto text-center mb-8 md:mb-10">
+        <div className="relative z-10 max-w-6xl mx-auto text-center mb-8 md:mb-10 hover:bg">
           <span className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-white/95">
             🌟 Our Vision & Mission
           </span>
@@ -419,14 +423,15 @@ const AboutUsComp = () => {
           </h3>
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 ">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="rounded-2xl p-6 md:p-8 backdrop-blur-md bg-gradient-to-b from-black/28 to-black/14 border border-white/12 shadow-[0_10px_40px_rgba(2,6,23,0.4)]"
-          >
+            className="hover:shadow-xl hover:shadow-green-400/60 
+    hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)]
+    transition rounded-2xl p-6 md:p-8 backdrop-blur-md bg-gradient-to-b from-black/28 to-black/14 border border-white/12 shadow-[0_10px_40px_rgba(2,6,23,0.4)]" >
             <div className="flex items-center gap-3 mb-3">
               <span className="px-3 py-1 rounded-full text-xs tracking-wide bg-gradient-to-r from-purple-500 to-orange-400 text-white">
                 Our Mission
@@ -445,9 +450,11 @@ const AboutUsComp = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="rounded-2xl p-6 md:p-8 backdrop-blur-md bg-gradient-to-b from-black/28 to-black/14 border border-white/12 shadow-[0_10px_40px_rgba(2,6,23,0.4)]"
+            className="hover:shadow-2xl hover:shadow-green-400/60 
+    hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)]
+    transition rounded-2xl p-6 md:p-8 backdrop-blur-md bg-gradient-to-b from-black/28 to-black/14 border border-white/12 shadow-[0_10px_40px_rgba(2,6,23,0.4)]"
           >
-            <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-3 mb-3 ">
               <span className="px-3 py-1 rounded-full text-xs tracking-wide bg-gradient-to-r from-purple-500 to-orange-400 text-white">
                 Our Vision
               </span>
