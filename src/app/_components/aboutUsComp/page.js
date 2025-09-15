@@ -176,6 +176,11 @@ const AboutUsComp = () => {
       <div className="absolute inset-0 -z-20" aria-hidden>
         <div
           style={{
+            //brandstory 1 blue
+             background:
+              "linear-gradient(99.31deg, #4F2FEB 8.33%, #5EB4F9 100.43%)",
+            //  background:
+            //   "linear-gradient(99.31deg, #7A6EFF 8.33%, #FFBFBF 100.43%)",
             // background:
             //   "linear-gradient(90deg,#1c103f 0%, #3b2979 28%, #fdd835 58%, #ff7e19 100%)",
             // filter: "saturate(1.05) contrast(1.02)",
@@ -186,6 +191,8 @@ const AboutUsComp = () => {
             // Cyber Neon (Purple to Cyan)--good
             // background:
             //   "linear-gradient(90deg, #240b36 0%, #c3147c 35%, #00d2ff 100%)",
+            // filter: "saturate(1.2)",
+           
             // filter: "saturate(1.2)",
             //deep space
             // background:
@@ -221,8 +228,10 @@ const AboutUsComp = () => {
             // Deep Blues---v.good
             // background: "linear-gradient(90deg, #000428 0%, #004e92 40%)",
             // filter: "contrast(1.1)",
-            background: "linear-gradient(270deg, #000428 0%, #004e92 75%)",
-            filter: "contrast(1.1)",
+
+            //selected-we are using
+            // background: "linear-gradient(270deg, #000428 0%, #004e92 75%)",
+            // filter: "contrast(1.1)",
 
             // Rich Purples --v.good--->selected
             // background: "linear-gradient(90deg, #240b36 0%, #c3147c 100%)",
