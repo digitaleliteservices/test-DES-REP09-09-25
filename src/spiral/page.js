@@ -118,6 +118,11 @@ import { motion } from "framer-motion";
 import { useMemo } from "react";
 import "./spiral.css"; // optional if you want to move styles to CSS
 
+const LOGO_GRADIENT =
+  "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
+const SOFT_ACCENT =
+  "radial-gradient(circle at 10% 10%, rgba(0,229,255,0.06), transparent 30%), radial-gradient(circle at 90% 90%, rgba(255,138,0,0.06), transparent 30%)";
+
 const chips = [
   "Innovation",
   "Integrity",
@@ -171,7 +176,14 @@ export default function Spiral() {
           One practical holistic service
         </h1>
         <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-          <span className="bg-gradient-to-r from-sky-500 via-indigo-400 to-amber-500 bg-clip-text text-transparent">
+          {/* <span className="bg-gradient-to-r from-sky-500 via-indigo-400 to-amber-500 bg-clip-text text-transparent"> */}
+          <span
+            style={{
+              background: LOGO_GRADIENT,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             Exponential daily value
           </span>
         </h2>

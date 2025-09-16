@@ -10,6 +10,8 @@ import Services from "../services/page";
 import WhoWeWorkWith from "../whowework/page";
 import WhyChooseUs from "../whychooseus/page";
 import { time } from "framer-motion";
+import HomeTestimonials from "../testimonials/clientTestimonial";
+import OurProcess from "../ourprocess/ourprocess";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -26,7 +28,9 @@ export default function Home() {
       <Hero />
       <Services />
       {/* <WhoWeWorkWith /> */}
+      {/* <OurProcess/> */}
       <Spiral />
+      <HomeTestimonials />
       <WhyChooseUs />
       <Footer />
     </div>
