@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CheckCircle, X } from "lucide-react";
+import WhoWeWorkWith from "../whowework/page";
 
 const services = [
   {
@@ -44,13 +45,20 @@ const Services = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/assets/services_bg_image.avif"
+          // src="/assets/services_bg_image.avif"
+          src="/assets/who-we-work_bg_image.avif"
           alt="Services Background"
           className="w-full h-full object-cover"
         />
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/70"></div>
+        {/* <div className="absolute inset-0 bg-black/70"></div> */}
       </div>
+      {/* <div className="absolute inset-0 pointer-events-none">
+        <img
+          src="/assets/who-we-work_bg_image.avif"
+          alt="Who we work with background"
+          className="w-full h-full object-cover"
+        />
+      </div> */}
 
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-6">
@@ -106,7 +114,7 @@ const Services = () => {
                 </ul>
 
                 {/* Hover Button */}
-                
+
                 <div className="flex justify-center  opacity-100 md:opacity-100 lg:opacity-100 min-[786px]:opacity-100 group-hover:opacity-100 transition-opacity duration-500">
                   <button
                     onClick={() => setActiveService(service)}
@@ -115,11 +123,14 @@ const Services = () => {
                     Get More
                   </button>
                 </div>
-
               </div>
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="services-who-wrapper mt-12">
+        <WhoWeWorkWith />
       </div>
 
       {/* Right Side Modal */}

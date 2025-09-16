@@ -25,7 +25,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Services />
-      <WhoWeWorkWith />
+      {/* <WhoWeWorkWith /> */}
       <Spiral />
       <WhyChooseUs />
       <Footer />

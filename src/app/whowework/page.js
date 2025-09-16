@@ -132,14 +132,14 @@ export default function WhoWeWorkWith() {
   };
 
   return (
-    <section className="who-section relative py-16 md:py-20 bg-white">
-      <div className="absolute inset-0 pointer-events-none">
+    <section className="who-section relative py-16 md:py-20">
+      {/* <div className="absolute inset-0 pointer-events-none">
         <img
           src="/assets/who-we-work_bg_image.avif"
           alt="Who we work with background"
           className="w-full h-full object-cover"
         />
-      </div>
+      </div> */}
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12">

@@ -49,6 +49,8 @@
   /* If you put a background image behind cards, keep it here */
 }
 
+
+
 /* -------------------------------------------------------------------------
    COLORED CARD (default behavior)
    - Per-card inline styles in JSX may set --card-bg, --card-hover, --fg, --icon

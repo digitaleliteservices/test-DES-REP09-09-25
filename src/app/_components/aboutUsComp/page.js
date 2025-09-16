@@ -176,11 +176,14 @@ const AboutUsComp = () => {
       <div className="absolute inset-0 -z-20" aria-hidden>
         <div
           style={{
-             //brandstory 1 blue
-             //brandstory 1 blue
-             //shade of blue-violet / purple.
-             background:
-              "linear-gradient(99.31deg, #4F2FEB 8.33%, #5EB4F9 100.43%)",
+            //brandstory 1 blue
+            //brandstory 1 blue
+            //shade of blue-violet / purple.
+            //  background:
+            //   "linear-gradient(99.31deg, #4F2FEB 8.33%, #5EB4F9 100.43%)",
+            
+            // background:
+            //   "linear-gradient(99.31deg, #4F2FEB 8.33%, #5EB4F9 100.43%),radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.12), transparent 50%),radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.08), transparent 60%)",
             //  background:
             //   "linear-gradient(99.31deg, #7A6EFF 8.33%, #FFBFBF 100.43%)",
             // background:
@@ -232,7 +235,7 @@ const AboutUsComp = () => {
             // filter: "contrast(1.1)",
 
             // Rich Purples --v.good--->selected
-            // background: "linear-gradient(90deg, #240b36 0%, #c3147c 100%)",
+            background: "linear-gradient(90deg, #240b36 0%, #c3147c 100%)",
             //emarald gray
             // background: "linear-gradient(90deg, #134e5e 0%, #71b280 100%)"
             // Emerald Greens
