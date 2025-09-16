@@ -201,81 +201,87 @@ export default function WhoWeWorkWith() {
                   viewport={{ once: false, amount: 0.2 }}
                   className="p-[3px] rounded-xl"
                 >
-                  <motion.div
-                    ref={(el) => (cardRefs.current[cardIndex] = el)}
-                    onMouseMove={(e) => handleMouseMove(e, cardIndex)}
-                    onMouseLeave={() => handleMouseLeave(cardIndex)}
-                    whileHover={{ translateY: -6 }}
-                    className="relative group card-inner colored-card transition-all"
+                  
+                 
+               <div className="relative group perspective-1000 w-full h-full">
+  <div className="flip-inner preserve-3d transition-transform duration-500 ease-out group-hover:rotate-y-180 w-full h-full will-change-transform backface-hidden">
+
+    <motion.div
+      ref={(el) => (cardRefs.current[cardIndex] = el)}
+      onMouseMove={(e) => handleMouseMove(e, cardIndex)}
+      onMouseLeave={() => handleMouseLeave(cardIndex)}
+      whileHover={{ translateY: -6 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="relative w-full  h-full card-inner colored-card transition-all will-change-transform backface-hidden"
+      style={{
+        "--card-bg": THEME.bg,
+        "--card-hover": THEME.hover,
+        "--fg": THEME.fg,
+        "--icon": THEME.icon,
+      }}
+    >
+      
+      {/* Content wrapper that flips back */}
+      {/* <div className="transition-transform duration-500 ease-in-out group-hover:rotate-y-180 w-full h-full"> */}
+ <div className="transition-transform duration-500 ease-out group-hover:rotate-y-180 w-full h-full will-change-transform backface-hidden">
+     
+        <div className="card-head">
+          <div className="icon-wrap big-icon">
+            <Icon style={{ color: "var(--icon)" }} className="w-10 h-10" />
+          </div>
+          <h3 className="partner-title centered-title" title={partner.title} style={{ color: "var(--fg)" }}>
+            {partner.title}
+          </h3>
+        </div>
+
+        <div className="flex-1 mt-2">
+          <motion.ul
+            variants={listContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.15 }}
+            className="space-y-2 text-base text-center mt-0"
+            style={{ color: "var(--fg)" }}
+          >
+            {partner.description.map((point, i) => {
+              const variant = i % 2 === 0 ? leftItem : rightItem;
+              return (
+                <motion.li key={i} variants={variant} className="flex items-start gap-3">
+                  <motion.span
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.44, ease: "backOut" }}
+                    className="mt-1 check-bubble flex-shrink-0 rounded-full w-5 h-5 flex items-center justify-center"
                     style={{
-                      "--card-bg": THEME.bg,
-                      "--card-hover": THEME.hover,
-                      "--fg": THEME.fg,
-                      "--icon": THEME.icon,
+                      background: "linear-gradient(180deg,var(--c-cyan),var(--c-blue))",
                     }}
                   >
-                    <div className="card-head">
-                      <div className="icon-wrap big-icon">
-                        <Icon
-                          style={{ color: "var(--icon)" }}
-                          className="w-10 h-10"
-                        />
-                      </div>
-                      <h3
-                        className="partner-title centered-title"
-                        title={partner.title}
-                        style={{ color: "var(--fg)" }}
-                      >
-                        {partner.title}
-                      </h3>
-                    </div>
+                    <CheckCircle2 className="w-4 h-4 text-white stroke-[2]" />
+                  </motion.span>
 
-                    <div className="flex-1 mt-2">
-                      <motion.ul
-                        variants={listContainer}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: false, amount: 0.15 }}
-                        // className="space-y-2 text-sm text-left mt-0"
-                        className="space-y-2 text-base text-center mt-0"
-                        style={{ color: "var(--fg)" }}
-                      >
-                        {partner.description.map((point, i) => {
-                          const variant = i % 2 === 0 ? leftItem : rightItem;
-                          return (
-                            <motion.li
-                              key={i}
-                              variants={variant}
-                              className="flex items-start gap-3"
-                            >
-                              <motion.span
-                                initial={{ scale: 0.6, opacity: 0 }}
-                                whileInView={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.44, ease: "backOut" }}
-                                className="mt-1 check-bubble flex-shrink-0 rounded-full w-5 h-5 flex items-center justify-center"
-                                style={{
-                                  background:
-                                    "linear-gradient(180deg,var(--c-cyan),var(--c-blue))",
-                                }}
-                              >
-                                <CheckCircle2 className="w-4 h-4 text-white stroke-[2]" />
-                              </motion.span>
+                  <motion.span className="leading-snug motion-bullet-underline title-point">
+                    {point}
+                  </motion.span>
+                </motion.li>
+              );
+            })}
+          </motion.ul>
+        </div>
 
-                              <motion.span className="leading-snug motion-bullet-underline title-point">
-                                {point}
-                              </motion.span>
-                            </motion.li>
-                          );
-                        })}
-                      </motion.ul>
-                    </div>
+        <div
+          aria-hidden
+          className="absolute -right-3 -top-3 w-14 h-14 rounded-full accent-blob opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+        />
+        <div className="glow-rim" aria-hidden />
+        
+      </div>
+    </motion.div>
 
-                    <div
-                      aria-hidden
-                      className="absolute -right-3 -top-3 w-14 h-14 rounded-full accent-blob opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
-                    />
-                    <div className="glow-rim" aria-hidden />
-                  </motion.div>
+  </div>
+</div>
+
+ 
+
                 </motion.div>
               );
             })}
@@ -294,7 +300,7 @@ export default function WhoWeWorkWith() {
             </div>
           </div>
 
-          <div className="space-y-6 lg:flex-1">
+          {/* <div className="space-y-6 lg:flex-1">
             {partners.slice(2).map((partner, idx) => {
               const Icon = partner.icon;
               const realIdx = idx + 2;
@@ -386,7 +392,110 @@ export default function WhoWeWorkWith() {
                 </motion.div>
               );
             })}
+          </div> */}
+          <div className="space-y-6 lg:flex-1">
+  {partners.slice(2).map((partner, idx) => {
+    const Icon = partner.icon;
+    const realIdx = idx + 2;
+    const cardIndex = realIdx;
+    return (
+      <motion.div
+        key={realIdx}
+        variants={cardVariant}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.2 }}
+        className="p-[3px] rounded-xl"
+      >
+        <div className="relative group perspective-1000 w-full h-full">
+          <div className="flip-inner preserve-3d transition-transform duration-500 ease-out w-full h-full will-change-transform backface-hidden group-hover:rotate-y-180">
+            <motion.div
+              ref={(el) => (cardRefs.current[cardIndex] = el)}
+              onMouseMove={(e) => handleMouseMove(e, cardIndex)}
+              onMouseLeave={() => handleMouseLeave(cardIndex)}
+              whileHover={{ translateY: -6 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="relative w-full h-full card-inner colored-card transition-all will-change-transform backface-hidden bg-[var(--card-bg)] group-hover:bg-blue-500"
+              style={{
+                "--card-bg": THEME.bg,
+                "--card-hover": THEME.hover,
+                "--fg": THEME.fg,
+                "--icon": THEME.icon,
+                "--card-radius": "12px",
+              }}
+            >
+              <div className="transition-transform duration-500 ease-out group-hover:rotate-y-180 w-full h-full will-change-transform backface-hidden">
+                <div className="card-head">
+                  <div className="icon-wrap big-icon">
+                    <Icon
+                      style={{ color: "var(--icon)" }}
+                      className="w-10 h-10"
+                    />
+                  </div>
+                  <h3
+                    className="partner-title centered-title"
+                    title={partner.title}
+                    style={{ color: "var(--fg)" }}
+                  >
+                    {partner.title}
+                  </h3>
+                </div>
+
+                <div className="flex-1 mt-2">
+                  <motion.ul
+                    variants={listContainer}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.15 }}
+                    className="space-y-2 text-base text-left mt-0"
+                    style={{ color: "var(--fg)" }}
+                  >
+                    {partner.description.map((point, i) => {
+                      const variant = i % 2 === 0 ? leftItem : rightItem;
+                      return (
+                        <motion.li
+                          key={i}
+                          variants={variant}
+                          className="flex items-start gap-3"
+                        >
+                          <motion.span
+                            initial={{ scale: 0.6, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.44, ease: "backOut" }}
+                            className="mt-1 check-bubble flex-shrink-0 rounded-full w-5 h-5 flex items-center justify-center"
+                            style={{
+                              background:
+                                "linear-gradient(180deg,var(--c-cyan),var(--c-blue))",
+                            }}
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-white stroke-[2]" />
+                          </motion.span>
+
+                          <motion.span className="leading-snug motion-bullet-underline title-point">
+                            {point}
+                          </motion.span>
+                        </motion.li>
+                      );
+                    })}
+                  </motion.ul>
+                </div>
+
+                <div
+                  aria-hidden
+                  className="absolute -right-3 -top-3 w-14 h-14 rounded-full accent-blob opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                />
+                <div className="glow-rim" aria-hidden />
+              </div>
+            </motion.div>
           </div>
+        </div>
+      </motion.div>
+    );
+  })}
+</div>
+
+
+
         </div>
 
         <OurClients />
