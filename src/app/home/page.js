@@ -12,7 +12,8 @@ import WhyChooseUs from "../whychooseus/page";
 import { time } from "framer-motion";
 import HomeTestimonials from "../testimonials/clientTestimonial";
 import OurProcess from "../ourprocess/ourprocess";
-
+import CurtainFooter from "../curtainraiser/curtainRaiser";
+import SocialMediaIcons from "../socialMediaIcons/socialMediaIcons";
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +24,7 @@ export default function Home() {
 
   if (loading) return <Loader />;
   return (
-    <div>
+    <div className="relative">
       <Navbar />
       <Hero />
       <Services />
@@ -32,7 +33,12 @@ export default function Home() {
       <Spiral />
       <HomeTestimonials />
       <WhyChooseUs />
-      <Footer />
+      <SocialMediaIcons />
+      {/* <div className="h-20"></div>
+
+      <CurtainFooter curtainHeight={600}>
+        <Footer />
+      </CurtainFooter> */}
     </div>
   );
 }

@@ -6,6 +6,8 @@ import { Poppins } from "next/font/google";
 import Head from "next/head";
 
 import "./about.css";
+import CurtainFooter from "@/app/curtainraiser/curtainRaiser";
+import Footer from "@/app/footer/page";
 
 // Google Font
 const poppins = Poppins({
@@ -162,248 +164,254 @@ const AboutUsComp = () => {
   });
 
   return (
-    <div className={`${poppins.className} min-h-screen text-white relative`}>
-      <Head>
-        <title>About Us - Digital Solutions & Branding Experts</title>
-        <meta
-          name="description"
-          content="Learn about our mission and vision at Digital Elite Services. We provide innovative digital solutions, creative branding, web development, and marketing strategies to help businesses grow."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-
-      {/* Page background gradient with subtle noise + bobbing vignette */}
-      <div className="absolute inset-0 -z-20" aria-hidden>
-        <div
-          style={{
-            //brandstory 1 blue
-            //brandstory 1 blue
-            //shade of blue-violet / purple.
-            //  background:
-            //   "linear-gradient(99.31deg, #4F2FEB 8.33%, #5EB4F9 100.43%)",
-            
-            // background:
-            //   "linear-gradient(99.31deg, #4F2FEB 8.33%, #5EB4F9 100.43%),radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.12), transparent 50%),radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.08), transparent 60%)",
-            //  background:
-            //   "linear-gradient(99.31deg, #7A6EFF 8.33%, #FFBFBF 100.43%)",
-            // background:
-            //   "linear-gradient(90deg,#1c103f 0%, #3b2979 28%, #fdd835 58%, #ff7e19 100%)",
-            // filter: "saturate(1.05) contrast(1.02)",
-            // Deep Ocean to Electric Blue--good
-            // background:
-            //   "linear-gradient(90deg, #0a1640 0%, #1a237e 30%, #2196f3 70%, #4fc3f7 100%)",
-            // filter: "saturate(1.1) contrast(1.1)",
-            // Cyber Neon (Purple to Cyan)--good
-            // background:
-            //   "linear-gradient(90deg, #240b36 0%, #c3147c 35%, #00d2ff 100%)",
-            // filter: "saturate(1.2)",
-            //deep space
-            // background:
-            //   "linear-gradient(90deg, #000428 0%, #203a43 50%, #2c5364 100%)",
-            // filter: "saturate(1.05)",
-            // Fiery Sunset--good
-            // background:
-            //   "linear-gradient(90deg, #33001b 0%, #ff0080 35%, #ff8c00 70%, #f9f047 100%)",
-            // filter: "saturate(1.1) contrast(1.05)",
-            // Vibrant Coral & Peach
-            // background:
-            //   "linear-gradient(90deg, #ff416c 0%, #ff4b2b 50%, #ffc371 100%)",
-            // Mango Sunrise--good
-            // background:
-            //   "linear-gradient(90deg, #283c86 0%, #45a247 50%, #fbd786 100%)", // A unique twist with a touch of green
-            // Desert Dusk
-            // background:
-            //   "linear-gradient(90deg, #2c3e50 0%, #4ca1af 50%, #c06c84 100%)",
-            // filter: "saturate(1.05)", // Keep the filter subtle here
-            // Earthy Terracotta --good
-            // background:
-            //   "linear-gradient(90deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%)",
-            // Electric Purple-Pink --good
-            // background:
-            //   "linear-gradient(90deg, #141E30 0%, #53346D 35%, #C06C84 65%, #F67280 100%)",
-            // filter: "saturate(1.1) contrast(1.1)",
-            // Neon Green & Purple
-            // background:
-            //   "linear-gradient(90deg, #3a1c71 0%, #8e24aa 30%, #00f2fe 70%, #4facfe 100%)",
-            // Tropical Punch
-            // background:
-            //   "linear-gradient(90deg, #00416a 0%, #e4e5e6 50%, #ff7e5f 100%)",
-            // Deep Blues---v.good
-            // background: "linear-gradient(90deg, #000428 0%, #004e92 40%)",
-            // filter: "contrast(1.1)",
-            // background: "linear-gradient(270deg, #000428 0%, #004e92 75%)",
-            // filter: "contrast(1.1)",
-
-            // Rich Purples --v.good--->selected
-            background: "linear-gradient(90deg, #240b36 0%, #c3147c 100%)",
-            //emarald gray
-            // background: "linear-gradient(90deg, #134e5e 0%, #71b280 100%)"
-            // Emerald Greens
-            // background:
-            //   "linear-gradient(90deg, #022c12 0%, #064e3b 50%, #059669 100%)",
-            //rich purple--very good
-            // background:
-            //   "linear-gradient(90deg, #240b36 0%, #6a3093 50%, #c3147c 100%)",
-            // filter: "saturate(1.12) contrast(1.08)",
-            //ocean-teal
-            // background: "linear-gradient(90deg, #2b5876 0%, #4e4376 100%)"
-            //magenta
-            // background:
-            //   "linear-gradient(90deg, #240b36 0%, #6a3093 50%, #c3147c 100%)",
-            //neon--good
-            // background: "linear-gradient(90deg, #0f0c29 0%, #302b63 50%, #c86dd7 100%)"
-            //sunrise warm
-            // background: "linear-gradient(90deg, #ff5f6d 0%, #ffc371 100%)"
-            //deep-ocean
-            // background: "linear-gradient(90deg, #0f2027 0%, #2c5364 100%)",
-          }}
-          className="w-full h-full"
-        />
-        {/* Vignette blobs that bob gently across the page to create 'bob screen' effect */}
-        <motion.div
-          className="absolute left-8 top-16 w-48 h-48 rounded-full blur-3xl"
-          {...bobAnim}
-        />
-        <motion.div
-          className="absolute right-6 top-32 w-60 h-60 rounded-full blur-3xl"
-          style={{
-            background: "radial-gradient(circle,#fb923c, transparent 40%)",
-            opacity: 0.22,
-          }}
-          {...bobAnim}
-        />
-        <motion.div
-          className="absolute left-10 bottom-24 w-72 h-72 rounded-full blur-3xl"
-          style={{
-            background: "radial-gradient(circle,#fef08a, transparent 40%)",
-            opacity: 0.18,
-          }}
-          {...bobAnim}
-        />
-      </div>
-
-      {/* HERO */}
-      <section className="relative flex items-center justify-center min-h-screen overflow-hidden px-6">
-        {/* decorative bobbing glow */}
-        <motion.div
-          className="absolute w-[260px] h-[260px] sm:w-[420px] sm:h-[420px] md:w-[640px] md:h-[640px] rounded-full -z-10"
-          style={{
-            background: "linear-gradient(90deg,#7c3aed 40%, #fbbf24 100%)",
-            opacity: 0.32,
-          }}
-          animate={{ y: [0, -18, 0, 9, 0], rotate: [0, 2, -2, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        <div className="relative z-10 text-center max-w-3xl">
-          <motion.h3
-            className="text-base sm:text-lg md:text-xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-200 via-orange-200 to-purple-200 mb-2 drop-shadow-md"
-            initial={{ opacity: 0, y: -18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Driving Innovation with Purpose, Precision & Impact
-          </motion.h3>
-
-          <motion.h1
-            className="text-2xl sm:text-3xl md:text-5xl font-semibold leading-tight text-white drop-shadow-xl"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.25 }}
-          >
-            We build meaningful experiences <br className="hidden sm:block" />{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-orange-400 to-purple-500">
-              with relentless focus
-            </span>
-          </motion.h1>
-        </div>
-      </section>
-
-      {/* ONE SERVICE */}
-      <section
-        ref={serviceRef}
-        className="relative flex flex-col items-center justify-center overflow-hidden px-6 py-16 md:py-20"
-      >
-        {/* Continuity gradients & subtle bobbing */}
-        <div className="absolute inset-0 -z-10">
-          <motion.div
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
+    <>
+      <div className={`${poppins.className} min-h-screen text-white relative`}>
+        <Head>
+          <title>About Us - Digital Solutions & Branding Experts</title>
+          <meta
+            name="description"
+            content="Learn about our mission and vision at Digital Elite Services. We provide innovative digital solutions, creative branding, web development, and marketing strategies to help businesses grow."
           />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+
+        {/* Page background gradient with subtle noise + bobbing vignette */}
+        <div className="absolute inset-0 -z-20" aria-hidden>
+          <div
+            style={{
+              //brandstory 1 blue
+              //brandstory 1 blue
+              //shade of blue-violet / purple.
+              //  background:
+              //   "linear-gradient(99.31deg, #4F2FEB 8.33%, #5EB4F9 100.43%)",
+
+              // background:
+              //   "linear-gradient(99.31deg, #4F2FEB 8.33%, #5EB4F9 100.43%),radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.12), transparent 50%),radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.08), transparent 60%)",
+              //  background:
+              //   "linear-gradient(99.31deg, #7A6EFF 8.33%, #FFBFBF 100.43%)",
+              // background:
+              //   "linear-gradient(90deg,#1c103f 0%, #3b2979 28%, #fdd835 58%, #ff7e19 100%)",
+              // filter: "saturate(1.05) contrast(1.02)",
+              // Deep Ocean to Electric Blue--good
+              // background:
+              //   "linear-gradient(90deg, #0a1640 0%, #1a237e 30%, #2196f3 70%, #4fc3f7 100%)",
+              // filter: "saturate(1.1) contrast(1.1)",
+              // Cyber Neon (Purple to Cyan)--good
+              // background:
+              //   "linear-gradient(90deg, #240b36 0%, #c3147c 35%, #00d2ff 100%)",
+              // filter: "saturate(1.2)",
+              //deep space
+              // background:
+              //   "linear-gradient(90deg, #000428 0%, #203a43 50%, #2c5364 100%)",
+              // filter: "saturate(1.05)",
+              // Fiery Sunset--good
+              // background:
+              //   "linear-gradient(90deg, #33001b 0%, #ff0080 35%, #ff8c00 70%, #f9f047 100%)",
+              // filter: "saturate(1.1) contrast(1.05)",
+              // Vibrant Coral & Peach
+              // background:
+              //   "linear-gradient(90deg, #ff416c 0%, #ff4b2b 50%, #ffc371 100%)",
+              // Mango Sunrise--good
+              // background:
+              //   "linear-gradient(90deg, #283c86 0%, #45a247 50%, #fbd786 100%)", // A unique twist with a touch of green
+              // Desert Dusk
+              // background:
+              //   "linear-gradient(90deg, #2c3e50 0%, #4ca1af 50%, #c06c84 100%)",
+              // filter: "saturate(1.05)", // Keep the filter subtle here
+              // Earthy Terracotta --good
+              // background:
+              //   "linear-gradient(90deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%)",
+              // Electric Purple-Pink --good
+              // background:
+              //   "linear-gradient(90deg, #141E30 0%, #53346D 35%, #C06C84 65%, #F67280 100%)",
+              // filter: "saturate(1.1) contrast(1.1)",
+              // Neon Green & Purple
+              // background:
+              //   "linear-gradient(90deg, #3a1c71 0%, #8e24aa 30%, #00f2fe 70%, #4facfe 100%)",
+              // Tropical Punch
+              // background:
+              //   "linear-gradient(90deg, #00416a 0%, #e4e5e6 50%, #ff7e5f 100%)",
+              // Deep Blues---v.good
+              // background: "linear-gradient(90deg, #000428 0%, #004e92 40%)",
+              // filter: "contrast(1.1)",
+              // background: "linear-gradient(270deg, #000428 0%, #004e92 75%)",
+              // filter: "contrast(1.1)",
+
+              // Rich Purples --v.good--->selected
+              background: "linear-gradient(90deg, #240b36 0%, #c3147c 100%)",
+              // background: "linear-gradient(90deg, #240b36 0%, #c3147c 70%,white 100%)",
+              // background:
+              //   "linear-gradient(180deg,#240b36 0%, #c3147c 70%,rgba(255,255,255,0.9) 90%,#ffffff 100%)",
+              //emarald gray
+              // background: "linear-gradient(90deg, #134e5e 0%, #71b280 100%)"
+              // Emerald Greens
+              // background:
+              //   "linear-gradient(90deg, #022c12 0%, #064e3b 50%, #059669 100%)",
+              //rich purple--very good
+              // background:
+              //   "linear-gradient(90deg, #240b36 0%, #6a3093 50%, #c3147c 100%)",
+              // filter: "saturate(1.12) contrast(1.08)",
+              //ocean-teal
+              // background: "linear-gradient(90deg, #2b5876 0%, #4e4376 100%)"
+              //magenta
+              // background:
+              //   "linear-gradient(90deg, #240b36 0%, #6a3093 50%, #c3147c 100%)",
+              //neon--good
+              // background: "linear-gradient(90deg, #0f0c29 0%, #302b63 50%, #c86dd7 100%)"
+              //sunrise warm
+              // background: "linear-gradient(90deg, #ff5f6d 0%, #ffc371 100%)"
+              //deep-ocean
+              // background: "linear-gradient(90deg, #0f2027 0%, #2c5364 100%)",
+            }}
+            className="w-full h-full"
+          />
+          {/* Vignette blobs that bob gently across the page to create 'bob screen' effect */}
           <motion.div
-            className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl"
+            className="absolute left-8 top-16 w-48 h-48 rounded-full blur-3xl"
             {...bobAnim}
           />
           <motion.div
-            className="absolute top-0 right-1/4 w-80 h-80 rounded-full blur-3xl"
+            className="absolute right-6 top-32 w-60 h-60 rounded-full blur-3xl"
+            style={{
+              background: "radial-gradient(circle,#fb923c, transparent 40%)",
+              opacity: 0.22,
+            }}
+            {...bobAnim}
+          />
+          <motion.div
+            className="absolute left-10 bottom-24 w-72 h-72 rounded-full blur-3xl"
+            style={{
+              background: "radial-gradient(circle,#fef08a, transparent 40%)",
+              opacity: 0.18,
+            }}
             {...bobAnim}
           />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={serviceInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.8 }}
-          className="text-center z-10 mb-10"
+        {/* HERO */}
+        <section className="relative flex items-center justify-center min-h-screen overflow-hidden px-6">
+          {/* decorative bobbing glow */}
+          <motion.div
+            className="absolute w-[260px] h-[260px] sm:w-[420px] sm:h-[420px] md:w-[640px] md:h-[640px] rounded-full -z-10"
+            style={{
+              background: "linear-gradient(90deg,#7c3aed 40%, #fbbf24 100%)",
+              opacity: 0.32,
+            }}
+            animate={{ y: [0, -18, 0, 9, 0], rotate: [0, 2, -2, 0] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          <div className="relative z-10 text-center max-w-3xl">
+            <motion.h3
+              className="text-base sm:text-lg md:text-xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-200 via-orange-200 to-purple-200 mb-2 drop-shadow-md"
+              initial={{ opacity: 0, y: -18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              Driving Innovation with Purpose, Precision & Impact
+            </motion.h3>
+
+            <motion.h1
+              className="text-2xl sm:text-3xl md:text-5xl font-semibold leading-tight text-white drop-shadow-xl"
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.25 }}
+            >
+              We build meaningful experiences <br className="hidden sm:block" />{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-orange-400 to-purple-500">
+                with relentless focus
+              </span>
+            </motion.h1>
+          </div>
+        </section>
+
+        {/* ONE SERVICE */}
+        <section
+          ref={serviceRef}
+          className="relative flex flex-col items-center justify-center overflow-hidden px-6 py-16 md:py-20"
         >
-          <span className="px-5 py-2 rounded-full bg-white/8 text-sm sm:text-base inline-block mb-4 text-white/95">
-            ✨ We Offer
-          </span>
-        </motion.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 max-w-6xl w-full z-10">
-          {[
-            {
-              title: "Digital Marketing Excellence",
-              desc: "We craft strategies that amplify visibility, engage audiences, and drive measurable growth.",
-              img: "/assets/aboutcard4.jpg",
-            },
-            {
-              title: "Creative Design & Branding",
-              desc: "From graphics to complete brand identities, we design with impact — ensuring your message is memorable.",
-              img: "/assets/aboutcard5.jpg",
-            },
-            {
-              title: "Custom Web Development",
-              desc: "We build tailored web solutions that transform ideas into powerful digital experiences.",
-              img: "/assets/aboutcard6.jpg",
-            },
-          ].map((card, i) => (
+          {/* Continuity gradients & subtle bobbing */}
+          <div className="absolute inset-0 -z-10">
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              animate={
-                serviceInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-              }
-              transition={{ duration: 0.9, delay: i * 0.14 }}
-              className="rounded-2xl overflow-hidden text-left bg-gradient-to-b from-black/20 to-black/6 shadow-[0_18px_40px_rgba(2,6,23,0.55)] hover:shadow-2xl hover:shadow-green-400/60 
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5 }}
+            />
+            <motion.div
+              className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl"
+              {...bobAnim}
+            />
+            <motion.div
+              className="absolute top-0 right-1/4 w-80 h-80 rounded-full blur-3xl"
+              {...bobAnim}
+            />
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={
+              serviceInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }
+            }
+            transition={{ duration: 0.8 }}
+            className="text-center z-10 mb-10"
+          >
+            <span className="px-5 py-2 rounded-full bg-white/8 text-sm sm:text-base inline-block mb-4 text-white/95">
+              ✨ We Offer
+            </span>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 max-w-6xl w-full z-10">
+            {[
+              {
+                title: "Digital Marketing Excellence",
+                desc: "We craft strategies that amplify visibility, engage audiences, and drive measurable growth.",
+                img: "/assets/aboutcard4.jpg",
+              },
+              {
+                title: "Creative Design & Branding",
+                desc: "From graphics to complete brand identities, we design with impact — ensuring your message is memorable.",
+                img: "/assets/aboutcard5.jpg",
+              },
+              {
+                title: "Custom Web Development",
+                desc: "We build tailored web solutions that transform ideas into powerful digital experiences.",
+                img: "/assets/aboutcard6.jpg",
+              },
+            ].map((card, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                animate={
+                  serviceInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                }
+                transition={{ duration: 0.9, delay: i * 0.14 }}
+                className="rounded-2xl overflow-hidden text-left bg-gradient-to-b from-black/20 to-black/6 shadow-[0_18px_40px_rgba(2,6,23,0.55)] hover:shadow-2xl hover:shadow-green-400/60 
     hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)]
     transition relative  flex flex-col"
-            >
-              <div className="relative">
-                <img
-                  src={card.img}
-                  alt={card.title}
-                  className="w-full h-48 object-cover brightness-90 contrast-110"
-                />
-              </div>
+              >
+                <div className="relative">
+                  <img
+                    src={card.img}
+                    alt={card.title}
+                    className="w-full h-48 object-cover brightness-90 contrast-110"
+                  />
+                </div>
 
-              {/* moved title + description below the image */}
-              <div className="p-6">
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white drop-shadow">
-                  {card.title}
-                </h3>
-                <p className="text-sm sm:text-base text-white/90 leading-relaxed">
-                  {card.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                {/* moved title + description below the image */}
+                <div className="p-6">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white drop-shadow">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-white/90 leading-relaxed">
+                    {card.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
-        {/* <div className="w-full flex justify-center mt-12 md:mt-14 z-10">
+          {/* <div className="w-full flex justify-center mt-12 md:mt-14 z-10">
           <img
             src={FLOWER_SRC}
             alt="Decorative flower"
@@ -411,115 +419,119 @@ const AboutUsComp = () => {
           />
         </div> */}
 
-        {/* ---------- Orbiting single dot (replace your current block) ---------- */}
-        <div className="w-full flex justify-center mt-14 md:mt-20 md:mb-5 relative z-10">
-          {/* Centering wrapper (static — avoids transform conflicts with Framer) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            {/* Rotating container — Framer will only change rotate on this element */}
-            <motion.div
-              className="relative w-[160px] h-[160px] sm:w-[220px] sm:h-[220px] md:w-[280px] md:h-[280px]"
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            >
-              {/* (optional) faint static orbital path behind the dot — put outside motion.div
+          {/* ---------- Orbiting single dot (replace your current block) ---------- */}
+          <div className="w-full flex justify-center mt-14 md:mt-20 md:mb-5 relative z-10">
+            {/* Centering wrapper (static — avoids transform conflicts with Framer) */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              {/* Rotating container — Framer will only change rotate on this element */}
+              <motion.div
+                className="relative w-[160px] h-[160px] sm:w-[220px] sm:h-[220px] md:w-[280px] md:h-[280px]"
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              >
+                {/* (optional) faint static orbital path behind the dot — put outside motion.div
           if you want it to remain static; kept inside for an orbit path that rotates */}
-              <div className="absolute inset-0 rounded-full border border-white/8 opacity-30" />
+                <div className="absolute inset-0 rounded-full border border-white/8 opacity-30" />
 
-              {/* Orbit dot placed at right edge — it will revolve with the parent */}
-              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2">
-                <div
-                  className="w-4 h-4 sm:w-5 sm:h-5 rounded-full shadow-lg"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, #60A5FA, #FB923C, #8B5CF6)",
-                    zIndex: 30,
-                  }}
-                />
+                {/* Orbit dot placed at right edge — it will revolve with the parent */}
+                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2">
+                  <div
+                    className="w-4 h-4 sm:w-5 sm:h-5 rounded-full shadow-lg"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #60A5FA, #FB923C, #8B5CF6)",
+                      zIndex: 30,
+                    }}
+                  />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Logo in front */}
+            <img
+              src={FLOWER_SRC}
+              alt="Decorative flower"
+              className="relative w-24 sm:w-32 md:w-40 lg:w-48 h-auto z-40"
+            />
+          </div>
+          {/* -------------------------------------------------------------------- */}
+
+          <div className="mt-6 md:mt-8 mb-8 z-10">
+            <AnimatedBullets
+              items={[
+                "Collaborative team of marketers, developers, designers, and digital strategists",
+                "We thrive on solving complex challenges",
+                "Anchored in quality and craftsmanship",
+                "Driven by innovation",
+                "Committed to measurable client success",
+              ]}
+            />
+          </div>
+        </section>
+
+        {/* MISSION & VISION */}
+        <section className="relative isolate overflow-hidden px-6 pt-10 md:pt-12 pb-16 md:pb-24">
+          <div className="relative z-10 max-w-6xl mx-auto text-center mb-8 md:mb-10 hover:bg">
+            <span className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-white/95">
+              🌟 Our Vision & Mission
+            </span>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow-md">
+              Purpose that powers our work
+            </h3>
+          </div>
+
+          <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 ">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="hover:shadow-xl hover:shadow-green-400/60 
+    hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)]
+    transition rounded-2xl p-6 md:p-8 backdrop-blur-md bg-gradient-to-b from-black/28 to-black/14 border border-white/12 shadow-[0_10px_40px_rgba(2,6,23,0.4)]"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="px-3 py-1 rounded-full text-xs tracking-wide bg-gradient-to-r from-purple-500 to-orange-400 text-white">
+                  Our Mission
+                </span>
               </div>
+              <p className="text-white/95 text-base sm:text-lg leading-relaxed">
+                To empower businesses with innovative design, custom digital
+                solutions that drive real measurable growth. We strategize
+                digital solutions that spark growth, improve visibility, and
+                deliver lasting values.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="hover:shadow-2xl hover:shadow-green-400/60 
+    hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)]
+    transition rounded-2xl p-6 md:p-8 backdrop-blur-md bg-gradient-to-b from-black/28 to-black/14 border border-white/12 shadow-[0_10px_40px_rgba(2,6,23,0.4)]"
+            >
+              <div className="flex items-center gap-3 mb-3 ">
+                <span className="px-3 py-1 rounded-full text-xs tracking-wide bg-gradient-to-r from-purple-500 to-orange-400 text-white">
+                  Our Vision
+                </span>
+              </div>
+              <p className="text-white/95 text-base sm:text-lg leading-relaxed">
+                To be a trusted digital growth partner for ambitious brands
+                around the world, known for creativity, innovation, and
+                exceptional service.
+              </p>
             </motion.div>
           </div>
 
-          {/* Logo in front */}
-          <img
-            src={FLOWER_SRC}
-            alt="Decorative flower"
-            className="relative w-24 sm:w-32 md:w-40 lg:w-48 h-auto z-40"
-          />
-        </div>
-        {/* -------------------------------------------------------------------- */}
-
-        <div className="mt-6 md:mt-8 mb-8 z-10">
-          <AnimatedBullets
-            items={[
-              "Collaborative team of marketers, developers, designers, and digital strategists",
-              "We thrive on solving complex challenges",
-              "Anchored in quality and craftsmanship",
-              "Driven by innovation",
-              "Committed to measurable client success",
-            ]}
-          />
-        </div>
-      </section>
-
-      {/* MISSION & VISION */}
-      <section className="relative isolate overflow-hidden px-6 pt-10 md:pt-12 pb-16 md:pb-24">
-        <div className="relative z-10 max-w-6xl mx-auto text-center mb-8 md:mb-10 hover:bg">
-          <span className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-white/95">
-            🌟 Our Vision & Mission
-          </span>
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow-md">
-            Purpose that powers our work
-          </h3>
-        </div>
-
-        <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 ">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="hover:shadow-xl hover:shadow-green-400/60 
-    hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)]
-    transition rounded-2xl p-6 md:p-8 backdrop-blur-md bg-gradient-to-b from-black/28 to-black/14 border border-white/12 shadow-[0_10px_40px_rgba(2,6,23,0.4)]"
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <span className="px-3 py-1 rounded-full text-xs tracking-wide bg-gradient-to-r from-purple-500 to-orange-400 text-white">
-                Our Mission
-              </span>
-            </div>
-            <p className="text-white/95 text-base sm:text-lg leading-relaxed">
-              To empower businesses with innovative design, custom digital
-              solutions that drive real measurable growth. We strategize digital
-              solutions that spark growth, improve visibility, and deliver
-              lasting values.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="hover:shadow-2xl hover:shadow-green-400/60 
-    hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)]
-    transition rounded-2xl p-6 md:p-8 backdrop-blur-md bg-gradient-to-b from-black/28 to-black/14 border border-white/12 shadow-[0_10px_40px_rgba(2,6,23,0.4)]"
-          >
-            <div className="flex items-center gap-3 mb-3 ">
-              <span className="px-3 py-1 rounded-full text-xs tracking-wide bg-gradient-to-r from-purple-500 to-orange-400 text-white">
-                Our Vision
-              </span>
-            </div>
-            <p className="text-white/95 text-base sm:text-lg leading-relaxed">
-              To be a trusted digital growth partner for ambitious brands around
-              the world, known for creativity, innovation, and exceptional
-              service.
-            </p>
-          </motion.div>
-        </div>
-
-        <WhatSetsUsApart />
-      </section>
-    </div>
+          <WhatSetsUsApart />
+        </section>
+        {/* <CurtainFooter aboutus="true">
+          <Footer />
+        </CurtainFooter> */}
+      </div>
+    </>
   );
 };
 

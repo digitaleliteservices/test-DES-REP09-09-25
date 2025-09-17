@@ -1,8 +1,8 @@
 "use client";
 
-import { Box, Code, Users, Activity } from "lucide-react"; // Importing icons
-import { useState, useEffect } from "react";
-import { FaArrowUp } from "react-icons/fa6";
+import { Box, Code, Users, Activity } from "lucide-react";
+import Footer from "../footer/page";
+import CurtainFooter from "../curtainraiser/curtainRaiser";
 
 const features = [
   {
@@ -78,6 +78,12 @@ const WhyChooseUs = () => {
           </div>
         </div>
       </section>
+
+      {/* Add responsive spacing before the curtain footer */}
+      {/* Curtain Footer Section - placed right after WhyChooseUs content */}
+      <CurtainFooter>
+        <Footer />
+      </CurtainFooter>
     </>
   );
 };
