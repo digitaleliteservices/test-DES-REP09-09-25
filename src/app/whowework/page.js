@@ -188,7 +188,7 @@ export default function WhoWeWorkWith() {
 
         {/* GRID */}
         <div className="lg:flex lg:items-center lg:gap-8 partners-grid">
-          <div className="space-y-6 lg:flex-1">
+          {/* <div className="space-y-6 lg:flex-1">
             {partners.slice(0, 2).map((partner, idx) => {
               const Icon = partner.icon;
               const cardIndex = idx;
@@ -276,15 +276,181 @@ export default function WhoWeWorkWith() {
   </motion.div>
 </div>
 
-                 
-              
-
  
 
                 </motion.div>
               );
             })}
+          </div> */}
+          <div className="space-y-6 lg:flex-1">
+  {partners.slice(0, 2).map((partner, idx) => {
+    const Icon = partner.icon;
+    const cardIndex = idx;
+    return (
+      <motion.div
+        key={idx}
+        variants={cardVariant}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.2 }}
+        className="p-[3px] rounded-xl"
+      >
+        <div className="relative group perspective-1000 w-full h-full">
+          <div className="flip-inner preserve-3d transition-transform duration-500 ease-out group-hover:rotate-y-180 w-full h-full">
+            
+            {/* FRONT SIDE */}
+            <motion.div
+              ref={(el) => (cardRefs.current[cardIndex] = el)}
+              onMouseMove={(e) => handleMouseMove(e, cardIndex)}
+              onMouseLeave={() => handleMouseLeave(cardIndex)}
+              whileHover={{ translateY: -6 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="absolute inset-0 backface-hidden rounded-xl p-4 card-inner "
+              style={{
+                "--card-bg": THEME.bg,
+                "--card-hover": THEME.hover,
+                "--fg": THEME.fg,
+                "--icon": THEME.icon,
+              }}
+            >
+              <div className="card-head">
+                <div className="icon-wrap big-icon">
+                  <Icon style={{ color: "var(--icon)" }} className="w-10 h-10" />
+                </div>
+                <h3
+                  className="partner-title centered-title"
+                  title={partner.title}
+                  style={{ color: "var(--fg)" }}
+                >
+                  {partner.title}
+                </h3>
+              </div>
+
+              <div className="flex-1 mt-2">
+                <motion.ul
+                  variants={listContainer}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: false, amount: 0.15 }}
+                  className="space-y-2 text-base text-center mt-0"
+                  style={{ color: "var(--fg)" }}
+                >
+                  {partner.description.map((point, i) => {
+                    const variant = i % 2 === 0 ? leftItem : rightItem;
+                    return (
+                      <motion.li
+                        key={i}
+                        variants={variant}
+                        className="flex items-start gap-3"
+                      >
+                        <motion.span
+                          initial={{ scale: 0.6, opacity: 0 }}
+                          whileInView={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.44, ease: "backOut" }}
+                          className="mt-1 check-bubble flex-shrink-0 rounded-full w-5 h-5 flex items-center justify-center"
+                          style={{
+                            background:
+                              "linear-gradient(180deg,var(--c-cyan),var(--c-blue))",
+                          }}
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-white stroke-[2]" />
+                        </motion.span>
+                        <motion.span className="leading-snug motion-bullet-underline title-point">
+                          {point}
+                        </motion.span>
+                      </motion.li>
+                    );
+                  })}
+                </motion.ul>
+              </div>
+              
+              <div
+                aria-hidden
+                className="absolute -right-3 -top-3 w-14 h-14 rounded-full accent-blob opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+              />
+              <div className="glow-rim" aria-hidden />
+            </motion.div>
+
+            {/* BACK SIDE */}
+            <div className="absolute inset-0 rotate-y-180 backface-hidden">
+              <motion.div
+                ref={(el) => (cardRefs.current[cardIndex] = el)}
+                onMouseMove={(e) => handleMouseMove(e, cardIndex)}
+                onMouseLeave={() => handleMouseLeave(cardIndex)}
+                whileHover={{ translateY: -6 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="absolute inset-0 rounded-xl p-4 card-inner colored-card"
+                style={{
+                  "--card-bg": THEME.bg,
+                  "--card-hover": THEME.hover,
+                  "--fg": THEME.fg,
+                  "--icon": THEME.icon,
+                }}
+              >
+                <div className="card-head">
+                  <div className="icon-wrap big-icon">
+                    <Icon style={{ color: "var(--icon)" }} className="w-10 h-10" />
+                  </div>
+                  <h3
+                    className="partner-title centered-title"
+                    title={partner.title}
+                    style={{ color: "var(--fg)" }}
+                  >
+                    {partner.title}
+                  </h3>
+                </div>
+
+                <div className="flex-1 mt-2">
+                  <motion.ul
+                    variants={listContainer}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.15 }}
+                    className="space-y-2 text-base text-center mt-0"
+                    style={{ color: "var(--fg)" }}
+                  >
+                    {partner.description.map((point, i) => {
+                      const variant = i % 2 === 0 ? leftItem : rightItem;
+                      return (
+                        <motion.li
+                          key={i}
+                          variants={variant}
+                          className="flex items-start gap-3"
+                        >
+                          <motion.span
+                            initial={{ scale: 0.6, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.44, ease: "backOut" }}
+                            className="mt-1 check-bubble flex-shrink-0 rounded-full w-5 h-5 flex items-center justify-center"
+                            style={{
+                              background:
+                                "linear-gradient(180deg,var(--c-cyan),var(--c-blue))",
+                            }}
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-white stroke-[2]" />
+                          </motion.span>
+                          <motion.span className="leading-snug motion-bullet-underline title-point">
+                            {point}
+                          </motion.span>
+                        </motion.li>
+                      );
+                    })}
+                  </motion.ul>
+                </div>
+                
+                <div
+                  aria-hidden
+                  className="absolute -right-3 -top-3 w-14 h-14 rounded-full accent-blob opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                />
+                <div className="glow-rim" aria-hidden />
+              </motion.div>
+            </div>
           </div>
+        </div>
+      </motion.div>
+    );
+  })}
+</div>
 
           <div className="flex justify-center my-6 lg:my-0 lg:flex-1">
             <div className="rounded-full bg-gradient-to-br from-[#a0a0a0] via-[#2C6DF6] to-[#FF8A00] shadow-lg p-1 flex items-center justify-center video-ring">
@@ -325,7 +491,7 @@ export default function WhoWeWorkWith() {
       onMouseLeave={() => handleMouseLeave(cardIndex)}
       whileHover={{ translateY: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="absolute inset-0 backface-hidden rounded-xl p-4 card-inner colored-card"
+      className="absolute inset-0 backface-hidden rounded-xl p-4 card-inner "
       style={{
         "--card-bg": THEME.bg,
         "--card-hover": THEME.hover,
@@ -386,7 +552,7 @@ export default function WhoWeWorkWith() {
     </motion.div>
 
     {/* BACK SIDE */}
-    <div className="absolute inset-0 rotate-y-180  ">
+    <div className="absolute inset-0 rotate-y-180 backface-hidden ">
       {/* <p>Back Side Content</p> */}
        <motion.div
       ref={(el) => (cardRefs.current[cardIndex] = el)}
@@ -394,7 +560,7 @@ export default function WhoWeWorkWith() {
       onMouseLeave={() => handleMouseLeave(cardIndex)}
       whileHover={{ translateY: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="absolute inset-0   p-4 card-inner "
+      className="absolute inset-0   rounded-xl p-4 card-inner colored-card "
       style={{
         "--card-bg": THEME.bg,
         "--card-hover": THEME.hover,
