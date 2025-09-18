@@ -78,10 +78,10 @@ const Services = () => {
             <div
               key={index}
               className={`group w-10/12 sm:w-11/12 min-h-[340px] mx-auto 
-    rounded-3xl bg-gradient-to-b from-[#1a0b2e]/90 
-    to-[#0a0014]/90 p-6 shadow-lg shadow-orange-400/40 hover:shadow-2xl hover:shadow-green-400/60 
-    hover:[box-shadow:0_0_20px_4px_rgba(59,130,246,0.7)]
-    transition relative overflow-hidden flex flex-col
+        rounded-3xl bg-gradient-to-b from-[#1a0b2e]/90 
+        to-[#0a0014]/90 p-6 shadow-lg shadow-orange-400/40 hover:shadow-2xl hover:shadow-green-400/60 
+        hover:[box-shadow:0_0_20px_4px_rgba(59,130,246,0.7)]
+        transition relative overflow-hidden flex flex-col
         ${
           services.length === 3 && index === 2
             ? "md:col-span-2 md:mx-auto md:w-1/2 lg:col-span-1 lg:w-11/12"
