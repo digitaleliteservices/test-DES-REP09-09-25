@@ -56,6 +56,123 @@
    - Per-card inline styles in JSX may set --card-bg, --card-hover, --fg, --icon
    - By default we fall back to logo-grad so new cards have a nice theme.
 ------------------------------------------------------------------------- */
+
+
+/* ========================================================================== 
+   work.css — WHO WE WORK WITH (complete)
+   - Fixed mobile responsiveness for card flipping
+   ========================================================================== */
+
+/* ... (keep all your existing CSS variables and styles) ... */
+
+/* ---------------------------
+   FLIP CARD STYLES (Updated)
+----------------------------*/
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Flip inner content */
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Flip on hover (desktop only) - using media query to target devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Prevent flip on mobile by default */
+@media (max-width: 768px) {
+  .group:hover .flip-inner {
+    transform: none;
+  }
+  
+  /* Alternative approach: Use focus for mobile accessibility */
+  .group:focus-within .flip-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Make cards more accessible on mobile */
+  .perspective-1000 {
+    cursor: pointer;
+  }
+  
+  /* Add a visual indicator for tappable cards */
+  .colored-card::after {
+    content: "Tap for details";
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    z-index: 5;
+  }
+}
+
+/* Fix for backface visibility */
+.flip-inner > * {
+  backface-visibility: hidden;
+}
+
+/* Ensure the back content is properly positioned and visible */
+.card-inner > div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------------------------
+   MOBILE-SPECIFIC STYLES
+----------------------------*/
+@media (max-width: 768px) {
+  /* Disable hover effects on mobile */
+  .group:hover .colored-card::before,
+  .group:focus-within .colored-card::before,
+  .colored-card:hover::before,
+  .colored-card:focus::before,
+  .colored-card:focus-visible::before {
+    opacity: 0;
+  }
+  
+  .group:hover .glow-rim,
+  .group:focus-within .glow-rim {
+    opacity: 0;
+    animation: none;
+  }
+  
+  .group:hover .accent-blob,
+  .group:focus-within .accent-blob {
+    opacity: 0;
+  }
+  
+  /* Disable tilt effect on mobile */
+  .card-inner:hover,
+  .card-inner:focus-within {
+    --ty: 0px;
+    --s: 1;
+    box-shadow: 0 10px 30px rgba(2, 14, 34, 0.18);
+  }
+}
+
+/* ---------------------------
+   ACCESSIBILITY IMPROVEMENTS
+----------------------------*/
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner {
+    transition: none;
+  }
+  
+  .group:hover .flip-inner,
+  .rotate-y-180 {
+    transform: none;
+  }
+}
+
+
 .colored-card {
   background: var(--card-bg, var(--logo-grad));
   color: var(--fg, #ffffff);
