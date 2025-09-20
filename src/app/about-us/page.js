@@ -5,6 +5,7 @@ import Loader from "../_components/loader/page";
 import AboutUsComp from "../_components/aboutUsComp/page";
 import Footer from "../footer/page";
 import Navbar from "../navbar/page";
+import SocialMediaIcons from "../socialMediaIcons/socialMediaIcons";
 
 const AboutUs = () => {
   const [loading, setLoading] = useState(true);
@@ -19,7 +20,6 @@ const AboutUs = () => {
     <div>
       <Navbar />
       <AboutUsComp />
-      <Footer />
     </div>
   );
 };
