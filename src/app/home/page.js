@@ -14,8 +14,8 @@ import HomeTestimonials from "../testimonials/clientTestimonial";
 import OurProcess from "../ourprocess/ourprocess";
 import CurtainFooter from "../curtainraiser/curtainRaiser";
 import SocialMediaIcons from "../socialMediaIcons/socialMediaIcons";
-import { WarpBackground } from "@/components/ui/warp-background";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
+import { WarpBackground } from "@/components/ui/warp-background";
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
@@ -32,8 +32,14 @@ export default function Home() {
       <WarpBackground>
         <Hero />
       </WarpBackground>
+      {/* <WarpBackground>
+        <div className="w-80">
+          <p>Warp Background</p>
+          <p>This is a component that creates a warp background effect.</p>
+        </div>
+      </WarpBackground> */}
       <Services />
-      <WhoWeWorkWith/>
+      <WhoWeWorkWith />
       {/* <WhoWeWorkWith /> */}
       {/* <OurProcess/> */}
       <Spiral />
