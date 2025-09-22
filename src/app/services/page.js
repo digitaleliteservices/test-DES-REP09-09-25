@@ -1,8 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { CheckCircle, X } from "lucide-react";
 import WhoWeWorkWith from "../whowework/page";
+import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
+import { Ripple } from "@/components/ui/ripple";
+
+const LOGO_GRADIENT =
+  "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
 
 const services = [
   {
@@ -37,103 +42,151 @@ const services = [
   },
 ];
 
+/* Small per-card component so pointer state is scoped correctly */
+function ServiceCard({ service, onOpen }) {
+  const [pointer, setPointer] = useState(null);
+  const cardRef = useRef(null);
+  const [cellSize, setCellSize] = useState({ w: 28, h: 28 });
+
+  useEffect(() => {
+    // compute sensible cell size based on card dimensions (runs on mount + resize)
+    function compute() {
+      const el = cardRef.current;
+      if (!el) return;
+      const w = el.clientWidth || 320;
+      const h = el.clientHeight || 340;
+      // aim for ~8 columns and ~6 rows (adjust if card size is small)
+      const cw = Math.max(18, Math.floor(w / 8));
+      const ch = Math.max(18, Math.floor(h / 6));
+      setCellSize({ w: cw, h: ch });
+    }
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, []);
+
+  const handleMouseMove = (e) => {
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setPointer({ x, y });
+  };
+  const handleMouseLeave = () => setPointer(null);
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group w-10/12 sm:w-11/12 min-h-[340px] mx-auto 
+                 rounded-2xl bg-white border border-gray-100 p-6
+                 shadow-md hover:shadow-xl hover:scale-[1.02]
+                 transition-all duration-300 ease-out
+                 relative overflow-hidden flex flex-col"
+    >
+      {/* Grid Pattern (behind content). pointer-events-none so events fall through to card */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <InteractiveGridPattern
+          width={cellSize.w}
+          height={cellSize.h}
+          squares={[8, 6]}
+          pointer={pointer}
+          // className="opacity-12"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex-1 flex flex-col">
+        <span
+          className="inline-block px-4 py-1.5 mb-6 rounded-full text-sm font-semibold 
+                     bg-gradient-to-r from-indigo-50 via-blue-50 to-purple-50 
+                     text-indigo-700 border border-indigo-100"
+        >
+          {service.title}
+        </span>
+
+        <h3 className="text-lg font-semibold mb-4 leading-snug text-gray-800">
+          {service.description}
+        </h3>
+
+        <ul className="space-y-3 mb-6">
+          {service.points.slice(0, 2).map((point, idx) => (
+            <li key={idx} className="flex items-center gap-2 text-gray-600">
+              <CheckCircle className="w-5 h-5 text-indigo-500" />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex justify-center mt-auto">
+          <button
+            onClick={() => onOpen(service)}
+            className="px-6 py-2.5 rounded-full text-sm md:text-base font-semibold tracking-wide text-white
+              bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 transition"
+          >
+            Get More
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const Services = () => {
   const [activeService, setActiveService] = useState(null);
 
   return (
-    <section className="relative py-20 text-white">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          // src="/assets/services_bg_image.avif"
-          src="/assets/who-we-work_bg_image.avif"
-          alt="Services Background"
-          className="w-full h-full object-cover"
+    <section className="relative py-20 overflow-hidden">
+      {/* Single Ripple behind all cards */}
+      <div className="absolute inset-0 -z-10 pointer-events-none flex items-center justify-center">
+        <Ripple 
+          mainCircleSize={500} 
+          mainCircleOpacity={0.1}
+          numCircles={6}
+          className="opacity-70"
         />
-        {/* <div className="absolute inset-0 bg-black/70"></div> */}
       </div>
-      {/* <div className="absolute inset-0 pointer-events-none">
-        <img
-          src="/assets/who-we-work_bg_image.avif"
-          alt="Who we work with background"
-          className="w-full h-full object-cover"
-        />
-      </div> */}
-
-      {/* Content */}
+      
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">
-            Core Services
-          </h2>
-          <p className="text-gray-300 mt-3 max-w-2xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+            <span className="text-black">Core</span>{" "}
+            <span
+              style={{
+                background: LOGO_GRADIENT,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+              className="inline-block"
+            >
+              Services
+            </span>
+          </h1>
+          <p className="mt-4 text-slate-600">
             Driving growth with technology, design, and strategy
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Cards Container with Relative Positioning */}
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
-              className={`group w-10/12 sm:w-11/12 min-h-[340px] mx-auto 
-        rounded-3xl bg-gradient-to-b from-[#1a0b2e]/90 
-        to-[#0a0014]/90 p-6 shadow-lg shadow-orange-400/40 hover:shadow-2xl hover:shadow-green-400/60 
-        hover:[box-shadow:0_0_20px_4px_rgba(59,130,246,0.7)]
-        transition relative overflow-hidden flex flex-col
-        ${
-          services.length === 3 && index === 2
-            ? "md:col-span-2 md:mx-auto md:w-1/2 lg:col-span-1 lg:w-11/12"
-            : ""
-        }`}
+              className={`${
+                services.length === 3 && index === 2
+                  ? "md:col-span-2 md:mx-auto md:w-1/2 lg:col-span-1 lg:w-11/12"
+                  : ""
+              }`}
             >
-              {/* Title Badge */}
-              <span className="inline-block px-4 py-3 mb-6 rounded-full text-base font-bold bg-[#1f1f2e]/80 border-[0.5px] border-orange-400/50 text-orange-300">
-                {service.title}
-              </span>
-
-              {/* Bottom content */}
-              <div className="mt-auto transition-all duration-500 group-hover:-translate-y-3">
-                {/* Description */}
-                <h3 className="text-lg font-semibold mb-4 leading-snug">
-                  {service.description}
-                </h3>
-
-                {/* Points */}
-                <ul className="space-y-3 mb-6">
-                  {service.points.slice(0, 2).map((point, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-center gap-2 text-gray-300"
-                    >
-                      <CheckCircle className="w-5 h-5 text-cyan-400" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Hover Button */}
-
-                <div className="flex justify-center  opacity-100 md:opacity-100 lg:opacity-100 min-[786px]:opacity-100 group-hover:opacity-100 transition-opacity duration-500">
-                  <button
-                    onClick={() => setActiveService(service)}
-                    className="px-6 py-2 rounded-full bg-gradient-to-r from-orange-500 via-yellow-400 to-blue-500 text-white font-medium shadow-lg hover:opacity-90"
-                  >
-                    Get More
-                  </button>
-                </div>
-              </div>
+              <ServiceCard service={service} onOpen={setActiveService} />
             </div>
           ))}
         </div>
       </div>
 
-      <div className="services-who-wrapper mt-12">
-        <WhoWeWorkWith />
-      </div>
-
-      {/* Right Side Modal */}
+      {/* Modal (unchanged) */}
       {activeService && (
         <div className="fixed inset-0 z-50 flex justify-end">
           {/* Overlay */}
@@ -145,9 +198,9 @@ const Services = () => {
           {/* Drawer */}
           <div
             className="relative w-full sm:w-[480px] md:w-[520px] lg:w-[600px] 
-  max-h-[85vh] bg-[#1a0b2e]/95 p-8 shadow-2xl 
-  transform transition-transform duration-500 translate-x-0 
-  rounded-2xl mt-10 mb-10 mr-6 overflow-y-auto"
+              max-h-[85vh] bg-[#1a0b2e]/95 p-8 shadow-2xl 
+              transform transition-transform duration-500 translate-x-0 
+              rounded-2xl mt-10 mb-10 mr-6 overflow-y-auto"
           >
             {/* Close button */}
             <button
@@ -163,7 +216,7 @@ const Services = () => {
             </span>
 
             {/* Description */}
-            <h2 className="text-2xl font-extrabold mb-4">
+            <h2 className="text-2xl font-extrabold mb-4 text-white">
               {activeService.description}
             </h2>
 

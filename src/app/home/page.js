@@ -14,6 +14,8 @@ import HomeTestimonials from "../testimonials/clientTestimonial";
 import OurProcess from "../ourprocess/ourprocess";
 import CurtainFooter from "../curtainraiser/curtainRaiser";
 import SocialMediaIcons from "../socialMediaIcons/socialMediaIcons";
+import { WarpBackground } from "@/components/ui/warp-background";
+import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
@@ -26,8 +28,12 @@ export default function Home() {
   return (
     <div className="relative">
       <Navbar />
-      <Hero />
+      {/* <Hero /> */}
+      <WarpBackground>
+        <Hero />
+      </WarpBackground>
       <Services />
+      <WhoWeWorkWith/>
       {/* <WhoWeWorkWith /> */}
       {/* <OurProcess/> */}
       <Spiral />
