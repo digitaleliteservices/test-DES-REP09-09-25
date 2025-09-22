@@ -123,9 +123,7 @@ export const WarpBackground = ({
           ))}
         </div>
       </div>
-      <div className="relative flex items-center justify-center w-full h-full">
-        {children}
-      </div>
+      <div className="relative flex items-center justify-center w-full h-full">{children}</div>
     </div>
   );
 };
