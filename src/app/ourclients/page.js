@@ -26,13 +26,12 @@ const clients = [
     src: "/assets/SriMathru2.jpg",
     url: "https://srimatru.in/",
   },
-   {
+  {
     name: "North East Reality",
     src: "/assets/logo-NER2.png",
     url: "https://northeastreality.in/",
   },
   { name: "Gnanasamrudhi", src: "/assets/gnanasamrudhi.png" },
-
 ];
 
 export default function OurClients() {
@@ -83,10 +82,10 @@ export default function OurClients() {
         </span>
       </h1>
       <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
-        We partner with businesses of all sizes across various industries to
-        deliver exceptional digital solutions
+        We proudly partner with clients across sectors, building lasting
+        relationships and delivering solutions that empower their digital
+        journey.
       </p>
-
       <div
         ref={containerRef}
         className="mt-12 flex flex-wrap justify-center items-center gap-6 sm:gap-8 px-4"

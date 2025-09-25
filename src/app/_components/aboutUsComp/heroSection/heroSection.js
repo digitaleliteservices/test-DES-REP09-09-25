@@ -183,55 +183,95 @@ const HeroSection = () => {
   const leftControls = useAnimation();
   const imageControls = useAnimation();
   const badgeControls = useAnimation();
-  
+
   useEffect(() => {
     // Stagger animations for left column
-    leftControls.start(i => ({
+    leftControls.start((i) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: 0.08 * i + 0.08, duration: 0.62, ease: "easeOut" },
+      transition: { delay: 0.06 * i + 0.06, duration: 0.62, ease: "easeOut" },
     }));
-    
+
     // Image animation
     imageControls.start({
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.9, delay: 0.12 }
+      transition: { duration: 0.9, delay: 0.12 },
     });
-    
+
     // Badge animations
-    badgeControls.start(i => ({
+    badgeControls.start((i) => ({
       opacity: 1,
       scale: 1,
-      transition: { delay: 0.2 * i + 0.5, duration: 0.5 }
+      transition: { delay: 0.16 * i + 0.36, duration: 0.48, ease: "easeOut" },
     }));
   }, [leftControls, imageControls, badgeControls]);
 
-  // Floating badges
+  // Floating badges (expanded to more bubble points)
   const badges = [
-    { title: "Brand", sub: "Identity", color: "from-blue-400 to-cyan-400" },
-    { title: "Digital", sub: "Marketing", color: "from-purple-400 to-pink-400" },
-    { title: "Web", sub: "Development", color: "from-orange-400 to-red-400" },
+    {
+      title: "Brand",
+      sub: "Identity",
+      color: "from-blue-400 to-cyan-400",
+      size: "w-20 h-20",
+    },
+    {
+      title: "Digital",
+      sub: "Marketing",
+      color: "from-purple-400 to-pink-400",
+      size: "w-20 h-20",
+    },
+    {
+      title: "Web",
+      sub: "Development",
+      color: "from-orange-400 to-red-400",
+      size: "w-20 h-20",
+    },
+    {
+      title: "SEO",
+      sub: "Growth",
+      color: "from-emerald-400 to-green-400",
+      size: "w-16 h-16",
+    },
+    {
+      title: "Graphic",
+      sub: "Design",
+      color: "from-indigo-400 to-purple-400",
+      size: "w-16 h-16",
+    },
+    {
+      title: "Analytics",
+      sub: "Insights",
+      color: "from-yellow-400 to-orange-400",
+      size: "w-16 h-16",
+    },
+   
   ];
 
-  // Floating particles effect
-  const particles = Array.from({ length: 15 }).map((_, i) => ({
+  // Floating particles effect (denser)
+  const particles = Array.from({ length: 32 }).map((_, i) => ({
     id: i,
-    size: Math.random() * 4 + 2,
+    size: Math.random() * 8 + 2, // larger variety
     x: Math.random() * 100,
     y: Math.random() * 100,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5,
+    duration: Math.random() * 12 + 8,
+    delay: Math.random() * 6,
+    xAmp: Math.random() * 28 - 14,
+    yAmp: Math.random() * 36 - 18,
+    opacityMin: 0.18 + Math.random() * 0.2,
   }));
 
   return (
     <section
       ref={containerRef}
       className="relative flex items-center min-h-screen overflow-hidden"
-      style={{ background: "linear-gradient(135deg,#055fa3 6%, #8b3fd6 55%, #ff6fa8 100%)" }}
+      style={{
+        background:
+          "linear-gradient(135deg,#055fa3 6%, #8b3fd6 55%, #ff6fa8 100%)",
+      }}
     >
-      {/* Animated particles */}
+      {/* Animated particles (denser) */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
@@ -241,12 +281,14 @@ const HeroSection = () => {
             height: particle.size,
             left: `${particle.x}%`,
             top: `${particle.y}%`,
+            borderRadius: "50%",
+            filter: "blur(2px)",
           }}
           animate={{
-            y: [0, -30, 0],
-            x: [0, Math.random() * 20 - 10, 0],
+            y: [0, -particle.yAmp / 2, 0],
+            x: [0, particle.xAmp / 2, 0],
             scale: [1, 1.5, 1],
-            opacity: [0.3, 0.8, 0.3],
+            opacity: [particle.opacityMin, 0.9, particle.opacityMin],
           }}
           transition={{
             duration: particle.duration,
@@ -258,10 +300,23 @@ const HeroSection = () => {
       ))}
 
       {/* diagonal texture */}
-      <svg className="absolute inset-0 -z-20 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <svg
+        className="absolute inset-0 -z-20 w-full h-full pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
         <defs>
-          <pattern id="diag" width="48" height="48" patternUnits="userSpaceOnUse">
-            <path d="M0 36 L36 0" stroke="rgba(255,255,255,0.02)" strokeWidth="1" />
+          <pattern
+            id="diag"
+            width="48"
+            height="48"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M0 36 L36 0"
+              stroke="rgba(255,255,255,0.02)"
+              strokeWidth="1"
+            />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#diag)" />
@@ -270,35 +325,59 @@ const HeroSection = () => {
       {/* drifting orbs (soft, low-opacity) */}
       <motion.div
         className="absolute rounded-full -z-10"
-        style={{ width: 220, height: 220, left: 28, top: 48, background: "linear-gradient(90deg,#7c3aed,#fbbf24)", filter: "blur(36px)", opacity: 0.42 }}
-        animate={{ 
-          y: [0, -18, 0], 
-          x: [0, -8, 0],
-          scale: [1, 1.1, 1]
+        style={{
+          width: 260,
+          height: 260,
+          left: 36,
+          top: 56,
+          background: "linear-gradient(90deg,#7c3aed,#fbbf24)",
+          filter: "blur(40px)",
+          opacity: 0.48,
         }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        animate={{
+          y: [0, -22, 0],
+          x: [0, -12, 0],
+          scale: [1, 1.06, 1],
+        }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute rounded-full -z-10"
-        style={{ width: 180, height: 180, right: 36, bottom: 64, background: "linear-gradient(90deg,#fbbf24,#7c3aed)", filter: "blur(36px)", opacity: 0.36 }}
-        animate={{ 
-          y: [0, 14, 0], 
-          x: [0, 10, 0],
-          scale: [1, 1.1, 1]
+        style={{
+          width: 220,
+          height: 220,
+          right: 44,
+          bottom: 84,
+          background: "linear-gradient(90deg,#fbbf24,#7c3aed)",
+          filter: "blur(40px)",
+          opacity: 0.42,
         }}
-        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+        animate={{
+          y: [0, 18, 0],
+          x: [0, 12, 0],
+          scale: [1, 1.06, 1],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.6,
+        }}
       />
 
       {/* gentle wave SVG at bottom (subtle) */}
-      <motion.svg 
-        className="absolute left-0 right-0 bottom-0 -z-10" 
-        viewBox="0 0 1440 120" 
-        preserveAspectRatio="none" 
+      <motion.svg
+        className="absolute left-0 right-0 bottom-0 -z-10"
+        viewBox="0 0 1440 120"
+        preserveAspectRatio="none"
         style={{ height: 120 }}
         animate={{ opacity: [0.8, 1, 0.8] }}
-        transition={{ duration: 8, repeat: Infinity }}
+        transition={{ duration: 9, repeat: Infinity }}
       >
-        <path d="M0 40 C 360 120 1080 -40 1440 40 L1440 120 L0 120 Z" fill="rgba(255,255,255,0.03)"></path>
+        <path
+          d="M0 40 C 360 120 1080 -40 1440 40 L1440 120 L0 120 Z"
+          fill="rgba(255,255,255,0.03)"
+        ></path>
       </motion.svg>
 
       {/* main container */}
@@ -311,11 +390,22 @@ const HeroSection = () => {
             animate={leftControls}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white"
           >
-            We build meaningful <motion.span 
-              style={{ background: "linear-gradient(90deg,#80eafc,#ffb4d2)", WebkitBackgroundClip: "text", color: "transparent" }}
+            We build meaningful{" "}
+            <motion.span
+              style={{
+                background: "linear-gradient(90deg,#80eafc,#ffb4d2)",
+                WebkitBackgroundClip: "text",
+                color: "transparent",
+              }}
               animate={{ backgroundPosition: ["0%", "100%"] }}
-              transition={{ duration: 5, repeat: Infinity, repeatType: "reverse" }}
-            >experiences</motion.span>
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            >
+              experiences
+            </motion.span>
           </motion.h2>
 
           <motion.h1
@@ -327,42 +417,44 @@ const HeroSection = () => {
             with relentless focus on design, performance and outcomes.
           </motion.h1>
 
-          <motion.div
+          {/* <motion.div
             custom={2}
             initial={{ opacity: 0, y: 20 }}
             animate={leftControls}
             className="mt-6 flex flex-wrap gap-3"
           >
-            {badges.map((badge, i) => (
-              <motion.span 
+            {badges.slice(0, 3).map((badge, i) => (
+              <motion.span
                 key={i}
                 custom={i}
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.85 }}
                 animate={badgeControls}
-                whileHover={{ 
-                  scale: 1.05,
+                whileHover={{
+                  scale: 1.06,
                   y: -2,
-                  transition: { duration: 0.2 }
+                  transition: { duration: 0.18 },
                 }}
                 className={`px-3 py-1 rounded-full bg-gradient-to-r ${badge.color} text-white text-sm backdrop-blur-sm`}
               >
-                {badge.title} <span className="font-bold">{badge.sub}</span>
+                {badge.title} <span className="font-bold"> {badge.sub}</span>
               </motion.span>
             ))}
-          </motion.div>
+          </motion.div> */}
 
-          <motion.p 
-            custom={3} 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={leftControls} 
+          <motion.p
+            custom={3}
+            initial={{ opacity: 0, y: 20 }}
+            animate={leftControls}
             className="mt-6 text-sm md:text-base text-white/80"
           >
-            Strategy, product design and engineering fused into clear, measurable outcomes. Clean craft, modern tooling, and a human-first approach.
+            Strategy, product design and engineering fused into clear,
+            measurable outcomes. Clean craft, modern tooling, and a human-first
+            approach.
           </motion.p>
         </div>
 
         {/* vertical divider */}
-        <motion.div 
+        <motion.div
           className="hidden md:flex items-center"
           initial={{ opacity: 0, scaleY: 0 }}
           animate={{ opacity: 1, scaleY: 1 }}
@@ -373,131 +465,175 @@ const HeroSection = () => {
 
         {/* right column */}
         <div className="flex-1 flex items-center justify-center relative">
-          {/* Animated floating badges around the image - made more visible */}
-          {badges.map((badge, i) => (
-            <motion.div
-              key={i}
-              className={`absolute w-20 h-20 rounded-full flex flex-col items-center justify-center text-white text-xs font-bold bg-gradient-to-br ${badge.color} shadow-lg z-10`}
-              style={{
-                top: i === 0 ? "5%" : i === 1 ? "75%" : "40%",
-                left: i === 0 ? "5%" : i === 1 ? "75%" : "-5%",
-                right: i === 2 ? "75%" : "auto",
-              }}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ 
-                opacity: 1, 
-                scale: 1,
-                y: [0, -15, 0],
-                rotate: [0, 5, 0, -5, 0]
-              }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity,
-                delay: i * 0.3,
-                ease: "easeInOut"
-              }}
-              whileHover={{
-                scale: 1.1,
-                z: 20,
-                transition: { duration: 0.3 }
-              }}
-            >
-              <span className="font-semibold">{badge.title}</span>
-              <span className="text-[10px] mt-1">{badge.sub}</span>
-            </motion.div>
-          ))}
+          {/* Animated floating badges around the image - expanded to 6 bubble points */}
+          {badges.map((badge, i) => {
+            // varied positions for visual distribution
+            const positions = [
+              { top: "6%", left: "6%" },
+              { top: "72%", left: "72%" },
+              { top: "36%", left: "-6%" },
+              { top: "12%", left: "68%" },
+              { top: "78%", left: "12%" },
+              { top: "46%", left: "88%" },
+            ];
+            const sizeClass = badge.size || "w-20 h-20";
+            const pos = positions[i] || {
+              top: `${10 + i * 10}%`,
+              left: `${10 + i * 6}%`,
+            };
 
-          {/* framed image card with rim + depth - made smaller */}
+            return (
+              <motion.div
+                key={`${badge.title}-${i}`}
+                className={`absolute ${sizeClass} rounded-full flex flex-col items-center justify-center text-white text-xs font-semibold shadow-2xl z-10`}
+                style={{
+                  top: pos.top,
+                  left: pos.left,
+                  pointerEvents: "auto",
+                }}
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{
+                  opacity: [0, 1, 1],
+                  scale: [0.85, 1, 0.95],
+                  y: [0, -12 - (i % 3) * 4, 0],
+                  rotate: [0, 4 * (i % 2 ? 1 : -1), 0],
+                }}
+                transition={{
+                  duration: 4 + i * 0.6,
+                  repeat: Infinity,
+                  delay: 0.2 * i + 0.4,
+                  ease: "easeInOut",
+                }}
+                whileHover={{
+                  scale: 1.12,
+                  zIndex: 40,
+                  transition: { duration: 0.22 },
+                }}
+              >
+                <div
+                  className={`w-full h-full rounded-full flex flex-col items-center justify-center text-white text-center px-1 bg-gradient-to-br ${badge.color}`}
+                  style={{ boxShadow: "0 18px 36px rgba(6,7,22,0.45)" }}
+                >
+                  <span className="text-sm leading-none">{badge.title}</span>
+                  <span className="text-[10px] mt-1 font-medium">
+                    {badge.sub}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
+
+          {/* framed image card with rim + depth */}
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95, rotate: 2 }}
+            initial={{ opacity: 0, y: 28, scale: 0.95, rotate: 2 }}
             animate={imageControls}
-            whileHover={{ 
+            whileHover={{
               scale: 1.03,
-              transition: { duration: 0.3 }
+              transition: { duration: 0.28 },
             }}
             style={{ perspective: 900 }}
-            className="relative z-0" // Lower z-index to allow badges to appear above
+            className="relative z-0"
           >
             {/* Glow effect */}
-            <motion.div 
+            <motion.div
               className="absolute inset-0 rounded-2xl opacity-70 -z-10"
               style={{
-                background: "linear-gradient(90deg, rgba(124,58,237,0.3), rgba(251,191,36,0.3))",
-                filter: "blur(15px)",
+                background:
+                  "linear-gradient(90deg, rgba(124,58,237,0.32), rgba(251,191,36,0.32))",
+                filter: "blur(16px)",
               }}
-              animate={{ 
-                opacity: [0.4, 0.7, 0.4],
-                scale: [1, 1.05, 1]
+              animate={{
+                opacity: [0.36, 0.78, 0.36],
+                scale: [1, 1.04, 1],
               }}
-              transition={{ duration: 3, repeat: Infinity }}
+              transition={{ duration: 3.6, repeat: Infinity }}
             />
-            
-            <div style={{
-              borderRadius: 18,
-              overflow: "hidden",
-              boxShadow: "0 40px 90px rgba(6,7,22,0.45)",
-              border: "1px solid rgba(255,255,255,0.06)",
-              background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))",
-              width: "80%", // Reduced width
-              margin: "0 auto", // Centered
-            }}>
+
+            <div
+              style={{
+                borderRadius: 18,
+                overflow: "hidden",
+                boxShadow: "0 40px 90px rgba(6,7,22,0.45)",
+                border: "1px solid rgba(255,255,255,0.06)",
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))",
+                width: "80%",
+                margin: "0 auto",
+              }}
+            >
               <motion.img
                 src={heroSrc}
                 alt="Hero"
-                onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = placeholder; }}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = placeholder;
+                }}
                 drag
                 dragConstraints={{ top: -10, bottom: 10, left: -10, right: 10 }}
                 whileTap={{ scale: 0.995 }}
-                animate={{ 
-                  y: [0, -10, 0], 
-                  rotate: [0, 0.6, 0], 
-                  scale: [1, 1.01, 1] 
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [0, 0.6, 0],
+                  scale: [1, 1.01, 1],
                 }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="w-full object-cover block" // Responsive width
-                style={{ display: "block", maxWidth: "300px" }} // Limited max width
+                transition={{
+                  duration: 6.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="w-full object-cover block"
+                style={{ display: "block", maxWidth: "340px" }}
               />
             </div>
 
             {/* rim glow */}
-            <div style={{
-              position: "absolute",
-              inset: -8,
-              borderRadius: 22,
-              filter: "blur(6px)",
-              background: "linear-gradient(90deg, rgba(124,58,237,0.06), rgba(251,191,36,0.05))",
-              pointerEvents: "none",
-              width: "calc(80% + 16px)", // Match the reduced image width
-              left: "10%", // Center the glow
-            }} />
+            <div
+              style={{
+                position: "absolute",
+                inset: -8,
+                borderRadius: 22,
+                filter: "blur(6px)",
+                background:
+                  "linear-gradient(90deg, rgba(124,58,237,0.06), rgba(251,191,36,0.05))",
+                pointerEvents: "none",
+                width: "calc(80% + 16px)",
+                left: "10%",
+              }}
+            />
           </motion.div>
 
           {/* dot grid accent */}
-          <motion.svg 
-            className="absolute right-6 bottom-6 hidden sm:block" 
-            width="80" 
-            height="80" 
-            viewBox="0 0 80 80" 
+          <motion.svg
+            className="absolute right-6 bottom-6 hidden sm:block"
+            width="88"
+            height="88"
+            viewBox="0 0 88 88"
             fill="none"
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.86 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.2 }}
           >
             <g>
-              {[0,1,2].map(r => [0,1,2].map(c =>
-                <motion.rect 
-                  key={`${r}-${c}`} 
-                  x={c*22} 
-                  y={r*22} 
-                  width="6" 
-                  height="6" 
-                  rx="2" 
-                  fill="white" 
-                  opacity="0.04"
-                  animate={{ opacity: [0.04, 0.1, 0.04] }}
-                  transition={{ duration: 2, delay: (r + c) * 0.2, repeat: Infinity }}
-                />
-              ))}
+              {[0, 1, 2].map((r) =>
+                [0, 1, 2].map((c) => (
+                  <motion.rect
+                    key={`${r}-${c}`}
+                    x={c * 26}
+                    y={r * 26}
+                    width="6"
+                    height="6"
+                    rx="2"
+                    fill="white"
+                    opacity="0.04"
+                    animate={{ opacity: [0.04, 0.12, 0.04] }}
+                    transition={{
+                      duration: 2.6,
+                      delay: (r + c) * 0.18,
+                      repeat: Infinity,
+                    }}
+                  />
+                ))
+              )}
             </g>
           </motion.svg>
         </div>

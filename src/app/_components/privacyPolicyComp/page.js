@@ -2,10 +2,13 @@
 
 import Image from "next/image";
 import DESLogo from "../../../../public/assets/DES_LOGO4.png"; // Adjust path if needed
+import CurtainFooter from "@/app/curtainraiser/curtainRaiser";
+import Footer from "@/app/footer/page";
 
 const PrivacyPolicyComp = () => {
   return (
-    <div className="min-h-screen bg-black text-gray-200 px-6 py-12 ">
+    <>
+    <div className="min-h-screen bg-white text-gray-200 px-6 py-12 ">
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto mt-15">
         <div className="flex justify-center mb-4">
@@ -16,10 +19,10 @@ const PrivacyPolicyComp = () => {
             height={90}
           />
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-blue-500">
+        <h1 className="text-4xl md:text-5xl font-bold text-black">
           Privacy Policy
         </h1>
-        <p className="mt-2 text-lg text-gray-400">Digital Elite Services</p>
+        <p className="mt-2 text-lg text-black">Digital Elite Services</p>
       </div>
 
       {/* Content Card */}
@@ -333,6 +336,10 @@ const PrivacyPolicyComp = () => {
         </p>
       </div>
     </div>
+    <CurtainFooter>
+      <Footer/>
+    </CurtainFooter>
+    </>
   );
 };
 

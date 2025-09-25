@@ -127,7 +127,7 @@ const FeatureCard = ({ Icon, title, desc, index = 0 }) => {
       />
 
       {/* top-right animated number */}
-      <motion.div
+      {/* <motion.div
         className="absolute right-4 top-4 z-20"
         initial={{ y: -6, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -145,7 +145,7 @@ const FeatureCard = ({ Icon, title, desc, index = 0 }) => {
         >
           {String(index + 1).padStart(2, "0")}
         </motion.span>
-      </motion.div>
+      </motion.div> */}
 
       <div className="p-6 flex items-start gap-4">
         {/* animated icon circle */}
@@ -233,8 +233,12 @@ const WhatSetsUsApart = () => {
         //   background:
         //     "linear-gradient(180deg,#f8fbff 0%, #eef6ff 45%, #fff9fb 100%)",
         // }}
+        // style={{
+        //   background: "white",
+        // }}
         style={{
-          background: "white",
+          background:
+            "linear-gradient(180deg, #ffffff 0%, #f7fbff 45%, #fffaf6 100%)",
         }}
       >
         {/* subtle decorative pattern */}
@@ -266,7 +270,7 @@ const WhatSetsUsApart = () => {
           </span>
 
           <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 drop-shadow-sm">
-            Built to deliver real impact
+            Built To Deliver Real Impact
           </h3>
 
           <p className="mt-3 text-base text-slate-600 max-w-2xl mx-auto">
@@ -295,9 +299,6 @@ const WhatSetsUsApart = () => {
           </div>
         </motion.div>
       </section>
-      {/* <CurtainFooter>
-        <Footer />
-      </CurtainFooter> */}
     </>
   );
 };

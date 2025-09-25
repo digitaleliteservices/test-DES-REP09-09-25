@@ -16,7 +16,7 @@ const AboutUsComp = () => {
     <>
       <HeroSection />
       <ServicesSection />
-      <EnhancedOrbitingAnimation />
+      {/* <EnhancedOrbitingAnimation /> */}
       {/* <AnimatedBullets /> */}
       <MissionVisionSection />
       <Spiral />

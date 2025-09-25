@@ -712,7 +712,7 @@ function ServicesSection() {
                 <div className="rim" aria-hidden />
 
                 {/* badge */}
-                <motion.div 
+                {/* <motion.div 
                   className="absolute -top-4 left-6 md:left-8 bg-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg flex items-center gap-2 z-20"
                   style={{ border: `1px solid ${card.colors[0]}20` }}
                   whileHover={{ scale: 1.05 }}
@@ -720,7 +720,7 @@ function ServicesSection() {
                 >
                   <span className="text-xl">{card.icon}</span>
                   <span style={{ color: card.colors[0] }}>{`0${i + 1}`}</span>
-                </motion.div>
+                </motion.div> */}
 
                 {/* image */}
                 <motion.div

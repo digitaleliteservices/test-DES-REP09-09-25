@@ -75,6 +75,11 @@ function ServiceCard({ service, onOpen }) {
   };
   const handleMouseLeave = () => setPointer(null);
 
+  const openServicesModal = () => {
+    const label = encodeURIComponent(service.title);
+    router.push(`/our-services?open=${label}`);
+  };
+
   return (
     <div
       ref={cardRef}
@@ -149,9 +154,10 @@ function ServiceCard({ service, onOpen }) {
         <div className="flex justify-center mt-auto">
           <button
             // onClick={() => onOpen(service)}
-            onClick={() => {
-              router.push("/our-services");
-            }}
+            // onClick={() => {
+            //   router.push("/our-services");
+            // }}
+            onClick={openServicesModal}
             className="px-6 py-2 rounded-full text-sm md:text-base font-semibold tracking-wide text-white
               bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 transition cursor-pointer"
           >

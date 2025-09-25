@@ -7,6 +7,7 @@ import Footer from "../footer/page";
 import Navbar from "../navbar/page";
 import SocialMediaIcons from "../socialMediaIcons/socialMediaIcons";
 import Spiral from "@/spiral/page";
+import SplashCursor from "@/components/SplashCursor";
 
 const AboutUs = () => {
   const [loading, setLoading] = useState(true);
@@ -19,6 +20,7 @@ const AboutUs = () => {
   if (loading) return <Loader />;
   return (
     <div>
+      <SplashCursor/>
       <Navbar />
       <AboutUsComp />
     </div>

@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Loader from "../_components/loader/page";
+import SplashCursor from "@/components/SplashCursor";
+import SocialMediaIcons from "../socialMediaIcons/socialMediaIcons";
 const {
   default: PrivacyPolicyComp,
 } = require("../_components/privacyPolicyComp/page");
@@ -17,9 +19,11 @@ const PrivacyPolicy = () => {
   if (loading) return <Loader />;
   return (
     <div>
+      <SplashCursor/>
       <Navbar />
       <PrivacyPolicyComp />
-      <Footer />
+      <SocialMediaIcons/>
+      {/* <Footer /> */}
     </div>
   );
 };

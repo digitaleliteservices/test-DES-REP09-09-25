@@ -6,6 +6,7 @@ import OurServicesComp from "../_components/aboutUsComp/ourServicesComp/page";
 import Footer from "../footer/page";
 import Navbar from "../navbar/page";
 import SocialMediaIcons from "../socialMediaIcons/socialMediaIcons";
+import SplashCursor from "@/components/SplashCursor";
 
 const OurServices = () => {
   const [loading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ const OurServices = () => {
   if (loading) return <Loader />;
   return (
     <div>
+      <SplashCursor/>
       <Navbar />
       <OurServicesComp />
       <SocialMediaIcons/>

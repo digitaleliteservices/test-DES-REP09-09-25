@@ -7,28 +7,23 @@ import "./spiral.css"; // keep existing styles if any
 const chips = [
   {
     title: "Innovation",
-    desc:
-      "Continuously embracing creativity and technology to deliver cutting-edge digital solutions.",
+    desc: "Continuously embracing creativity and technology to deliver cutting-edge digital solutions.",
   },
   {
     title: "Integrity",
-    desc:
-      "Maintaining transparency, honesty, and ethical practices in all our interactions.",
+    desc: "Maintaining transparency, honesty, and ethical practices in all our interactions.",
   },
   {
     title: "Excellence",
-    desc:
-      "Striving for the highest quality in every project, ensuring measurable results and client satisfaction.",
+    desc: "Striving for the highest quality in every project, ensuring measurable results and client satisfaction.",
   },
   {
     title: "Collaboration",
-    desc:
-      "Working closely with clients and within our team to achieve shared goals and meaningful outcomes.",
+    desc: "Working closely with clients and within our team to achieve shared goals and meaningful outcomes.",
   },
   {
     title: "Customer-Centricity",
-    desc:
-      "Placing client needs at the heart of everything we do, building long-term relationships.",
+    desc: "Placing client needs at the heart of everything we do, building long-term relationships.",
   },
   {
     title: "Accountability",
@@ -36,8 +31,7 @@ const chips = [
   },
   {
     title: "Adaptability",
-    desc:
-      "Embracing change and staying agile in a dynamic digital landscape.",
+    desc: "Embracing change and staying agile in a dynamic digital landscape.",
   },
 ];
 
@@ -66,7 +60,10 @@ export default function Spiral() {
   );
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.06 } },
+  };
   const chipVariants = (dir) => ({
     hidden: { x: dir.x, y: dir.y, opacity: 0, scale: 0.98 },
     show: {
@@ -87,131 +84,258 @@ export default function Spiral() {
   };
 
   return (
-    <section className="relative overflow-hidden">
-      <div aria-hidden className="pointer-events-none absolute inset-0" />
+    <section
+      className="relative overflow-hidden"
+      aria-labelledby="core-values-heading"
+      style={{
+        // page background: smooth diagonal gradient + subtle texture tint
+        background:
+          "radial-gradient(800px 400px at 10% 20%, rgba(99,102,241,0.06), transparent 8%)," +
+          "radial-gradient(700px 360px at 92% 82%, rgba(251,191,36,0.04), transparent 8%)," +
+          "linear-gradient(135deg, #f7fbff 0%, #f3f7ff 35%, #fffaf6 100%)",
+      }}
+    >
+      {/* decorative animated blobs */}
+      <motion.div
+        aria-hidden
+        initial={{ opacity: 0.12 }}
+        animate={{ y: [0, -12, 0], opacity: [0.12, 0.22, 0.12] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: "absolute",
+          right: -80,
+          top: -80,
+          width: 420,
+          height: 420,
+          borderRadius: "50%",
+          background: "linear-gradient(135deg,#7c3aed33,#06b6d433)",
+          filter: "blur(72px)",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 text-center">
-        <span className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-gray-800">
-          🌟 Core Values
-        </span>
-        <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 drop-shadow-md">
-          Exponential daily value
-        </h3>
-        <p className="mt-4 text-slate-600">
-          Our teams secure, align, validate and curate exactly what keeps your
-          work moving
-        </p>
-      </div>
+      <motion.div
+        aria-hidden
+        initial={{ opacity: 0.08 }}
+        animate={{ y: [0, 10, 0], opacity: [0.08, 0.16, 0.08] }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.6,
+        }}
+        style={{
+          position: "absolute",
+          left: -120,
+          bottom: -100,
+          width: 520,
+          height: 520,
+          borderRadius: "50%",
+          background: "linear-gradient(135deg,#fb923c22,#60a5fa22)",
+          filter: "blur(92px)",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 mb-2">
-        <motion.div
-          className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
-        >
-          {chips.map((chip, i) => {
-            const dir = chipDirs[i];
-            const accent = CHIP_ACCENTS[i % CHIP_ACCENTS.length];
-            return (
+      {/* subtle vignette for contrast */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(1200px 600px at 50% 10%, rgba(255,255,255,0) 0%, rgba(2,6,23,0.02) 100%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
+
+      <div className="relative z-10">
+        {/* Centered small label */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 text-center">
+          <span
+            id="core-values-heading"
+            className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-gray-800"
+          >
+            🌟 Core Values
+          </span>
+        </div>
+
+        {/* Two-column layout: left = Exponential Daily Value + subtitle; right = pills */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            {/* LEFT column - heading & subtitle (left-aligned) */}
+            <div className="order-2 md:order-1 flex flex-col justify-start">
+              {/* <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 drop-shadow-sm">
+                Exponential Daily Value
+              </h3> */}
+              <p className="mt-4 text-slate-600 max-w-xl">
+                Our teams secure, align, validate and curate exactly what keeps
+                your work moving. Every day we invest in small improvements that
+                compound into large wins — measurable, repeatable and
+                client-focused.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-cyan-50 to-blue-50 text-sm text-slate-700 border border-gray-100">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block" />
+                  Daily Improvements
+                </span>
+
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-yellow-50 to-orange-50 text-sm text-slate-700 border border-gray-100">
+                  <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
+                  Measurable Outcomes
+                </span>
+              </div>
+            </div>
+
+            {/* RIGHT column - pills (aligned to right on md+, stacked on small screens) */}
+            <div className="order-1 md:order-2 flex justify-end">
               <motion.div
-                key={`${chip.title}-${i}`}
-                variants={chipVariants(dir)}
-                className="relative"
+                className="w-full md:w-auto"
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, amount: 0.2 }}
               >
-                <button
-                  onMouseEnter={() => setActiveIndex(i)}
-                  onMouseLeave={() => setActiveIndex((cur) => (cur === i ? null : cur))}
-                  onFocus={() => setActiveIndex(i)}
-                  onBlur={() => setActiveIndex((cur) => (cur === i ? null : cur))}
-                  onKeyDown={(e) => {
-                    if (e.key === "Escape") setActiveIndex(null);
-                  }}
-                  className="relative px-5 py-2 rounded-full ring-1 ring-black/5 shadow-sm bg-gradient-to-r from-sky-500 via-indigo-400 to-amber-500 text-white font-semibold text-base sm:text-lg leading-tight focus:outline-none focus:ring-4 focus:ring-sky-200"
-                  aria-haspopup="dialog"
-                  aria-expanded={activeIndex === i}
-                  aria-controls={`chip-desc-${i}`}
-                >
-                  <span className="pointer-events-none absolute inset-0 rounded-full" aria-hidden />
-                  <span>{chip.title}</span>
+                {/* pills wrapped to the right; on small screens they will wrap under the heading */}
+                <div className="flex flex-wrap justify-end gap-3">
+                  {chips.map((chip, i) => {
+                    const dir = chipDirs[i];
+                    const accent = CHIP_ACCENTS[i % CHIP_ACCENTS.length];
 
-                  <AnimatePresence>
-                    {activeIndex === i && (
+                    return (
                       <motion.div
-                        id={`chip-desc-${i}`}
-                        role="dialog"
-                        initial={tipAnim.initial}
-                        animate={tipAnim.animate}
-                        exit={tipAnim.exit}
-                        transition={tipAnim.transition}
-                        className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-72 md:w-80 z-50"
-                        style={{ pointerEvents: "auto" }}
+                        key={`${chip.title}-${i}`}
+                        variants={chipVariants(dir)}
+                        className="relative"
                       >
-                        {/* Tooltip card (glass + accent + shadow + glow) */}
-                        <div
-                          className="rounded-xl border border-gray-100 p-3 text-left backdrop-blur-sm"
-                          style={{
-                            background:
-                              "linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,255,255,0.78))",
-                            boxShadow: `0 10px 30px rgba(15,23,42,0.12), 0 3px 8px rgba(0,0,0,0.06), 0 0 18px ${accent.from}22`,
-                            borderLeft: `4px solid ${accent.from}`,
+                        <button
+                          onMouseEnter={() => setActiveIndex(i)}
+                          onMouseLeave={() =>
+                            setActiveIndex((cur) => (cur === i ? null : cur))
+                          }
+                          onFocus={() => setActiveIndex(i)}
+                          onBlur={() =>
+                            setActiveIndex((cur) => (cur === i ? null : cur))
+                          }
+                          onKeyDown={(e) => {
+                            if (e.key === "Escape") setActiveIndex(null);
                           }}
-                      >
-                          {/* top accent strip */}
-                          <div
-                            className="h-1 rounded-t-xl -mx-3 mb-2"
-                            style={{
-                              background: `linear-gradient(90deg, ${accent.from}, ${accent.to})`,
-                            }}
+                          className="relative px-5 py-2 rounded-full ring-1 ring-black/5 shadow-sm bg-gradient-to-r from-sky-500 via-indigo-400 to-amber-500 text-white font-semibold text-base sm:text-lg leading-tight focus:outline-none focus:ring-4 focus:ring-sky-200"
+                          aria-haspopup="dialog"
+                          aria-expanded={activeIndex === i}
+                          aria-controls={`chip-desc-${i}`}
+                        >
+                          <span
+                            className="pointer-events-none absolute inset-0 rounded-full"
+                            aria-hidden
                           />
-                          <div className="flex items-start gap-3">
-                            <div
-                              className="flex-shrink-0 w-9 h-9 rounded-md grid place-items-center"
-                              style={{
-                                background: `linear-gradient(90deg, ${accent.from}, ${accent.to})`,
-                                boxShadow: `0 6px 18px ${accent.to}30`,
-                              }}
-                              aria-hidden
-                            >
-                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2v6" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M12 16v6" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M4 12h16" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                              </svg>
-                            </div>
+                          <span>{chip.title}</span>
 
-                            <div>
-                              <div className="text-sm font-semibold text-slate-900">
-                                {chip.title}
-                              </div>
-                              <div className="mt-1 text-xs text-slate-600 leading-snug">
-                                {chip.desc}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          <AnimatePresence>
+                            {activeIndex === i && (
+                              <motion.div
+                                id={`chip-desc-${i}`}
+                                role="dialog"
+                                initial={tipAnim.initial}
+                                animate={tipAnim.animate}
+                                exit={tipAnim.exit}
+                                transition={tipAnim.transition}
+                                className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-72 md:w-80 z-50"
+                                style={{ pointerEvents: "auto" }}
+                              >
+                                {/* Tooltip card (glass + accent + shadow + glow) */}
+                                <div
+                                  className="rounded-xl border border-gray-100 p-3 text-left backdrop-blur-sm"
+                                  style={{
+                                    background:
+                                      "linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,255,255,0.78))",
+                                    boxShadow: `0 10px 30px rgba(15,23,42,0.12), 0 3px 8px rgba(0,0,0,0.06), 0 0 18px ${accent.from}22`,
+                                    borderLeft: `4px solid ${accent.from}`,
+                                  }}
+                                >
+                                  {/* top accent strip */}
+                                  <div
+                                    className="h-1 rounded-t-xl -mx-3 mb-2"
+                                    style={{
+                                      background: `linear-gradient(90deg, ${accent.from}, ${accent.to})`,
+                                    }}
+                                  />
+                                  <div className="flex items-start gap-3">
+                                    <div
+                                      className="flex-shrink-0 w-9 h-9 rounded-md grid place-items-center"
+                                      style={{
+                                        background: `linear-gradient(90deg, ${accent.from}, ${accent.to})`,
+                                        boxShadow: `0 6px 18px ${accent.to}30`,
+                                      }}
+                                      aria-hidden
+                                    >
+                                      <svg
+                                        width="18"
+                                        height="18"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                      >
+                                        <path
+                                          d="M12 2v6"
+                                          stroke="white"
+                                          strokeWidth="1.6"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                        />
+                                        <path
+                                          d="M12 16v6"
+                                          stroke="white"
+                                          strokeWidth="1.6"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                        />
+                                        <path
+                                          d="M4 12h16"
+                                          stroke="white"
+                                          strokeWidth="1.6"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                        />
+                                      </svg>
+                                    </div>
 
-                        {/* arrow with soft shadow */}
-                        <div className="flex justify-center -mt-1.5 pointer-events-none">
-                          <div
-                            className="w-3 h-3 bg-white rotate-45 border-l border-t border-gray-100"
-                            style={{
-                              boxShadow: `0 4px 8px rgba(2,6,23,0.06)`,
-                            }}
-                          />
-                        </div>
+                                    <div>
+                                      <div className="text-sm font-semibold text-slate-900">
+                                        {chip.title}
+                                      </div>
+                                      <div className="mt-1 text-xs text-slate-600 leading-snug">
+                                        {chip.desc}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* arrow with soft shadow */}
+                                <div className="flex justify-center -mt-1.5 pointer-events-none">
+                                  <div
+                                    className="w-3 h-3 bg-white rotate-45 border-l border-t border-gray-100"
+                                    style={{
+                                      boxShadow: `0 4px 8px rgba(2,6,23,0.06)`,
+                                    }}
+                                  />
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </button>
                       </motion.div>
-                    )}
-                  </AnimatePresence>
-                </button>
+                    );
+                  })}
+                </div>
               </motion.div>
-            );
-          })}
-        </motion.div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div className="pb-12" />
     </section>
   );
 }

@@ -1,5 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { WineOff } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 // Approach items
 const approach = [
@@ -53,6 +55,21 @@ const NodeIcon = () => (
 
 const services = [
   {
+    label: "Web Development",
+    headline: "Fast and secure web experiences",
+    blurb:
+      "From landing pages to ecommerce, we build responsive, secure, and high-performance sites.",
+    points: [
+      "Custom Website Development",
+      "Website Maintenance & Support",
+      "Built with the latest technologies",
+      "Business-ready solutions",
+      "SEO optimized builds",
+      "Responsive design",
+      "Landing pages to full scale websites",
+    ],
+  },
+  {
     label: "Digital Marketing",
     headline: "Be seen and Grow consistently",
     blurb:
@@ -71,7 +88,7 @@ const services = [
     ],
   },
   {
-    label: "Graphic Designing",
+    label: "Graphic Design",
     headline: "Designs that speak and sell",
     blurb:
       "We enhance brand presence, engage audiences, and communicate your message effectively.",
@@ -84,21 +101,7 @@ const services = [
       "Advertising banners",
     ],
   },
-  {
-    label: "Web Development",
-    headline: "Fast and secure web experiences",
-    blurb:
-      "From landing pages to ecommerce, we build responsive, secure, and high-performance sites.",
-    points: [
-      "Custom Website Development",
-      "Website Maintenance & Support",
-      "Built with the latest technologies",
-      "Business-ready solutions",
-      "SEO optimized builds",
-      "Responsive design",
-      "Landing pages to full scale websites",
-    ],
-  },
+
   {
     label: "Digital Services",
     headline: "Integrations power your operations",
@@ -148,6 +151,35 @@ const CloseIcon = () => (
 
 const OurServicesComp = () => {
   const [openIdx, setOpenIdx] = useState(null);
+
+  useEffect(() => {
+    // only run on client
+    if (typeof window === "undefined") return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const openParam = urlParams.get("open");
+    if (!openParam) return;
+
+    // match by label (case-insensitive). openParam is expected to be encoded from the Services page.
+    const decoded = decodeURIComponent(openParam);
+    const foundIndex = services.findIndex(
+      (s) =>
+        s.label.toLowerCase() === decoded.toLowerCase() ||
+        s.headline.toLowerCase() === decoded.toLowerCase()
+    );
+
+    if (foundIndex !== -1) {
+      setOpenIdx(foundIndex);
+
+      // remove query param so the URL is clean (no navigation)
+      urlParams.delete("open");
+      const newUrl =
+        window.location.pathname +
+        (urlParams.toString() ? "?" + urlParams.toString() : "") +
+        (window.location.hash || "");
+      window.history.replaceState({}, "", newUrl);
+    }
+  }, []);
 
   // Close modal on ESC
   useEffect(() => {
@@ -217,7 +249,7 @@ const OurServicesComp = () => {
       <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-32 md:pt-40 lg:pt-44 pb-8 sm:pb-16 text-center">
         <p className="text-xs sm:text-sm md:text-base font-semibold tracking-wide">
           <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-amber-300 bg-clip-text text-transparent">
-            Eliminate the Hassle
+            Simplify Your Journey
           </span>
         </p>
         <h1 className="mt-4 font-extrabold leading-tight tracking-tight text-2xl sm:text-4xl md:text-5xl lg:text-6xl">
@@ -252,13 +284,13 @@ const OurServicesComp = () => {
         <div className="flex justify-center">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-white/5 ring-1 ring-white/10">
             <span className="inline-block w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400" />
-            What to Expect
+            What Awaits You{" "}
           </span>
         </div>
         <h2 className="mt-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
-          We adapt and grow{" "}
+          We Adapt And Grow{" "}
           <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-amber-300 bg-clip-text text-transparent">
-            within your unique environment
+            Within Your Unique Environment
           </span>
         </h2>
 
@@ -269,7 +301,7 @@ const OurServicesComp = () => {
       </div>
 
       {/* === SERVICES GRID === */}
-      <section className="    relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-14 md:mt-16 pb-16">
+      <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-14 md:mt-16 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-7 ">
           {services.map((svc, idx) => {
             const preview = svc.points.slice(0, 1);
@@ -278,7 +310,7 @@ const OurServicesComp = () => {
             return (
               <article
                 key={idx}
-                className="relative group rounded-[26px] overflow-hidden border hover:shadow-xl hover:shadow-green-400/60 hover:[box-shadow:0_0_20px_4px_rgba(255,110,0,0.7)] border-white/5 shadow-2xl shadow-black/40 min-h-[280px]"
+                className="relative group rounded-[26px] overflow-hidden border hover:shadow-xl hover:shadow-green-400/60 border-white/5 shadow-2xl shadow-black/40 min-h-[280px]"
               >
                 {/* Card background */}
                 <img
@@ -359,9 +391,9 @@ const OurServicesComp = () => {
           {/* Content centered */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 sm:px-10 py-6 sm:py-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
-              Your trusted partner{" "}
+              Your Trusted Partner{" "}
               <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-amber-300 bg-clip-text text-transparent">
-                driving ideas into reality
+                Driving Ideas Into Reality
               </span>
             </h2>
 
@@ -421,9 +453,9 @@ const OurServicesComp = () => {
         {/* headline */}
         <div className="text-center mt-6">
           <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-            Always giving you{" "}
+            Always Giving You{" "}
             <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-amber-300 bg-clip-text text-transparent">
-              exactly what you need
+              Exactly What You Need
             </span>
           </h3>
           <p className="mt-4 text-white/80 max-w-2xl mx-auto">
@@ -433,102 +465,99 @@ const OurServicesComp = () => {
           </p>
         </div>
 
-        {/* grid */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* left: overview card */}
-          <div className="lg:col-span-2">
-            <div className="relative rounded-3xl bg-[#0f0f18]/80 p-6 sm:p-8 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.7),0_0_30px_6px_rgba(0,212,255,0.6),0_0_40px_8px_rgba(255,110,0,0.65),0_0_50px_10px_rgba(255,184,0,0.6)]">
-              {/* gradient border sheen */}
-              <div className="absolute inset-0 rounded-3xl pointer-events-none">
-                <div
-                  className="absolute inset-0 rounded-3xl opacity-25"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(6,182,212,.35), rgba(59,130,246,.25), rgba(245,158,11,.25))",
-                  }}
-                />
-              </div>
-
-              <h4 className="text-2xl sm:text-3xl font-bold">Our Approach</h4>
-              <p className="mt-2 text-white/80 max-w-2xl">
-                A pragmatic, transparent workflow that keeps momentum and
-                delivers results.
-              </p>
-
-              {/* chips */}
-              <div className="mt-6 flex flex-wrap gap-3">
-                {[
-                  "Client understanding",
-                  "Customized strategy",
-                  "Creative execution",
-                  "Collaboration",
-                  "Continuous optimization",
-                  "Measurable impact",
-                  "Quality & timely delivery",
-                ].map((chip, i) => (
-                  <span
-                    key={i}
-                    className="px-4 py-2 rounded-2xl text-sm bg-white/[0.06] ring-1 ring-white/10 relative"
-                  >
-                    <span
-                      className="absolute inset-0 rounded-2xl pointer-events-none"
-                      style={{
-                        boxShadow: "0 0 0 1px rgba(255,255,255,0.06) inset",
-                      }}
-                    />
-                    <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-amber-300 bg-clip-text text-transparent">
-                      {chip}
-                    </span>
-                  </span>
-                ))}
-              </div>
-
-              {/* subtle bottom glow */}
+        {/* NEW LAYOUT: Overview full width */}
+        <div className="mt-12">
+          <div className="relative rounded-3xl bg-[#0f0f18]/80 p-6 sm:p-8 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.12),0_0_30px_6px_rgba(0,212,255,0.08)] transition-shadow duration-400">
+            {/* gradient border sheen */}
+            <div className="absolute inset-0 rounded-3xl pointer-events-none">
               <div
-                className="pointer-events-none absolute inset-x-0 -bottom-6 h-28 blur-2xl"
+                className="absolute inset-0 rounded-3xl opacity-20"
                 style={{
                   background:
-                    "radial-gradient(60% 100% at 50% 100%, rgba(6,182,212,.18), rgba(59,130,246,.14), rgba(245,158,11,.12), transparent)",
+                    "linear-gradient(135deg, rgba(6,182,212,.25), rgba(59,130,246,.12), rgba(245,158,11,.12))",
                 }}
               />
             </div>
-          </div>
 
-          {/* right: two tiles */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-            {approach.slice(0, 2).map((item, i) => (
-              <div
-                key={i}
-                className="group relative rounded-3xl bg-[#10101a]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.7),0_0_30px_6px_rgba(0,212,255,0.6),0_0_40px_8px_rgba(255,110,0,0.65),0_0_50px_10px_rgba(255,184,0,0.6)]"
-              >
-                <div className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400 opacity-90" />
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0 text-white/70 group-hover:text-white transition">
-                    <NodeIcon />
-                  </div>
-                  <div>
-                    <p className="font-semibold">{item.title}</p>
-                    <p className="text-sm text-white/80 mt-1">{item.desc}</p>
-                  </div>
-                </div>
-                <div
-                  className="pointer-events-none absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl"
-                  style={{
-                    background:
-                      "radial-gradient(60% 80% at 50% 0%, rgba(6,182,212,.16), rgba(59,130,246,.12), rgba(245,158,11,.10), transparent)",
-                  }}
-                />
-              </div>
-            ))}
+            <h4 className="text-2xl sm:text-3xl font-bold">Our Approach</h4>
+            <p className="mt-2 text-white/80 max-w-2xl">
+              A pragmatic, transparent workflow that keeps momentum and delivers
+              results.
+            </p>
+
+            {/* chips */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              {[
+                "Client understanding",
+                "Customized strategy",
+                "Creative execution",
+                "Collaboration",
+                "Continuous optimization",
+                "Measurable impact",
+                "Quality & timely delivery",
+              ].map((chip, i) => (
+                <span
+                  key={i}
+                  className="px-4 py-2 rounded-2xl text-sm bg-white/[0.04] ring-1 ring-white/10 relative"
+                >
+                  <span
+                    className="absolute inset-0 rounded-2xl pointer-events-none"
+                    style={{
+                      boxShadow: "0 0 0 1px rgba(255,255,255,0.04) inset",
+                    }}
+                  />
+                  <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-amber-300 bg-clip-text text-transparent">
+                    {chip}
+                  </span>
+                </span>
+              ))}
+            </div>
+
+            {/* subtle bottom glow */}
+            <div
+              className="pointer-events-none absolute inset-x-0 -bottom-6 h-28 blur-2xl"
+              style={{
+                background:
+                  "radial-gradient(60% 100% at 50% 100%, rgba(6,182,212,.12), rgba(59,130,246,.08), rgba(245,158,11,.06), transparent)",
+              }}
+            />
           </div>
         </div>
 
-        {/* second row tiles */}
+        {/* Put Client Understanding and Customized Strategy below overview as two tiles */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {approach.slice(0, 2).map((item, i) => (
+            <article
+              key={i}
+              className="group relative rounded-3xl bg-[#10101a]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_6px_rgba(0,122,255,0.12),0_0_30px_8px_rgba(0,212,255,0.08)] transition"
+            >
+              <div className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400 opacity-90" />
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 text-white/70 group-hover:text-white transition">
+                  <NodeIcon />
+                </div>
+                <div>
+                  <p className="font-semibold">{item.title}</p>
+                  <p className="text-sm text-white/80 mt-1">{item.desc}</p>
+                </div>
+              </div>
+              <div
+                className="pointer-events-none absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl"
+                style={{
+                  background:
+                    "radial-gradient(60% 80% at 50% 0%, rgba(6,182,212,.12), rgba(59,130,246,.08), rgba(245,158,11,.06), transparent)",
+                }}
+              />
+            </article>
+          ))}
+        </div>
+
+        {/* remaining approach tiles (grid) */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {approach.slice(2).map((item, i) => (
             <div
               key={i}
-              className="group relative rounded-3xl bg-[#0e0e17]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.7),0_0_30px_6px_rgba(0,212,255,0.6),0_0_40px_8px_rgba(255,110,0,0.65),0_0_50px_10px_rgba(255,184,0,0.6)]"
+              className="group relative rounded-3xl bg-[#0e0e17]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_6px_rgba(0,122,255,0.12),0_0_30px_8px_rgba(0,212,255,0.08)] transition"
             >
               <div className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400 opacity-80 group-hover:opacity-100" />
               <div className="flex items-start gap-4">
@@ -544,7 +573,7 @@ const OurServicesComp = () => {
                 className="pointer-events-none absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl"
                 style={{
                   background:
-                    "radial-gradient(80% 80% at 100% 0%, rgba(6,182,212,.12), rgba(59,130,246,.10), rgba(245,158,11,.10), transparent)",
+                    "radial-gradient(80% 80% at 100% 0%, rgba(6,182,212,.10), rgba(59,130,246,.08), rgba(245,158,11,.06), transparent)",
                 }}
               />
             </div>

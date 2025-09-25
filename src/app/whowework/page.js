@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import OurClients from "../ourclients/page";
 import { ScrollBasedVelocityImagesDemo } from "../scrollBasedImages/scrollBasedImages";
 import { useRouter } from "next/navigation";
+
 const LOGO_GRADIENT =
   "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
 
@@ -130,11 +131,51 @@ export default function WhoWeWorkWith() {
 
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-100/40 blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-purple-100/40 blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-40 h-40 rounded-full bg-orange-100/30 blur-3xl"></div>
+      {/* Background decorative elements — improved visibility */}
+      <div className="absolute inset-0 overflow-hidden -z-10 pointer-events-none">
+        {/* stronger blue-cyan blob (top-right) */}
+        <div
+          className="
+            absolute -top-56 -right-44
+            w-96 h-96 rounded-full
+            bg-gradient-to-br from-blue-400/60 to-cyan-300/40
+            blur-2xl transform-gpu scale-[1.06]
+            mix-blend-screen
+            animate-pulse
+            opacity-95
+          "
+          aria-hidden="true"
+        ></div>
+
+        {/* stronger purple-pink blob (bottom-left) */}
+        <div
+          className="
+            absolute -bottom-56 -left-44
+            w-96 h-96 rounded-full
+            bg-gradient-to-br from-purple-400/60 to-pink-300/40
+            blur-2xl transform-gpu scale-[1.08]
+            mix-blend-screen
+            animate-pulse
+            opacity-95
+          "
+          aria-hidden="true"
+        ></div>
+
+        {/* mid-left orange accent (center area) */}
+        <div
+          className="
+            absolute top-1/2 left-1/4
+            w-56 h-56 rounded-full
+            bg-gradient-to-br from-orange-400/70 to-yellow-300/45
+            blur-xl transform -translate-y-1/2
+            mix-blend-screen
+            opacity-100
+          "
+          aria-hidden="true"
+        ></div>
+
+        {/* optional soft vignette to increase contrast with content */}
+        <div className="absolute inset-0 pointer-events-none rounded-3xl bg-gradient-to-b from-transparent to-white/6 -z-10" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -165,16 +206,13 @@ export default function WhoWeWorkWith() {
             deliver exceptional digital solutions
           </p>
         </motion.div>
+
         <motion.div
-          // className="mb-16"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariant}
         >
-          {/* <h3 className="text-2xl font-semibold text-center text-gray-800 mb-8">
-            Industries We Serve
-          </h3> */}
           <div className="flex flex-wrap justify-center gap-3">
             {industries.map((industry, idx) => (
               <motion.div
@@ -190,12 +228,10 @@ export default function WhoWeWorkWith() {
             ))}
           </div>
         </motion.div>
+
         <ScrollBasedVelocityImagesDemo />
 
-        {/* INDUSTRIES */}
-
         {/* PARTNER CARDS */}
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {partners.map((partner, idx) => {
             const Icon = partner.icon;
@@ -284,7 +320,6 @@ export default function WhoWeWorkWith() {
           className="flex justify-center mb-20"
         >
           <div className="relative">
-            {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-30 animate-pulse"></div> */}
             <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
               <div className="absolute bottom-6 left-6">

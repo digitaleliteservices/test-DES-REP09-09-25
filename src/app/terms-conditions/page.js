@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Loader from "../_components/loader/page";
+import SplashCursor from "@/components/SplashCursor";
 const {
   default: TermsAndConditionComponent,
 } = require("../_components/termsAndConditionComp/page");
@@ -18,9 +19,10 @@ const TermsConditions = () => {
   if (loading) return <Loader />;
   return (
     <div>
+      <SplashCursor/>
       <Navbar />
       <TermsAndConditionComponent />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

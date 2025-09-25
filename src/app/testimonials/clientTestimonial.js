@@ -144,7 +144,7 @@ export default function HomeTestimonials({ items = sampleTestimonials }) {
 
         {/* Fixed spacing between "What our" and "clients say" */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
-          What our{" "}
+          What Our{" "}
           <span
             style={{
               background: LOGO_GRADIENT,
@@ -152,7 +152,7 @@ export default function HomeTestimonials({ items = sampleTestimonials }) {
               WebkitTextFillColor: "transparent",
             }}
           >
-            clients say
+            Clients Say
           </span>
         </h1>
 

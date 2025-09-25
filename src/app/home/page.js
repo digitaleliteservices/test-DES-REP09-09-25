@@ -18,6 +18,7 @@ import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern
 import { WarpBackground } from "@/components/ui/warp-background";
 import OurClients from "../ourclients/page";
 import Essence from "../essence/page";
+import SplashCursor from "@/components/SplashCursor";
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
@@ -29,12 +30,13 @@ export default function Home() {
   if (loading) return <Loader />;
   return (
     <div className="relative">
+      <SplashCursor/>
       <Navbar />
       {/* <Hero /> */}
       <WarpBackground>
         <Hero />
       </WarpBackground>
-      <Essence/>
+      <Essence />
       {/* <WarpBackground>
         <div className="w-80">
           <p>Warp Background</p>

@@ -10,7 +10,7 @@ const MissionVisionSection = () => {
           🌟 Our Vision & Mission
         </span>
         <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 drop-shadow-md">
-          Purpose that powers our work
+          Purpose That Powers Our Work
         </h3>
       </div>
 
