@@ -295,9 +295,9 @@ const WhatSetsUsApart = () => {
           </div>
         </motion.div>
       </section>
-      <CurtainFooter>
+      {/* <CurtainFooter>
         <Footer />
-      </CurtainFooter>
+      </CurtainFooter> */}
     </>
   );
 };

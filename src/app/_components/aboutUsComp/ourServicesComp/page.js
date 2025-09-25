@@ -64,6 +64,10 @@ const services = [
       "Email & Content Marketing",
       "Analytics & Reporting",
       "LinkedIn Optimization, Paid Ads",
+      "Email & WhatsApp campaigns",
+      "Google, YouTube Ads & more",
+      "Targeted social media strategy",
+      "Analytics & performance reports",
     ],
   },
   {
@@ -89,6 +93,10 @@ const services = [
       "Custom Website Development",
       "Website Maintenance & Support",
       "Built with the latest technologies",
+      "Business-ready solutions",
+      "SEO optimized builds",
+      "Responsive design",
+      "Landing pages to full scale websites",
     ],
   },
   {
@@ -520,7 +528,8 @@ const OurServicesComp = () => {
           {approach.slice(2).map((item, i) => (
             <div
               key={i}
-              className="group relative rounded-3xl bg-[#0e0e17]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.7),0_0_30px_6px_rgba(0,212,255,0.6),0_0_40px_8px_rgba(255,110,0,0.65),0_0_50px_10px_rgba(255,184,0,0.6)]">
+              className="group relative rounded-3xl bg-[#0e0e17]/80 p-6 overflow-hidden ring-1 ring-white/10 hover:[box-shadow:0_0_20px_4px_rgba(0,122,255,0.7),0_0_30px_6px_rgba(0,212,255,0.6),0_0_40px_8px_rgba(255,110,0,0.65),0_0_50px_10px_rgba(255,184,0,0.6)]"
+            >
               <div className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-amber-400 opacity-80 group-hover:opacity-100" />
               <div className="flex items-start gap-4">
                 <div className="shrink-0 text-white/70 group-hover:text-white transition">
