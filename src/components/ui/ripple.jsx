@@ -2,7 +2,10 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 const LOGO_GRADIENT =
-  "linear-gradient(90deg, #00E5FF 0%, #2C6DF6 52%, #FF8A00 100%)";
+  // "linear-gradient(90deg, #00E5FF 0%, #2C6DF6 52%, #FF8A00 100%)";
+  // "linear-gradient(360deg, #00FFE0 0%, #3399FF 52%, #FFEA00 100%)";
+  // "linear-gradient(360deg, #00FFFF 0%, #1E90FF 52%, #FFD700 100%)";
+  "linear-gradient(360deg, #00FFFF 0%, #3B82FF 52%, #FFD700 100%)";
 
 export const Ripple = React.memo(function Ripple({
   mainCircleSize = 210,
@@ -27,7 +30,7 @@ export const Ripple = React.memo(function Ripple({
         return (
           <div
             key={i}
-            className="absolute animate-ripple rounded-full shadow-xl"
+            className="absolute animate-ripple rounded-full"
             style={{
               width: `${size}px`,
               height: `${size}px`,
@@ -37,8 +40,14 @@ export const Ripple = React.memo(function Ripple({
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%) scale(1)",
-              border: "1px solid transparent",
+              border: "1px solid rgba(255,255,255,0.2)",
+
+              // ✨ Color visibility boost
               backgroundClip: "padding-box",
+              mixBlendMode: "screen", // makes bright colors pop against background
+              filter: "saturate(1.6) contrast(1.2)", // boost color vibrancy & contrast
+              boxShadow:
+                "0 0 25px rgba(255,138,0,0.25), 0 0 45px rgba(44,109,246,0.2)", // subtle glow
             }}
           />
         );

@@ -6,6 +6,7 @@ import AboutUsComp from "../_components/aboutUsComp/page";
 import Footer from "../footer/page";
 import Navbar from "../navbar/page";
 import SocialMediaIcons from "../socialMediaIcons/socialMediaIcons";
+import Spiral from "@/spiral/page";
 
 const AboutUs = () => {
   const [loading, setLoading] = useState(true);

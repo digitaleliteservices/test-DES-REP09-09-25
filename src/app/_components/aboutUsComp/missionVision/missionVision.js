@@ -15,8 +15,8 @@ const MissionVisionSection = () => {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-6">
-        <MissionCard />
         <VisionCard />
+        <MissionCard />
       </div>
     </section>
   );

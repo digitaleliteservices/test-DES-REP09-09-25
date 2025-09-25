@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import OurClients from "../ourclients/page";
 import { ScrollBasedVelocityImagesDemo } from "../scrollBasedImages/scrollBasedImages";
-
+import { useRouter } from "next/navigation";
 const LOGO_GRADIENT =
   "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
 
@@ -22,7 +22,7 @@ const partners = [
     color: "from-blue-500 to-cyan-500",
   },
   {
-    title: "SMEs",
+    title: "SMBs",
     description: [
       "Improve visibility",
       "Increase sales",
@@ -126,6 +126,7 @@ const listItem = {
 export default function WhoWeWorkWith() {
   const [activeCard, setActiveCard] = useState(null);
   const cardRefs = useRef([]);
+  const router = useRouter();
 
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
@@ -164,12 +165,8 @@ export default function WhoWeWorkWith() {
             deliver exceptional digital solutions
           </p>
         </motion.div>
-
-        <ScrollBasedVelocityImagesDemo />
-
-        {/* INDUSTRIES */}
         <motion.div
-          className="mb-16"
+          // className="mb-16"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
@@ -193,6 +190,9 @@ export default function WhoWeWorkWith() {
             ))}
           </div>
         </motion.div>
+        <ScrollBasedVelocityImagesDemo />
+
+        {/* INDUSTRIES */}
 
         {/* PARTNER CARDS */}
 
@@ -256,7 +256,10 @@ export default function WhoWeWorkWith() {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`w-full mt-6 py-2.5 rounded-lg font-medium text-white bg-gradient-to-r ${partner.color} transition-all duration-300`}
+                      className={`w-full mt-6 py-2.5 rounded-lg font-medium text-white bg-gradient-to-r ${partner.color} transition-all duration-300 cursor-pointer`}
+                      onClick={() => {
+                        router.push("/our-services");
+                      }}
                     >
                       Learn More
                     </motion.button>

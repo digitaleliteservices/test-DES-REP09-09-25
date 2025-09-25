@@ -7,6 +7,9 @@ import ServicesSection from "./serviceSection/serviceSection";
 import AnimatedBullets from "./animatedBullets/animatedBullets";
 import EnhancedOrbitingAnimation from "./enhancedOrbitingAnimation/enhancedOrbitingAnimation";
 import SocialMediaIcons from "@/app/socialMediaIcons/socialMediaIcons";
+import Spiral from "@/spiral/page";
+import EliteFamily from "./eliteFamily/eliteFamily";
+import OurExperts from "./ourExperts/ourExperts";
 
 const AboutUsComp = () => {
   return (
@@ -14,9 +17,12 @@ const AboutUsComp = () => {
       <HeroSection />
       <ServicesSection />
       <EnhancedOrbitingAnimation />
-      <AnimatedBullets />
+      {/* <AnimatedBullets /> */}
       <MissionVisionSection />
+      <Spiral />
       <WhatSetsUsApart />
+      <EliteFamily/>
+      <OurExperts/>
       <SocialMediaIcons />
     </>
   );

@@ -5,6 +5,7 @@ import { CheckCircle, X } from "lucide-react";
 import WhoWeWorkWith from "../whowework/page";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import { Ripple } from "@/components/ui/ripple";
+import { useRouter } from "next/navigation";
 
 const LOGO_GRADIENT =
   "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
@@ -47,6 +48,7 @@ function ServiceCard({ service, onOpen }) {
   const [pointer, setPointer] = useState(null);
   const cardRef = useRef(null);
   const [cellSize, setCellSize] = useState({ w: 28, h: 28 });
+  const router = useRouter();
 
   useEffect(() => {
     // compute sensible cell size based on card dimensions (runs on mount + resize)
@@ -97,13 +99,39 @@ function ServiceCard({ service, onOpen }) {
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
-        <span
+        {/* <span
           className="inline-block px-4 py-1.5 mb-6 rounded-full text-sm font-semibold 
                      bg-gradient-to-r from-indigo-50 via-blue-50 to-purple-50 
                      text-indigo-700 border border-indigo-100"
         >
           {service.title}
+        </span> */}
+
+        {/* <span
+          className="inline-block px-4 py-3 mb-6 rounded-full text-sm font-semibold 
+             text-white shadow-md 
+             bg-gradient-to-r from-cyan-400 via-blue-500 to-orange-400 
+             border border-white/ text-center"
+        >
+          {service.title}
+        </span> */}
+
+        <span
+          className="inline-block px-6 py-3 mb-6 rounded-full text-lg font-semibold 
+             text-white shadow-md text-center
+             bg-gradient-to-r from-cyan-400 via-blue-500 to-orange-400 
+             border border-white/20"
+        >
+          {service.title}
         </span>
+
+        {/* <span
+          className="inline-block px-4 py-3 mb-6 rounded-full text-sm font-bold 
+             text-white bg-indigo-600 shadow-[0_0_12px_rgba(99,102,241,0.6)] 
+             border border-indigo-700/50 text-center"
+        >
+          {service.title}
+        </span> */}
 
         <h3 className="text-lg font-semibold mb-4 leading-snug text-gray-800">
           {service.description}
@@ -120,9 +148,12 @@ function ServiceCard({ service, onOpen }) {
 
         <div className="flex justify-center mt-auto">
           <button
-            onClick={() => onOpen(service)}
-            className="px-6 py-2.5 rounded-full text-sm md:text-base font-semibold tracking-wide text-white
-              bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 transition"
+            // onClick={() => onOpen(service)}
+            onClick={() => {
+              router.push("/our-services");
+            }}
+            className="px-6 py-2 rounded-full text-sm md:text-base font-semibold tracking-wide text-white
+              bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 transition cursor-pointer"
           >
             Get More
           </button>
@@ -139,14 +170,9 @@ const Services = () => {
     <section className="relative py-20 overflow-hidden">
       {/* Single Ripple behind all cards */}
       <div className="absolute inset-0 -z-10 pointer-events-none flex items-center justify-center">
-        <Ripple 
-          mainCircleSize={500} 
-          mainCircleOpacity={0.1}
-          numCircles={6}
-          className="opacity-70"
-        />
+        <Ripple mainCircleSize={300} mainCircleOpacity={0.4} numCircles={6} />
       </div>
-      
+
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-14">

@@ -10,10 +10,16 @@ export function InteractiveGridPattern({
   pointer = null, // { x, y } in px relative to svg top-left OR null
   className,
   squaresClassName,
+  // customization knobs:
+  activeAlpha = 0.62,
+  inactiveAlpha = 0.0,
+  borderInset = 2, // how much smaller inner fill is than outer stroke
+  strokeColor = "rgba(148,163,184,0.30)",
+  strokeWidth = 0.3,
+  popScale = 1.03,
   ...props
 }) {
   const [horizontal, vertical] = squares;
-
   const totalWidth = width * horizontal;
   const totalHeight = height * vertical;
 
@@ -27,6 +33,23 @@ export function InteractiveGridPattern({
     return row * horizontal + col;
   }, [pointer, width, height, horizontal, totalWidth]);
 
+  // deterministic hue for each index (good distribution)
+  const hueForIndex = (index) => {
+    const step = 137.50776405003785; // golden angle degrees
+    return Math.round((index * step) % 360);
+  };
+
+  // precompute cell positions to avoid re-calculation inside render
+  const cells = useMemo(() => {
+    return Array.from({ length: horizontal * vertical }).map((_, index) => {
+      const x = (index % horizontal) * width;
+      const y = Math.floor(index / horizontal) * height;
+      const cx = x + width / 2;
+      const cy = y + height / 2;
+      return { index, x, y, cx, cy };
+    });
+  }, [horizontal, vertical, width, height]);
+
   return (
     <svg
       width={totalWidth}
@@ -36,26 +59,58 @@ export function InteractiveGridPattern({
       className={cn("w-full h-full", className)}
       {...props}
     >
-      {Array.from({ length: horizontal * vertical }).map((_, index) => {
-        const x = (index % horizontal) * width;
-        const y = Math.floor(index / horizontal) * height;
+      {cells.map(({ index, x, y }) => {
         const isActive = activeIndex === index;
+        const hue = hueForIndex(index);
+        const activeFill = `hsla(${hue}, 92%, 56%, ${activeAlpha})`;
+        const inactiveFill = `rgba(0,0,0,0)`; // fully transparent
+
+        const inset = Math.max(0, Math.min(borderInset, Math.floor(width / 4)));
+        const innerX = x + inset;
+        const innerY = y + inset;
+        const innerW = Math.max(0, width - inset * 2);
+        const innerH = Math.max(0, height - inset * 2);
+        const innerRx = Math.max(0, 4 - inset);
+
         return (
-          <rect
-            key={index}
-            x={x}
-            y={y}
-            width={width}
-            height={height}
-            className={cn(
-              "stroke-gray-300/30 transition-all duration-150",
-              isActive ? "fill-indigo-100/30" : "fill-transparent",
-              squaresClassName
-            )}
-            style={{ pointerEvents: "none" }}
-            rx={4}
-            ry={4}
-          />
+          <g key={index} className={squaresClassName}>
+            {/* outer stroke rect (grid lines): always visible */}
+            <rect
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+              rx={4}
+              ry={4}
+              fill="transparent"
+              stroke={strokeColor}
+              strokeWidth={strokeWidth}
+              vectorEffect="non-scaling-stroke"
+              style={{
+                pointerEvents: "none",
+                transition: "stroke 120ms linear",
+              }}
+            />
+
+            {/* inner fill rect: inset so stroke remains visible */}
+            <rect
+              x={innerX}
+              y={innerY}
+              width={innerW}
+              height={innerH}
+              rx={innerRx}
+              ry={innerRx}
+              fill={isActive ? activeFill : inactiveFill}
+              style={{
+                pointerEvents: "none",
+                transition:
+                  "fill 140ms linear, transform 140ms linear, opacity 140ms linear",
+                opacity: isActive ? 1 : 0,
+                transformOrigin: `${x + width / 2}px ${y + height / 2}px`,
+                transform: isActive ? `scale(${popScale})` : "scale(1)",
+              }}
+            />
+          </g>
         );
       })}
     </svg>
