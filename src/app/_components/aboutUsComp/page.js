@@ -10,19 +10,21 @@ import SocialMediaIcons from "@/app/socialMediaIcons/socialMediaIcons";
 import Spiral from "@/spiral/page";
 import EliteFamily from "./eliteFamily/eliteFamily";
 import OurExperts from "./ourExperts/ourExperts";
+import PreWhatWeOffer from "./preWeOffer/page";
 
 const AboutUsComp = () => {
   return (
     <>
       <HeroSection />
+      <PreWhatWeOffer/>
       <ServicesSection />
       {/* <EnhancedOrbitingAnimation /> */}
       {/* <AnimatedBullets /> */}
       <MissionVisionSection />
       <Spiral />
       <WhatSetsUsApart />
-      <EliteFamily/>
-      <OurExperts/>
+      <EliteFamily />
+      <OurExperts />
       <SocialMediaIcons />
     </>
   );

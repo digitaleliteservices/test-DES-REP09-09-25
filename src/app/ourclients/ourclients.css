@@ -1,245 +1,71 @@
-/* ---------- Color variables (match your logo) ---------- */
-:root {
-  --c1: #00e5ff; /* cyan */
-  --c2: #2c6df6; /* blue */
-  --c3: #ff8a00; /* orange */
-  --glow-alpha: 0.24; /* overall glow alpha */
+/* Grid: 2 cols mobile, 3 cols md+ */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: stretch;
+  gap: 0; /* dividers handle spacing */
+  background: transparent;
 }
 
-/* --- Card base (outer) --- */
-.client-card {
+@media (min-width: 768px) {
+  .clients-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Cells: use top & left borders to create internal grid lines only */
+.client-cell {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.2rem;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  backdrop-filter: blur(6px);
-
-  /* neutral shadow so glow stands out */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
-
-  /* entrance + hover transition */
-  transition: transform 0.55s cubic-bezier(0.22, 0.9, 0.37, 1),
-    box-shadow 0.4s ease, opacity 0.45s ease;
-  will-change: transform, opacity;
-  opacity: 0;
-  transform: translateY(18px);
-
-  /* provide perspective so child rotation looks 3D */
-  perspective: 900px;
-  -webkit-perspective: 900px;
-
-  position: relative;
-  overflow: visible; /* allow glow pseudo-element to show */
-  z-index: 0;
+  padding: 2.5rem; /* ~40px */
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
+  text-decoration: none;
 }
 
-/* sheen overlay (subtle highlight) */
-.client-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0) 50%
-  );
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-.client-card:hover::before {
-  opacity: 1;
+/* Remove top border for first row (first 3 items covers both 2- and 3-col layouts) */
+.clients-grid > .client-cell:nth-child(-n+3) {
+  border-top: none;
 }
 
-/* colored glow halo around the card - blurred multi-color */
-.client-card::after {
-  content: "";
-  position: absolute;
-  left: -14px;
-  right: -14px;
-  top: -14px;
-  bottom: -14px;
-  border-radius: calc(1rem + 14px);
-  background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3));
-  opacity: 0;
-  filter: blur(20px) saturate(120%);
-  transform: scale(0.98);
-  transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
-  pointer-events: none;
-  z-index: 0; /* sits behind the card content but above page background */
+/* Remove left border for first column depending on layout */
+/* Default (2 columns): items 1,3,5... are first column */
+.clients-grid > .client-cell:nth-child(2n+1) {
+  border-left: none;
 }
 
-/* accent rim (thin colored border) using a second pseudo layered with less blur */
-.client-card .glow-rim {
-  position: absolute;
-  inset: 2px;
-  border-radius: inherit;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 229, 255, 0.7),
-    rgba(44, 109, 246, 0.7),
-    rgba(255, 138, 0, 0.7)
-  );
-  pointer-events: none;
-  opacity: 0;
-  filter: blur(6px) saturate(120%);
-  transition: opacity 0.35s ease;
-  z-index: 2;
-  mix-blend-mode: screen;
-}
-
-/* show glow on hover / focus */
-.client-card:hover::after,
-.client-card:focus::after {
-  opacity: var(--glow-alpha);
-  transform: scale(1.02);
-  filter: blur(18px) saturate(130%);
-}
-.client-card:hover .glow-rim,
-.client-card:focus .glow-rim {
-  opacity: 1;
-}
-
-/* combine colored shadows into box-shadow as well */
-.client-card:hover {
-  transform: scale(1.06) translateY(0);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18), 0 0 26px rgba(0, 229, 255, 0.08),
-    0 0 34px rgba(44, 109, 246, 0.08), 0 0 40px rgba(255, 138, 0, 0.06);
-}
-
-/* --- Inner wrapper (handles float up/down) --- */
-.client-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  will-change: transform;
-  transition: transform 0.35s ease;
-  z-index: 3; /* ensure content is above rim */
-}
-
-/* Float animation applied to inner wrapper */
-@keyframes floatY {
-  0% {
-    transform: translateY(0);
+/* For md+ (3 columns): remove left border on 3n+1 */
+@media (min-width: 768px) {
+  .clients-grid > .client-cell:nth-child(2n+1) {
+    border-left: 1px solid #e5e7eb; /* revert mobile rule */
   }
-  50% {
-    transform: translateY(-8px);
-  } /* card moves up 8px at mid */
-  100% {
-    transform: translateY(0);
+  .clients-grid > .client-cell:nth-child(3n+1) {
+    border-left: none;
   }
 }
-.animate-float {
-  animation: floatY 5.5s ease-in-out infinite;
-}
 
-/* --- Logo (img) rotates on hover independently --- */
+/* Logo styling + animation smoothing */
 .client-logo {
-  height: 5.5rem;
+  max-height: 160px;
   width: auto;
   object-fit: contain;
-
-  transition: filter 0.35s ease, transform 0.9s cubic-bezier(0.2, 0.9, 0.3, 1);
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  filter: grayscale(30%) drop-shadow(0 6px 12px rgba(0, 0, 0, 0.18));
-  will-change: transform, filter;
-  pointer-events: none; /* anchor handles clicks */
-  z-index: 4;
+  will-change: transform, opacity;
+  transition: transform 340ms cubic-bezier(.2,.9,.2,1), opacity 300ms ease-out;
+  -webkit-user-drag: none;
+  user-select: none;
+  display: block;
 }
 
-/* --- Spin Y (single-run 360deg) --- */
-@keyframes spinY {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
+/* Small visual polish for focus states */
+.client-cell:focus {
+  outline: none;
 }
 
-/* single-run spin on hover/focus of the card */
-.client-card:hover .client-logo,
-.client-card:focus .client-logo {
-  animation: spinY 0.9s linear 1;
-  filter: grayscale(0%) drop-shadow(0 0 14px rgba(0, 0, 0, 0.12));
-  transform-origin: center center;
-}
-
-/* --- Entrance from left / right initial states (outer card) --- */
-.from-left {
-  transform: translateX(-92px) translateY(18px);
-  opacity: 0;
-}
-.from-right {
-  transform: translateX(92px) translateY(18px);
-  opacity: 0;
-}
-
-/* when observer toggles .in-view, outer card transitions to neutral,
-   inner wrapper keeps floating independently */
-.client-card.in-view {
-  transform: translateX(0) translateY(0);
-  opacity: 1;
-}
-
-/* Ensure transition settings (respect inline transition-delay) */
-.client-card {
-  transition-property: transform, box-shadow, opacity;
-  transition-duration: 0.6s;
-  transition-timing-function: cubic-bezier(0.22, 0.9, 0.37, 1);
-}
-
-/* Focus for accessibility */
-.client-card:focus {
-  outline: 2px solid rgba(66, 153, 225, 0.22);
-  outline-offset: 4px;
-}
-
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  .client-logo {
-    height: 4.5rem;
-  }
-  .client-card {
-    padding: 1rem;
-  }
-}
-@media (max-width: 640px) {
-  .client-logo {
-    height: 4rem;
-  }
-  .client-card {
-    padding: 0.85rem;
-  }
-  .from-left,
-  .from-right {
-    transform: translateY(40px);
-  } /* simpler mobile entrance */
-}
-
-/* Reduced-motion fallback */
+/* Optional: reduce motion preference respect */
 @media (prefers-reduced-motion: reduce) {
-  .animate-float {
-    animation: none !important;
-  }
-  .client-card,
-  .client-inner,
   .client-logo {
     transition: none !important;
-    transform: none !important;
-    animation: none !important;
-    opacity: 1 !important;
-  }
-  .client-card:hover .client-logo {
-    transform: scale(1.03);
-    filter: grayscale(0%) drop-shadow(0 0 6px rgba(66, 153, 225, 0.45));
   }
 }

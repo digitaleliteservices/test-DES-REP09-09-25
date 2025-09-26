@@ -11,7 +11,7 @@ export default function Essence() {
   return (
     <section className="py-20">
       {/* <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12"> */}
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-start gap-12">
         {/* Left side - headline + paragraph */}
         <div className="md:w-1/2 pr-8 border-r border-gray-300 flex flex-col justify-center h-full">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-left">
@@ -28,16 +28,11 @@ export default function Essence() {
               Essence
             </span>
           </h2>
-          <p className="mt-4 text-slate-600">
+          <p className="mt-4 text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-600">
             Welcome to Digital Elite Services — where innovation and creativity
             come together to transform business visions into reality. In today’s
             competitive digital landscape, a powerful online presence is
-            essential for growth. We specialize in custom web development,
-            impactful graphic design, and strategic digital marketing solutions
-            that enable brands to stand out, engage their audience, and achieve
-            measurable success. Whether you’re an emerging startup or an
-            established enterprise, our expertise and commitment ensure the
-            right digital solutions to drive your journey forward.
+            essential for growth.
           </p>
         </div>
 

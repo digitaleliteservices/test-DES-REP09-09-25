@@ -131,51 +131,82 @@ export default function WhoWeWorkWith() {
 
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Background decorative elements — improved visibility */}
+      {/* 🌈 Background decorative elements — stronger & more visible */}
       <div className="absolute inset-0 overflow-hidden -z-10 pointer-events-none">
-        {/* stronger blue-cyan blob (top-right) */}
+        {/* full-section tonal wash */}
+        <div
+          className="absolute inset-0 -z-20 pointer-events-none"
+          aria-hidden="true"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(14,165,233,0.06) 0%, rgba(99,102,241,0.03) 40%, rgba(255,186,84,0.02) 100%)",
+          }}
+        />
+
+        {/* large blue-cyan blob (top-right) */}
         <div
           className="
-            absolute -top-56 -right-44
-            w-96 h-96 rounded-full
-            bg-gradient-to-br from-blue-400/60 to-cyan-300/40
-            blur-2xl transform-gpu scale-[1.06]
+            absolute -top-80 -right-64
+            w-[40rem] h-[40rem] rounded-full
+            bg-gradient-to-br from-blue-400/85 to-cyan-300/65
+            blur-[56px] transform-gpu scale-[1.02]
             mix-blend-screen
-            animate-pulse
+            animate-[pulse_6s_ease-in-out_infinite]
             opacity-95
           "
           aria-hidden="true"
-        ></div>
+        />
 
-        {/* stronger purple-pink blob (bottom-left) */}
+        {/* large purple-pink blob (bottom-left) */}
         <div
           className="
-            absolute -bottom-56 -left-44
-            w-96 h-96 rounded-full
-            bg-gradient-to-br from-purple-400/60 to-pink-300/40
-            blur-2xl transform-gpu scale-[1.08]
+            absolute -bottom-80 -left-64
+            w-[40rem] h-[40rem] rounded-full
+            bg-gradient-to-br from-purple-400/85 to-pink-400/65
+            blur-[56px] transform-gpu scale-[1.03]
             mix-blend-screen
-            animate-pulse
+            animate-[pulse_7s_ease-in-out_infinite]
             opacity-95
           "
           aria-hidden="true"
-        ></div>
+        />
 
-        {/* mid-left orange accent (center area) */}
+        {/* mid orange accent */}
         <div
           className="
             absolute top-1/2 left-1/4
-            w-56 h-56 rounded-full
-            bg-gradient-to-br from-orange-400/70 to-yellow-300/45
-            blur-xl transform -translate-y-1/2
+            w-72 h-72 rounded-full
+            bg-gradient-to-br from-orange-400/85 to-yellow-300/60
+            blur-2xl transform -translate-y-1/2
             mix-blend-screen
-            opacity-100
+            opacity-95
           "
           aria-hidden="true"
-        ></div>
+        />
 
-        {/* optional soft vignette to increase contrast with content */}
-        <div className="absolute inset-0 pointer-events-none rounded-3xl bg-gradient-to-b from-transparent to-white/6 -z-10" />
+        {/* extra teal highlight */}
+        <div
+          className="
+            absolute top-1/3 right-1/3
+            w-56 h-56 rounded-full
+            bg-gradient-to-br from-teal-300/75 to-cyan-200/55
+            blur-3xl transform translate-y-6
+            mix-blend-screen
+            opacity-90
+          "
+          aria-hidden="true"
+        />
+
+        {/* soft vignette for contrast */}
+        <div className="absolute inset-0 pointer-events-none rounded-3xl -z-10">
+          <div
+            style={{
+              boxShadow:
+                "inset 0px 120px 180px rgba(0,0,0,0.03), inset 0px -60px 120px rgba(255,255,255,0.03)",
+            }}
+            className="absolute inset-0 rounded-3xl"
+          />
+        </div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -200,13 +231,14 @@ export default function WhoWeWorkWith() {
             >
               Work With
             </span>
-          </h1>{" "}
+          </h1>
           <p className="mt-4 text-slate-600">
             We partner with businesses of all sizes across various industries to
             deliver exceptional digital solutions
           </p>
         </motion.div>
 
+        {/* Industry Chips */}
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -231,7 +263,7 @@ export default function WhoWeWorkWith() {
 
         <ScrollBasedVelocityImagesDemo />
 
-        {/* PARTNER CARDS */}
+        {/* Partner Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {partners.map((partner, idx) => {
             const Icon = partner.icon;
@@ -247,15 +279,14 @@ export default function WhoWeWorkWith() {
                 onMouseLeave={() => setActiveCard(null)}
               >
                 <div className="h-full bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-2 relative">
-                  {/* Expanding gradient overlay (starts as header, grows to full height on hover) */}
+                  {/* Gradient overlay */}
                   <div
                     className={`absolute left-0 right-0 top-0 h-32 group-hover:h-full transition-all duration-500 ease-out overflow-hidden rounded-2xl pointer-events-none z-10 bg-gradient-to-r ${partner.color}`}
                   >
-                    {/* subtle dark layer to keep contrast */}
                     <div className="absolute inset-0 bg-black/10"></div>
                   </div>
 
-                  {/* Card header (keeps the centered icon + title) */}
+                  {/* Card Header */}
                   <div className="relative z-20 h-32 flex flex-col items-center justify-center p-4">
                     <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                       <Icon className="w-8 h-8 text-white" />
@@ -265,7 +296,7 @@ export default function WhoWeWorkWith() {
                     </h3>
                   </div>
 
-                  {/* Card content (stays above the overlay) */}
+                  {/* Card Content */}
                   <div className="p-6 relative z-20 bg-transparent">
                     <motion.ul
                       variants={listContainer}
@@ -302,7 +333,7 @@ export default function WhoWeWorkWith() {
                   </div>
                 </div>
 
-                {/* Glow effect (underneath overlay) */}
+                {/* Glow effect */}
                 <div
                   className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${partner.color} opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500 -z-10`}
                 />
@@ -311,7 +342,7 @@ export default function WhoWeWorkWith() {
           })}
         </div>
 
-        {/* CENTER VIDEO SECTION */}
+        {/* Center Video Section */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -334,7 +365,7 @@ export default function WhoWeWorkWith() {
           </div>
         </motion.div>
 
-        {/* OurClients component */}
+        {/* Our Clients */}
         <OurClients />
       </div>
     </section>

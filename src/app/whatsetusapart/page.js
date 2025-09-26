@@ -9,30 +9,10 @@ import Footer from "../footer/page";
 const IconTarget = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
     <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.4" />
-    <path
-      d="M12 8v-2"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-    />
-    <path
-      d="M12 16v2"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-    />
-    <path
-      d="M8 12H6"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-    />
-    <path
-      d="M18 12h-2"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-    />
+    <path d="M12 8v-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <path d="M12 16v2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <path d="M8 12H6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <path d="M18 12h-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     <circle cx="12" cy="12" r="2" fill="currentColor" />
   </svg>
 );
@@ -49,41 +29,15 @@ const IconBrain = () => (
 const IconSearch = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
     <circle cx="11" cy="11" r="6" stroke="currentColor" strokeWidth="1.4" />
-    <path
-      d="M21 21l-4.35-4.35"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
+    <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
   </svg>
 );
 const IconChart = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
-    <path
-      d="M3 3v18h18"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M7 13v6"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
-    <path
-      d="M12 9v10"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
-    <path
-      d="M17 5v14"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
+    <path d="M3 3v18h18" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M7 13v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    <path d="M12 9v10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    <path d="M17 5v14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
   </svg>
 );
 
@@ -98,6 +52,10 @@ const FeatureCard = ({ Icon, title, desc, index = 0 }) => {
   ];
   const rim = rims[index % rims.length];
 
+  // subtle gradient stops with alpha (keeps text readable)
+  const cardGradient = `linear-gradient(135deg, ${rim.from}18 0%, ${rim.to}12 45%, ${rim.from}10 100%)`;
+  const rimOutline = `linear-gradient(120deg, ${rim.from}33, ${rim.to}22)`;
+
   return (
     <motion.article
       role="article"
@@ -108,61 +66,54 @@ const FeatureCard = ({ Icon, title, desc, index = 0 }) => {
       transition={{ duration: 0.56, delay: index * 0.06, ease: "easeOut" }}
       whileHover={{ y: -10, scale: 1.02 }}
       className="relative group rounded-2xl overflow-hidden shadow-xl transition-transform duration-300"
-      // style={{
-      //   background:
-      //     "linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,250,255,0.78))",
-      //   border: "1px solid rgba(15,23,42,0.06)",
-      //   boxShadow: "0 18px 50px rgba(10,15,40,0.06)",
-      // }}
+      style={{
+        // base card look (subtle white glass)
+        background: "linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,255,0.96))",
+        border: "1px solid rgba(15,23,42,0.04)",
+      }}
     >
-      {/* colorful rim glow (appears on hover) */}
+      {/* ---------- FULL CARD TINT (static, behind content) ---------- */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute inset-0 pointer-events-none rounded-2xl"
         style={{
-          background: `linear-gradient(120deg, ${rim.from}22, ${rim.to}18 40%, ${rim.from}11)`,
+          background: cardGradient,
           mixBlendMode: "screen",
-          filter: "blur(12px)",
+          opacity: 0.22, // tweak for strength: 0.12 -> subtle, 0.30 -> strong
+          zIndex: 0,
+          filter: "blur(6px)",
         }}
       />
 
-      {/* top-right animated number */}
-      {/* <motion.div
-        className="absolute right-4 top-4 z-20"
-        initial={{ y: -6, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: index * 0.06 + 0.12 }}
-      >
-        <motion.span
-          whileHover={{ scale: 1.08, rotate: 6 }}
-          className="text-xs font-semibold px-2 py-1 rounded-full inline-block"
-          style={{
-            background: `linear-gradient(90deg, ${rim.from}, ${rim.to})`,
-            color: "white",
-            boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
-            transformOrigin: "center",
-          }}
-        >
-          {String(index + 1).padStart(2, "0")}
-        </motion.span>
-      </motion.div> */}
+      {/* subtle colored rim overlay (keeps soft outline + glow) */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none rounded-2xl"
+        style={{
+          background: rimOutline,
+          mixBlendMode: "overlay",
+          opacity: 0.18,
+          zIndex: 0,
+          filter: "blur(10px)",
+        }}
+      />
 
-      <div className="p-6 flex items-start gap-4">
-        {/* animated icon circle */}
+      <div className="p-6 flex items-start gap-4 relative" style={{ zIndex: 10 }}>
+        {/* animated icon circle (static colored background) */}
         <motion.div
           className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-xl grid place-items-center"
           initial={{ scale: 0.98 }}
-          animate={{ y: [0, -6, 0], scale: [1, 1.03, 1] }}
+          animate={{ y: [0, -6, 0], scale: [1, 1.02, 1] }}
           transition={{
             duration: 3 + index * 0.6,
             repeat: Infinity,
             ease: "easeInOut",
           }}
           style={{
-            background: `linear-gradient(135deg, ${rim.from}11, ${rim.to}08)`,
-            border: `1px solid ${rim.from}22`,
-            boxShadow: `inset 0 2px 6px rgba(255,255,255,0.6)`,
-            color: rims[index % rims.length].from,
+            background: `linear-gradient(135deg, ${rim.from}30, ${rim.to}18)`,
+            border: `1px solid ${rim.from}60`,
+            boxShadow: `0 6px 18px ${rim.to}18, inset 0 2px 6px rgba(255,255,255,0.7)`,
+            color: rim.from,
           }}
         >
           <Icon />
@@ -182,13 +133,12 @@ const FeatureCard = ({ Icon, title, desc, index = 0 }) => {
         </div>
       </div>
 
-      {/* bottom gradient accent */}
+      {/* bottom gradient accent (kept for style, now more subtle) */}
       <div
         aria-hidden
-        className="absolute left-0 bottom-0 w-full h-8"
+        className="absolute left-0 bottom-0 w-full h-6 pointer-events-none"
         style={{
-          background: `linear-gradient(90deg, ${rim.from}11, rgba(0,0,0,0))`,
-          pointerEvents: "none",
+          background: `linear-gradient(90deg, ${rim.from}18, rgba(0,0,0,0))`,
         }}
       />
     </motion.article>
@@ -229,16 +179,8 @@ const WhatSetsUsApart = () => {
     <>
       <section
         className="relative overflow-hidden px-6 py-16 md:py-20"
-        // style={{
-        //   background:
-        //     "linear-gradient(180deg,#f8fbff 0%, #eef6ff 45%, #fff9fb 100%)",
-        // }}
-        // style={{
-        //   background: "white",
-        // }}
         style={{
-          background:
-            "linear-gradient(180deg, #ffffff 0%, #f7fbff 45%, #fffaf6 100%)",
+          background: "linear-gradient(180deg, #ffffff 0%, #f7fbff 45%, #fffaf6 100%)",
         }}
       >
         {/* subtle decorative pattern */}
@@ -248,17 +190,8 @@ const WhatSetsUsApart = () => {
           preserveAspectRatio="none"
         >
           <defs>
-            <pattern
-              id="p2"
-              width="56"
-              height="56"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M0 28 L28 0"
-                stroke="rgba(15,23,42,0.02)"
-                strokeWidth="1"
-              />
+            <pattern id="p2" width="56" height="56" patternUnits="userSpaceOnUse">
+              <path d="M0 28 L28 0" stroke="rgba(15,23,42,0.02)" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#p2)" />
@@ -274,8 +207,7 @@ const WhatSetsUsApart = () => {
           </h3>
 
           <p className="mt-3 text-base text-slate-600 max-w-2xl mx-auto">
-            Our process blends strategy, design and engineering to ensure
-            measurable business outcomes — not just pretty pixels.
+            Our process blends strategy, design and engineering to ensure measurable business outcomes — not just pretty pixels.
           </p>
         </div>
 
@@ -288,13 +220,7 @@ const WhatSetsUsApart = () => {
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f, i) => (
-              <FeatureCard
-                key={f.title}
-                Icon={f.Icon}
-                title={f.title}
-                desc={f.desc}
-                index={i}
-              />
+              <FeatureCard key={f.title} Icon={f.Icon} title={f.title} desc={f.desc} index={i} />
             ))}
           </div>
         </motion.div>
