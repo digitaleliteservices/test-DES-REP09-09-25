@@ -58,7 +58,9 @@ const AnimatedBullets = ({ className = "" }) => {
           <motion.span
             className="mt-1 w-4 h-4 rounded-full flex-shrink-0 shadow-sm z-10 transition-colors duration-500"
             style={{
-              background: "linear-gradient(90deg,#f59e0b,#fb923c)",
+              // background: "linear-gradient(90deg,#f59e0b,#fb923c)",
+              background: "linear-gradient(90deg, #f59e0b, #fb923c, #3b82f6)",
+
             }}
             whileHover={{ scale: 1.15 }}
           >

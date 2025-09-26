@@ -19,6 +19,7 @@ import { WarpBackground } from "@/components/ui/warp-background";
 import OurClients from "../ourclients/page";
 import Essence from "../essence/page";
 import SplashCursor from "@/components/SplashCursor";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
@@ -31,6 +32,7 @@ export default function Home() {
   return (
     <div className="relative">
       <SplashCursor/>
+      {/* <SmoothCursor/> */}
       <Navbar />
       {/* <Hero /> */}
       <WarpBackground>

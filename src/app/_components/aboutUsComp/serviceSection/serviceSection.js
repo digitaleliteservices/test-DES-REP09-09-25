@@ -558,7 +558,6 @@ function ServicesSection() {
       className="relative flex flex-col items-center justify-center px-6 py-20 md:py-28 overflow-hidden"
       aria-label="Our services"
       style={{ 
-        // background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
         position: "relative",
       }}
     >
@@ -606,7 +605,16 @@ function ServicesSection() {
         
         .bg-shift { 
           background-size: 200% 200%; 
-          animation: gradientShift 10s ease-in-out infinite; 
+          animation: gradientShift 10s ease-in-out infinite;
+          /* ✅ visible by default (subtle) */
+          opacity: 0.08;
+          transition: opacity 400ms ease, transform 400ms ease;
+        }
+        
+        /* stronger on hover */
+        .group:hover .bg-shift {
+          opacity: 0.18;
+          transform: scale(1.02);
         }
         
         .text-overlay { 
@@ -631,12 +639,12 @@ function ServicesSection() {
             inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
-        /* decorative gradient rim */
+        /* decorative gradient rim (stronger by default) */
         .rim {
           position: absolute; 
           inset: -1px; 
           border-radius: 24px; 
-          background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05)); 
+          background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(0,0,0,0.05)); 
           pointer-events: none;
           z-index: -1;
         }
@@ -711,17 +719,6 @@ function ServicesSection() {
               <div className={`flex flex-col ${rowClass} md:items-center items-start gap-8 md:gap-16 service-card glass relative p-6 md:p-8 rounded-3xl`}>
                 <div className="rim" aria-hidden />
 
-                {/* badge */}
-                {/* <motion.div 
-                  className="absolute -top-4 left-6 md:left-8 bg-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg flex items-center gap-2 z-20"
-                  style={{ border: `1px solid ${card.colors[0]}20` }}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <span className="text-xl">{card.icon}</span>
-                  <span style={{ color: card.colors[0] }}>{`0${i + 1}`}</span>
-                </motion.div> */}
-
                 {/* image */}
                 <motion.div
                   className={`flex-shrink-0 flex items-center justify-center ${shapeClass} bg-black/0 transform-gpu overflow-hidden relative`}
@@ -738,9 +735,15 @@ function ServicesSection() {
                   }}
                   transition={{ duration: 0.5 }}
                 >
-                  {/* Image overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-                  
+                  {/* Image overlay gradient (now visible by default via .bg-shift opacity) */}
+                  <div
+                    className="absolute inset-0 bg-shift"
+                    style={{
+                      backgroundImage: `linear-gradient(120deg, ${card.colors[0]}, ${card.colors[1]}, ${card.colors[0]})`,
+                      zIndex: 0,
+                    }}
+                  />
+
                   <motion.img
                     src={card.img}
                     alt={card.title}
@@ -757,6 +760,8 @@ function ServicesSection() {
                       objectFit: "cover", 
                       display: "block", 
                       minHeight: 240,
+                      position: "relative",
+                      zIndex: 10
                     }}
                     className="transition-transform duration-700"
                   />
@@ -766,10 +771,11 @@ function ServicesSection() {
                 <div className="relative flex-1 w-full overflow-hidden rounded-2xl">
                   <div
                     aria-hidden
-                    className="absolute inset-0 rounded-xl bg-shift opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                    className="absolute inset-0 rounded-xl bg-shift"
                     style={{
                       backgroundImage: `linear-gradient(120deg, ${card.colors[0]}, ${card.colors[1]}, ${card.colors[0]})`,
                       zIndex: 0,
+                      /* subtle visible tint by default (controlled in CSS) */
                     }}
                   />
 
@@ -822,15 +828,6 @@ function ServicesSection() {
                         </svg>
                         <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                       </motion.a>
-
-                      {/* <motion.button 
-                        className="text-sm md:text-base text-gray-600 group-hover:text-white transition-colors duration-500 flex items-center gap-1 font-medium"
-                        whileHover={{ x: 4 }}
-                        transition={{ type: "spring", stiffness: 500 }}
-                      >
-                        Learn more 
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                      </motion.button> */}
                     </div>
                   </div>
 
@@ -886,4 +883,3 @@ function ServicesSection() {
 }
 
 export default ServicesSection;
-
