@@ -3,29 +3,20 @@ import {
   ScrollVelocityRow,
 } from "@/components/ui/scroll-based-velocity";
 
-// const IMAGES_ROW_A = [
-// //   "https://images.unsplash.com/photo-1749738456487-2af715ab65ea?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-// "https://www.freepik.com/free-photo/high-angle-pie-chart-with-cities_32677519.htm#fromView=search&page=1&position=0&uuid=4cac2fb0-3226-472e-a11e-4c82cac53b17&query=real+estate",
-// "https://plus.unsplash.com/premium_photo-1720139288219-e20aa9c8895b?q=80&w=1810&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-// ];
+const CLOUD_BASE = "https://res.cloudinary.com/dxdgk4v3t/image/upload";
 
-// const IMAGES_ROW_B = [
-//   "https://images.unsplash.com/photo-1749738456487-2af715ab65ea?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//   "https://plus.unsplash.com/premium_photo-1720139288219-e20aa9c8895b?q=80&w=1810&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-// ];
-
-// DON'T import from public. Use the public URL instead:
+// Optimized Cloudinary URLs with q_auto,f_auto and fixed size
 const IMAGES_ROW_A = [
-  "/assets/e-commerce.jpg",
-  "/assets/tech-industry.jpg",
-  "/assets/real-estate.jpg",
-  "/assets/resort.jpg",
+  `${CLOUD_BASE}/w_640,h_426,c_fill,q_auto,f_auto/v1758951980/tech-industry2_dt82db.jpg`,
+  `${CLOUD_BASE}/w_640,h_426,c_fill,q_auto,f_auto/v1758951597/real-estate2_tas2cj.jpg`,
+  `${CLOUD_BASE}/w_640,h_426,c_fill,q_auto,f_auto/v1758951614/resort2_apjg3v.jpg`,
+  `${CLOUD_BASE}/w_640,h_426,c_fill,q_auto,f_auto/v1758951572/e-commerce2_vqptq1.jpg`,
 ];
 
 const IMAGES_ROW_B = [
-  "/assets/education.jpg",
-  "/assets/food.jpg",
-  "/assets/charitable-trust.jpg",
+  `${CLOUD_BASE}/w_640,h_426,c_fill,q_auto,f_auto/v1758951624/education2_vclva3.jpg`,
+  `${CLOUD_BASE}/w_640,h_426,c_fill,q_auto,f_auto/v1758951640/food2_pddwmd.jpg`,
+  `${CLOUD_BASE}/w_640,h_426,c_fill,q_auto,f_auto/v1758951655/charitable-trust2_glhdc0.jpg`,
 ];
 
 export function ScrollBasedVelocityImagesDemo() {
@@ -37,7 +28,7 @@ export function ScrollBasedVelocityImagesDemo() {
             <img
               key={idx}
               src={src}
-              alt="Unsplash sample"
+              alt={`sample ${idx}`}
               width={240}
               height={160}
               loading="lazy"
@@ -46,13 +37,13 @@ export function ScrollBasedVelocityImagesDemo() {
             />
           ))}
         </ScrollVelocityRow>
+
         <ScrollVelocityRow baseVelocity={6} direction={-1} className="py-4">
           {IMAGES_ROW_B.map((src, idx) => (
             <img
               key={idx}
-              //   src={`${src}&ixlib=rb-4.0.3`}
               src={src}
-              alt="Unsplash sample"
+              alt={`sample B${idx}`}
               width={240}
               height={160}
               loading="lazy"
@@ -62,9 +53,6 @@ export function ScrollBasedVelocityImagesDemo() {
           ))}
         </ScrollVelocityRow>
       </ScrollVelocityContainer>
-
-      {/* <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div> */}
     </div>
   );
 }

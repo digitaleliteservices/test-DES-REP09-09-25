@@ -3,6 +3,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+const LOGO_GRADIENT =
+  "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
+
 const Hero = () => {
   const container = {
     hidden: {},

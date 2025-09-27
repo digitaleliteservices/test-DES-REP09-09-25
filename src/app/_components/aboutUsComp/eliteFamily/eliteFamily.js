@@ -2,46 +2,45 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import DirectorBg from "../../../../../public/assets/director-bg.jpg";
 
 const LOGO_GRADIENT =
   "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
 
-// PRIYA in middle
 const LEADERS = [
-  { name: "Mr. THEERTHANANDA K K", role: "Director" },
+  { name: "Mr. Theerthananda K K", role: "Director" },
   { name: "Mrs. Priya H K", role: "Director" },
-  { name: "Mr. LAKSHMISHA K J", role: "Director" },
+  { name: "Mr. Lakshmisha K J", role: "Director" },
+];
+
+const container = {
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0, transition: { staggerChildren: 0.12 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 18, scale: 0.99 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: [0.2, 0.9, 0.25, 1] },
+  },
+};
+
+const accents = [
+  ["#06b6d4", "#3b82f6"],
+  ["#f59e0b", "#fb923c"],
+  ["#a78bfa", "#ec4899"],
 ];
 
 export default function EliteFamily() {
-  const container = {
-    hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0, transition: { staggerChildren: 0.12 } },
-  };
-
-  const cardVariant = {
-    hidden: { opacity: 0, y: 18, scale: 0.995 },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.45, ease: [0.2, 0.9, 0.25, 1] },
-    },
-  };
-
-  // subtle accent palettes for avatars
-  const accents = [
-    ["#06b6d4", "#3b82f6"], // cyan -> blue
-    ["#f59e0b", "#fb923c"], // amber -> orange
-    ["#a78bfa", "#ec4899"], // violet -> pink
-  ];
-
   return (
     <section
       className="relative overflow-hidden py-24"
       aria-labelledby="elite-family-heading"
     >
-      {/* Background: soft layered gradients + subtle texture */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
@@ -53,44 +52,7 @@ export default function EliteFamily() {
         }}
       />
 
-      {/* subtle animated decorative blobs */}
-      <motion.div
-        aria-hidden
-        initial={{ opacity: 0.14 }}
-        animate={{ y: [0, -18, 0], opacity: [0.14, 0.26, 0.14] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          position: "absolute",
-          top: -120,
-          right: -180,
-          width: 520,
-          height: 520,
-          borderRadius: "50%",
-          background: "linear-gradient(120deg,#7c3aed33,#06b6d433)",
-          filter: "blur(92px)",
-        }}
-        className="pointer-events-none -z-20"
-      />
-      <motion.div
-        aria-hidden
-        initial={{ opacity: 0.08 }}
-        animate={{ y: [0, 14, 0], opacity: [0.08, 0.16, 0.08] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-        style={{
-          position: "absolute",
-          left: -180,
-          bottom: -140,
-          width: 640,
-          height: 640,
-          borderRadius: "50%",
-          background: "linear-gradient(120deg,#fb923c22,#60a5fa22)",
-          filter: "blur(110px)",
-        }}
-        className="pointer-events-none -z-20"
-      />
-
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* Heading: more visual impact */}
         <div className="text-center mb-10">
           <motion.h2
             id="elite-family-heading"
@@ -125,182 +87,110 @@ export default function EliteFamily() {
             transition={{ duration: 0.6, delay: 0.12 }}
             className="mt-5 text-slate-600 max-w-3xl mx-auto leading-relaxed"
           >
-            Our leadership brings together strategic insight, creative expertise and technical excellence — guiding Digital Elite Services to deliver measurable impact.
+            Our leadership brings together strategic insight, creative expertise
+            and technical excellence.
           </motion.p>
         </div>
 
-        {/* Panel */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.12 }}
-          className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-100 overflow-hidden relative"
+          className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-100 overflow-hidden relative p-8"
           style={{
-            boxShadow: "0 20px 60px rgba(12,18,39,0.08)",
+            boxShadow: "0 20px 60px rgba(12,18,39,0.06)",
             borderTop: "1px solid rgba(255,255,255,0.6)",
           }}
         >
-          <div className="md:flex">
-            {/* Left: label */}
-            <div className="md:w-1/3 p-8 flex items-center">
-              <div>
-                <h4 className="text-xl font-semibold text-slate-900">Leadership Team</h4>
-                <p className="mt-3 text-sm text-slate-600 max-w-sm">
-                  Directors steering strategy and delivery. Each brings domain expertise to drive growth.
-                </p>
-
-                {/* subtle decorative badges */}
-                <div className="mt-6 flex gap-3">
-                  <motion.span
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm bg-gradient-to-r from-cyan-50 to-blue-50 text-slate-700 border border-gray-100"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block" />
-                    Strategy
-                  </motion.span>
-                  <motion.span
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.72 }}
-                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm bg-gradient-to-r from-yellow-50 to-orange-50 text-slate-700 border border-gray-100"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
-                    Delivery
-                  </motion.span>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
+            {/* Leadership Team text column */}
+            <div className="md:col-span-1 flex flex-col">
+              <h4 className="text-xl font-semibold text-slate-900">
+                Leadership Team
+              </h4>
+              <p className="mt-3 text-sm text-slate-600 max-w-sm">
+                Under our leadership, Digital Elite Services is committed to
+                helping businesses strengthen their online presence, engage
+                audiences and achieve measurable growth in today's dynamic
+                digital landscape.
+              </p>
             </div>
 
-            {/* divider */}
-            <div className="hidden md:block w-px bg-gradient-to-b from-transparent via-gray-200 to-transparent" />
+            {/* Directors cards */}
+            <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {LEADERS.map((person, idx) => {
+                const accent = accents[idx % accents.length];
+                const avatarGradient = `linear-gradient(135deg, ${accent[0]}, ${accent[1]})`;
 
-            {/* Right: directors stacked vertically with color + animation */}
-            <div className="md:w-2/3 p-6 md:p-8">
-              <div className="flex flex-col gap-4">
-                {LEADERS.map((person, idx) => {
-                  const initials = person.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .slice(0, 2)
-                    .join("")
-                    .toUpperCase();
+                return (
+                  <motion.article
+                    key={person.name}
+                    variants={cardVariant}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ duration: 0.28 }}
+                    className="group relative flex flex-col items-center text-center rounded-2xl bg-white p-6 border border-gray-100 shadow-sm overflow-hidden"
+                    aria-label={`${person.name} — ${person.role}`}
+                  >
+                    {/* Background image (CSS-driven visibility via group-hover) */}
+                    <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Image
+                        src={DirectorBg}
+                        alt="Director background"
+                        fill
+                        style={{ objectFit: "cover" }}
+                        className="rounded-2xl"
+                      />
+                      <div className="absolute inset-0 bg-black/40 rounded-2xl" />
+                    </div>
 
-                  const accent = accents[idx % accents.length];
-                  const avatarGradient = `linear-gradient(135deg, ${accent[0]}, ${accent[1]})`;
-
-                  return (
-                    <motion.div
-                      key={person.name}
-                      variants={cardVariant}
-                      whileHover={{
-                        y: -8,
-                        scale: 1.02,
-                        boxShadow: "0 30px 60px rgba(14, 30, 60, 0.12)",
-                        transition: { duration: 0.22 },
-                      }}
-                      transition={{ duration: 0.5, ease: [0.2, 0.9, 0.25, 1] }}
-                      className="relative flex items-start gap-4 rounded-lg border border-gray-100 bg-white p-4 shadow-sm"
-                      aria-label={`${person.name} — ${person.role}`}
-                    >
-                      {/* avatar + ring */}
-                      <div className="relative flex-shrink-0">
-                        <motion.div
-                          className="w-14 h-14 rounded-lg grid place-items-center font-semibold text-white text-base"
-                          style={{
-                            background: avatarGradient,
-                            boxShadow: `0 12px 36px ${accent[1]}22`,
-                            border: "1px solid rgba(255,255,255,0.06)",
-                          }}
-                          initial={{ scale: 1 }}
-                          whileHover={{ scale: 1.08, rotate: 6 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 260,
-                            damping: 22,
-                          }}
-                        >
-                          {initials}
-                        </motion.div>
-
-                        {/* glowing ring */}
-                        <motion.span
+                    {/* Content */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div
+                        className="w-28 h-28 rounded-full grid place-items-center mb-4 relative transition-all duration-300 group-hover:scale-95"
+                        style={{
+                          background: avatarGradient,
+                          boxShadow: `0 18px 48px ${accent[1]}22`,
+                          border: "1px solid rgba(255,255,255,0.06)",
+                        }}
+                      >
+                        <svg
+                          width="46"
+                          height="46"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
                           aria-hidden
-                          initial={{ opacity: 0 }}
-                          whileHover={{ opacity: 1 }}
-                          transition={{ duration: 0.36 }}
-                          style={{
-                            position: "absolute",
-                            left: -8,
-                            top: -8,
-                            width: "calc(100% + 16px)",
-                            height: "calc(100% + 16px)",
-                            borderRadius: 12,
-                            background: `radial-gradient(closest-side, ${accent[1]}33, transparent 40%)`,
-                            filter: "blur(10px)",
-                            pointerEvents: "none",
-                          }}
-                        />
+                        >
+                          <path
+                            d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z"
+                            fill="rgba(255,255,255,0.95)"
+                          />
+                          <path
+                            d="M3 21c0-3 4-5 9-5s9 2 9 5v1H3v-1z"
+                            fill="rgba(255,255,255,0.85)"
+                          />
+                        </svg>
                       </div>
 
-                      {/* details: name above role */}
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1 min-w-0">
-                            <h5 className="text-base font-semibold text-slate-900 truncate">
-                              {person.name}
-                            </h5>
-                            <motion.span
-                              className="mt-1 text-sm text-slate-500 block"
-                              initial={{ opacity: 0.8, y: 6 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.32 }}
-                            >
-                              {person.role}
-                            </motion.span>
-                          </div>
-
-                          {/* subtle action badge (non-interactive) */}
-                          {/* <div className="ml-4 self-start">
-                            <span
-                              className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-xs font-medium"
-                              style={{
-                                background: "linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85))",
-                                border: "1px solid rgba(220, 224, 255, 0.6)",
-                                color: "#334155",
-                                boxShadow: "0 6px 18px rgba(15,23,42,0.04)",
-                              }}
-                            >
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                <path d="M12 2v6" stroke="#0ea5a4" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M12 16v6" stroke="#06b6d4" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                              </svg>
-                              Director
-                            </span>
-                          </div> */}
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
+                      <h3 className="text-lg font-semibold text-slate-900 truncate px-2 transition-colors duration-200 group-hover:text-white">
+                        {person.name}
+                      </h3>
+                      <p className="text-sm text-slate-500 mt-1 transition-colors duration-200 group-hover:text-white">
+                        {person.role}
+                      </p>
+                    </div>
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
         </motion.div>
       </div>
 
-      {/* extra small decorative CSS for motion smoothing and accessibility */}
       <style>{`
         @media (prefers-reduced-motion: reduce) {
           * { animation: none !important; transition: none !important; }
-        }
-        /* slight fade-in for the entire section for a polished feel */
-        .elite-fade { animation: eliteFade 0.9s ease both; }
-        @keyframes eliteFade {
-          from { opacity: 0; transform: translateY(6px); }
-          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </section>

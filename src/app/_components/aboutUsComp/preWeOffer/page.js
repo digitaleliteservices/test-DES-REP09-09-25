@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import whatWeOffer from "../../../../../public/assets/whatweoffer.jpg";
+import whatWeOffer from "../../../../../public/assets/whatweoffer2.jpg";
 import companyLogo from "../../../../../public/assets/DES_LOGO4.png";
 
 const LOGO_GRADIENT =
@@ -64,7 +64,7 @@ const PreWhatWeOffer = () => {
                       backgroundClip: "text",
                     }}
                   >
-                    ABOUT US
+                    ABOUT COMPANY
                   </span>
                 </h2>
 
@@ -125,7 +125,7 @@ const PreWhatWeOffer = () => {
             </p>
 
             <p className="mt-4 text-base md:text-lg leading-relaxed">
-              At Digital Elite Services, we combine creativity, strategic
+              We at Digital Elite Services combine creativity, strategic
               insight, and cutting-edge technology to deliver tailored solutions
               that meet each client’s unique objectives. From crafting engaging
               marketing campaigns and designing compelling visuals to developing
