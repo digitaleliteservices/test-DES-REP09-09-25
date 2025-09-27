@@ -5,14 +5,37 @@ import { motion } from "framer-motion";
 import CurtainFooter from "../curtainraiser/curtainRaiser";
 import Footer from "../footer/page";
 
+const LOGO_GRADIENT =
+  "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
+
 /* ---------- SVG Icons ---------- */
 const IconTarget = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
     <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.4" />
-    <path d="M12 8v-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    <path d="M12 16v2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    <path d="M8 12H6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    <path d="M18 12h-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <path
+      d="M12 8v-2"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
+    <path
+      d="M12 16v2"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
+    <path
+      d="M8 12H6"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
+    <path
+      d="M18 12h-2"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    />
     <circle cx="12" cy="12" r="2" fill="currentColor" />
   </svg>
 );
@@ -29,15 +52,41 @@ const IconBrain = () => (
 const IconSearch = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
     <circle cx="11" cy="11" r="6" stroke="currentColor" strokeWidth="1.4" />
-    <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    <path
+      d="M21 21l-4.35-4.35"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
   </svg>
 );
 const IconChart = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
-    <path d="M3 3v18h18" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M7 13v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    <path d="M12 9v10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    <path d="M17 5v14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    <path
+      d="M3 3v18h18"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M7 13v6"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+    <path
+      d="M12 9v10"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+    <path
+      d="M17 5v14"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
   </svg>
 );
 
@@ -68,7 +117,8 @@ const FeatureCard = ({ Icon, title, desc, index = 0 }) => {
       className="relative group rounded-2xl overflow-hidden shadow-xl transition-transform duration-300"
       style={{
         // base card look (subtle white glass)
-        background: "linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,255,0.96))",
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,255,0.96))",
         border: "1px solid rgba(15,23,42,0.04)",
       }}
     >
@@ -98,7 +148,10 @@ const FeatureCard = ({ Icon, title, desc, index = 0 }) => {
         }}
       />
 
-      <div className="p-6 flex items-start gap-4 relative" style={{ zIndex: 10 }}>
+      <div
+        className="p-6 flex items-start gap-4 relative"
+        style={{ zIndex: 10 }}
+      >
         {/* animated icon circle (static colored background) */}
         <motion.div
           className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-xl grid place-items-center"
@@ -180,7 +233,8 @@ const WhatSetsUsApart = () => {
       <section
         className="relative overflow-hidden px-6 py-16 md:py-20"
         style={{
-          background: "linear-gradient(180deg, #ffffff 0%, #f7fbff 45%, #fffaf6 100%)",
+          background:
+            "linear-gradient(180deg, #ffffff 0%, #f7fbff 45%, #fffaf6 100%)",
         }}
       >
         {/* subtle decorative pattern */}
@@ -190,8 +244,17 @@ const WhatSetsUsApart = () => {
           preserveAspectRatio="none"
         >
           <defs>
-            <pattern id="p2" width="56" height="56" patternUnits="userSpaceOnUse">
-              <path d="M0 28 L28 0" stroke="rgba(15,23,42,0.02)" strokeWidth="1" />
+            <pattern
+              id="p2"
+              width="56"
+              height="56"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M0 28 L28 0"
+                stroke="rgba(15,23,42,0.02)"
+                strokeWidth="1"
+              />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#p2)" />
@@ -202,12 +265,48 @@ const WhatSetsUsApart = () => {
             💡 What Sets Us Apart
           </span>
 
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 drop-shadow-sm">
+          {/* <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 drop-shadow-sm">
             Built To Deliver Real Impact
-          </h3>
+          </h3> */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+            <span className="text-slate-900">Built To Deliver</span>{" "}
+            <span
+              className="inline-block"
+              style={{
+                background: LOGO_GRADIENT,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Real Impact
+            </span>
+          </h2>
+
+          {/* <div
+            className="mt-4 h-1 rounded-full mx-auto"
+            style={{
+              width: 160,
+              background: LOGO_GRADIENT,
+              backgroundSize: "200% 100%",
+              boxShadow: "0 8px 28px rgba(44,109,246,0.10)",
+            }}
+          /> */}
+
+          <motion.div
+            initial={{ scaleX: 0.6, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.08 }}
+            className="mx-auto mt-4 h-1 w-36 rounded-full"
+            style={{
+              background: "linear-gradient(90deg,#00E5FF,#2C6DF6,#FF8A00)",
+              opacity: 0.14,
+            }}
+          />
 
           <p className="mt-3 text-base text-slate-600 max-w-2xl mx-auto">
-            Our process blends strategy, design and engineering to ensure measurable business outcomes — not just pretty pixels.
+            Our process blends strategy, design and engineering to ensure
+            measurable business outcomes — not just pretty pixels.
           </p>
         </div>
 
@@ -220,7 +319,13 @@ const WhatSetsUsApart = () => {
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f, i) => (
-              <FeatureCard key={f.title} Icon={f.Icon} title={f.title} desc={f.desc} index={i} />
+              <FeatureCard
+                key={f.title}
+                Icon={f.Icon}
+                title={f.title}
+                desc={f.desc}
+                index={i}
+              />
             ))}
           </div>
         </motion.div>

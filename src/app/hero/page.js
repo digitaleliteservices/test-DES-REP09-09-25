@@ -3,8 +3,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+const LOGO_GRADIENT2 =
+  "linear-gradient(90deg,#FF8A00 0%,#2C6DF6 52%,#00E5FF 100%)";
+
+// blue-indigo
+// const LOGO_GRADIENT =
+//   "linear-gradient(90deg,#0ea5e9 0%,#3b82f6 50%,#6366f1 100%)";
+
+//orange-pink--good
 const LOGO_GRADIENT =
-  "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
+  "linear-gradient(90deg,#FF8A00 0%,#ec4899 50%,#3b82f6 100%)";
+
+//good
+// const LOGO_GRADIENT =
+//   "linear-gradient(90deg,#8b5cf6 0%,#3b82f6 50%,#06b6d4 100%)";
 
 const Hero = () => {
   const container = {
@@ -21,6 +33,20 @@ const Hero = () => {
     },
   };
 
+  const GradientWord = ({ children }) => (
+    <span
+      className="inline-block mx-2"
+      style={{
+        background: LOGO_GRADIENT,
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+      }}
+    >
+      {children}
+    </span>
+  );
+
   return (
     <header role="banner" className="w-full flex justify-center">
       <motion.div
@@ -28,31 +54,22 @@ const Hero = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.5 }}
-        className="text-center max-w-2xl px-4"
+        className="text-center max-w-3xl px-4"
       >
-        {/* Tagline */}
         <motion.p
           variants={item}
-          className="text-base sm:text-lg font-semibold tracking-wide mb-3"
-          style={{ color: "rgb(79 70 229)" }} // stronger indigo for visibility
+          className="text-base sm:text-lg font-semibold tracking-wide mb-3 text-blue-600"
         >
           Your All-In-One Digital Partner
         </motion.p>
 
-        {/* Main heading */}
-        <motion.h1
-          variants={item}
-          className="mt-2 text-4xl sm:text-5xl font-extrabold leading-tight bg-clip-text text-transparent"
-          style={{
-            // keep the striking gradient while ensuring contrast/visibility
-            background:
-              "linear-gradient(90deg, rgba(79,70,229,1) 0%, rgba(139,92,246,1) 45%, rgba(236,72,153,1) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          Innovation Design and Growth
-        </motion.h1>
+        {/* Heading with all 4 words in one row */}
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight flex flex-wrap justify-center">
+          <GradientWord>Innovation</GradientWord>
+          <GradientWord>Design</GradientWord>
+          <GradientWord>and</GradientWord>
+          <GradientWord>Growth</GradientWord>
+        </h2>
 
         {/* animated accent bar */}
         <motion.div
@@ -62,21 +79,19 @@ const Hero = () => {
           transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
           className="mx-auto mt-4 h-1 w-28 rounded origin-left"
           style={{
-            background: "linear-gradient(90deg,#06b6d4,#3b82f6,#a78bfa)",
+            background: LOGO_GRADIENT,
           }}
         />
 
-        {/* Sub-heading */}
-        {/* <motion.p
-          variants={item}
-          className="mt-6 text-base sm:text-lg text-slate-700"
-          aria-label="What we do"
-        >
-          Web Development  •  Graphic Design  •  Digital Marketing
-        </motion.p> */}
         <motion.p
           variants={item}
-          className="mt-6 text-base sm:text-lg font-medium text-indigo-600"
+          className="mt-6 text-base sm:text-lg font-medium"
+          style={{
+            background: LOGO_GRADIENT2,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
           aria-label="What we do"
         >
           Web Development • Graphic Design • Digital Marketing

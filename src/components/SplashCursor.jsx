@@ -23,7 +23,8 @@ function SplashCursor({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const GLOBAL_BRIGHTNESS = 0.6;
+    // increased brightness for stronger color effects
+    const GLOBAL_BRIGHTNESS = 0.85;
 
     function pointerPrototype() {
       this.id = -1;
@@ -988,10 +989,10 @@ function SplashCursor({
 
     function clickSplat(pointer) {
       const color = generateColor();
-      // reduce click intensity (used to be color.* *= 10.0)
-      color.r *= 1.5;
-      color.g *= 1.5;
-      color.b *= 1.5;
+      // increased click intensity for brighter clicks
+      color.r *= 2.5;
+      color.g *= 2.5;
+      color.b *= 2.5;
       let dx = 10 * (Math.random() - 0.5);
       let dy = 30 * (Math.random() - 0.5);
       splat(pointer.texcoordX, pointer.texcoordY, dx, dy, color);
@@ -1013,10 +1014,10 @@ function SplashCursor({
       blit(velocity.write);
       velocity.swap();
 
-      // dim the incoming color before writing to dye
-      const dimmedR = color.r * GLOBAL_BRIGHTNESS * 0.6;
-      const dimmedG = color.g * GLOBAL_BRIGHTNESS * 0.6;
-      const dimmedB = color.b * GLOBAL_BRIGHTNESS * 0.6;
+      // dim the incoming color before writing to dye - dim less than before
+      const dimmedR = color.r * GLOBAL_BRIGHTNESS * 0.9;
+      const dimmedG = color.g * GLOBAL_BRIGHTNESS * 0.9;
+      const dimmedB = color.b * GLOBAL_BRIGHTNESS * 0.9;
 
       gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
       gl.uniform3f(splatProgram.uniforms.color, dimmedR, dimmedG, dimmedB);
@@ -1071,12 +1072,13 @@ function SplashCursor({
       return delta;
     }
 
-   function generateColor() {
+    // generateColor: stronger base multiplier for more vivid splats
+    function generateColor() {
       let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-      // reduced from 0.15 to 0.06 for much dimmer base colors
-      c.r *= 0.06;
-      c.g *= 0.06;
-      c.b *= 0.06;
+      // increased multiplier from 0.06 -> 0.18 for more visible base colors
+      c.r *= 0.18;
+      c.g *= 0.18;
+      c.b *= 0.18;
       return c;
     }
 

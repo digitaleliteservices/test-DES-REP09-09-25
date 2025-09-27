@@ -400,35 +400,48 @@ export default function CoreValues() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* Heading */}
-     <div className="flex justify-center mb-6">
-  <div className="text-center">
-    <h2
-      className="font-extrabold tracking-tight leading-tight"
-      style={{
-        fontSize: "clamp(2.4rem, 6vw, 5.2rem)",
-        lineHeight: 1.02,
-        background: LOGO_GRADIENT,
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        backgroundClip: "text",
-        backgroundSize: "200% 100%",
-      }}
-    >
-      Core values
-    </h2>
+        <div className="flex justify-center mb-6">
+          <div className="text-center">
+            <span className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-gray-800">
+              🌟 The DNA of Our Brand
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-left">
+              <span className="text-slate-900">Core</span>{" "}
+              <span
+                className="inline-block"
+                style={{
+                  background: LOGO_GRADIENT,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Values
+              </span>
+            </h2>
 
-    <div
-      className="mt-4 h-1 rounded-full mx-auto"
-      style={{
-        width: 160,
-        background: LOGO_GRADIENT,
-        backgroundSize: "200% 100%",
-        boxShadow: "0 8px 28px rgba(44,109,246,0.10)",
-      }}
-    />
-  </div>
-</div>
+            {/* <div
+              className="mt-4 h-1 rounded-full mx-auto"
+              style={{
+                width: 160,
+                background: LOGO_GRADIENT,
+                backgroundSize: "200% 100%",
+                boxShadow: "0 8px 28px rgba(44,109,246,0.10)",
+              }}
+            /> */}
 
+            <motion.div
+              initial={{ scaleX: 0.6, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="mx-auto mt-4 h-1 w-36 rounded-full"
+              style={{
+                background: "linear-gradient(90deg,#00E5FF,#2C6DF6,#FF8A00)",
+                opacity: 0.14,
+              }}
+            />
+          </div>
+        </div>
 
         {/* Grid rows */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">

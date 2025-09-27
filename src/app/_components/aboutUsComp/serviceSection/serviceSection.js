@@ -494,13 +494,19 @@
 
 // export default ServicesSection;
 
-
-
 "use client";
 
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+
+const CLOUD_BASE = "https://res.cloudinary.com/dxdgk4v3t/image/upload";
+const digiMark1 = `${CLOUD_BASE}/v1758957523/digital_marketing_yilyjw.jpg`;
+const digiMark2 = `${CLOUD_BASE}/v1758957649/digital_marketing5_oy2nzp.avif`;
+const digiMark3 = `${CLOUD_BASE}/v1758957750/digital_marketing6_e6e0q0.avif`;
+
+const LOGO_GRADIENT =
+  "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
 
 /* card entrance variant */
 const cardVariant = {
@@ -509,9 +515,9 @@ const cardVariant = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { 
-      duration: 0.8, 
-      delay: i * 0.15, 
+    transition: {
+      duration: 0.8,
+      delay: i * 0.15,
       ease: [0.25, 0.46, 0.45, 0.94],
     },
   }),
@@ -524,7 +530,7 @@ function ServicesSection() {
     {
       title: "Digital Marketing Excellence",
       desc: "We craft strategies that amplify visibility, engage audiences, and drive measurable growth.",
-      img: "/assets/digital_marketing.jpeg",
+      img: digiMark1,
       colors: ["#3b82f6", "#06b6d4"], // blue → cyan
       shape: "rect",
       icon: "📈",
@@ -532,7 +538,7 @@ function ServicesSection() {
     {
       title: "Creative Design & Branding",
       desc: "From graphics to complete brand identities, we design with impact — ensuring your message is memorable.",
-      img: "/assets/digital_marketing5.jpeg",
+      img: digiMark2,
       colors: ["#8b5cf6", "#ec4899"], // purple → pink
       shape: "circle",
       icon: "🎨",
@@ -540,7 +546,7 @@ function ServicesSection() {
     {
       title: "Custom Web Development",
       desc: "We build tailored web solutions that transform ideas into powerful digital experiences.",
-      img: "/assets/digital_marketing6.jpeg",
+      img: digiMark3,
       colors: ["#fb923c", "#f43f5e"], // orange → coral
       shape: "pentagon",
       icon: "💻",
@@ -557,7 +563,7 @@ function ServicesSection() {
       ref={serviceRef}
       className="relative flex flex-col items-center justify-center px-6 py-20 md:py-28 overflow-hidden"
       aria-label="Our services"
-      style={{ 
+      style={{
         position: "relative",
       }}
     >
@@ -681,11 +687,50 @@ function ServicesSection() {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="text-center mb-16 relative"
       >
-        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-24 h-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-4">
+        {/* <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-24 h-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div> */}
+        {/* <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-4">
           What We <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Offer</span>
+        </h2> */}
+        <span className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-gray-800">
+          🌟 Discove With Us
+        </span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+          <span className="text-slate-900">What We</span>{" "}
+          <span
+            className="inline-block"
+            style={{
+              background: LOGO_GRADIENT,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Offer
+          </span>
         </h2>
-        <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-lg">Tailored services that combine creativity, strategy and engineering — built to move your brand forward.</p>
+        {/* <div
+          className="mt-4 h-1 rounded-full mx-auto"
+          style={{
+            width: 160,
+            background: LOGO_GRADIENT,
+            backgroundSize: "200% 100%",
+            boxShadow: "0 8px 28px rgba(44,109,246,0.10)",
+          }}
+        /> */}
+        <motion.div
+          initial={{ scaleX: 0.6, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.08 }}
+          className="mx-auto mt-4 h-1 w-36 rounded-full"
+          style={{
+            background: "linear-gradient(90deg,#00E5FF,#2C6DF6,#FF8A00)",
+            opacity: 0.14,
+          }}
+        />
+        <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-lg">
+          Tailored services that combine creativity, strategy and engineering —
+          built to move your brand forward.
+        </p>
       </motion.div>
 
       {/* cards */}
@@ -699,7 +744,8 @@ function ServicesSection() {
               ? "card-image-circle"
               : "card-image-pent";
 
-          const circleSize = card.shape === "circle" ? { width: 280, height: 280 } : {};
+          const circleSize =
+            card.shape === "circle" ? { width: 280, height: 280 } : {};
 
           // For card 2 (i===1), place image on right on md+; other cards keep image left
           const rowClass = i === 1 ? "md:flex-row-reverse" : "md:flex-row";
@@ -716,7 +762,9 @@ function ServicesSection() {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               className="group relative overflow-visible bg-transparent"
             >
-              <div className={`flex flex-col ${rowClass} md:items-center items-start gap-8 md:gap-16 service-card glass relative p-6 md:p-8 rounded-3xl`}>
+              <div
+                className={`flex flex-col ${rowClass} md:items-center items-start gap-8 md:gap-16 service-card glass relative p-6 md:p-8 rounded-3xl`}
+              >
                 <div className="rim" aria-hidden />
 
                 {/* image */}
@@ -729,7 +777,7 @@ function ServicesSection() {
                     boxShadow: `0 20px 50px ${card.colors[0]}30`,
                     borderRadius: card.shape === "rect" ? 20 : undefined,
                   }}
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.03,
                     rotate: card.shape === "circle" ? 2 : 0,
                   }}
@@ -752,16 +800,20 @@ function ServicesSection() {
                       e.currentTarget.src = placeholder;
                     }}
                     animate={{ y: [0, -12, 0] }}
-                    transition={{ duration: 6 + i, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{
+                      duration: 6 + i,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                     whileHover={{ scale: 1.08 }}
-                    style={{ 
-                      width: "100%", 
-                      height: "100%", 
-                      objectFit: "cover", 
-                      display: "block", 
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
                       minHeight: 240,
                       position: "relative",
-                      zIndex: 10
+                      zIndex: 10,
                     }}
                     className="transition-transform duration-700"
                   />
@@ -779,18 +831,21 @@ function ServicesSection() {
                     }}
                   />
 
-                  <div style={{ position: "relative", zIndex: 20 }} className="p-6 md:p-8 bg-transparent">
-                    <div 
-                      style={{ 
-                        height: 6, 
-                        width: 60, 
-                        borderRadius: 9999, 
-                        background: grad, 
+                  <div
+                    style={{ position: "relative", zIndex: 20 }}
+                    className="p-6 md:p-8 bg-transparent"
+                  >
+                    <div
+                      style={{
+                        height: 6,
+                        width: 60,
+                        borderRadius: 9999,
+                        background: grad,
                         marginBottom: 20,
-                      }} 
+                      }}
                       className="group-hover:width-80 transition-all duration-500"
                     />
-                    
+
                     <h3 className="text-2xl md:text-4xl font-bold mb-4 text-gray-900 group-hover:text-black transition-colors duration-500">
                       {card.title}
                     </h3>
@@ -807,24 +862,34 @@ function ServicesSection() {
                           background: grad,
                           boxShadow: `0 12px 36px ${card.colors[0]}40`,
                         }}
-                        whileHover={{ 
+                        whileHover={{
                           scale: 1.05,
                           boxShadow: `0 16px 40px ${card.colors[0]}60`,
                         }}
                         whileTap={{ scale: 0.98 }}
                       >
                         <span className="relative z-10">Let's talk</span>
-                        <svg 
-                          width="18" 
-                          height="18" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          xmlns="http://www.w3.org/2000/svg" 
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
                           className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1"
                           aria-hidden
                         >
-                          <path d="M2 12h20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                          <path d="M15 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                          <path
+                            d="M2 12h20"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M15 5l7 7-7 7"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
                         </svg>
                         <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                       </motion.a>
@@ -834,9 +899,9 @@ function ServicesSection() {
                   <div
                     aria-hidden
                     className="text-overlay absolute left-0 top-0 bottom-0 origin-left rounded-xl"
-                    style={{ 
-                      background: grad, 
-                      zIndex: 10, 
+                    style={{
+                      background: grad,
+                      zIndex: 10,
                       opacity: 0,
                     }}
                   />
@@ -847,12 +912,15 @@ function ServicesSection() {
               {[1, 2, 3].map((dot) => (
                 <motion.div
                   key={dot}
-                  className={`absolute rounded-full ${dot % 2 === 0 ? 'bg-blue-400/20' : 'bg-purple-400/20'} -z-10`}
+                  className={`absolute rounded-full ${
+                    dot % 2 === 0 ? "bg-blue-400/20" : "bg-purple-400/20"
+                  } -z-10`}
                   style={{
                     width: dot * 16,
                     height: dot * 16,
                     top: `${20 + dot * 10}%`,
-                    left: dot % 2 === 0 ? `${80 - dot * 5}%` : `${10 + dot * 5}%`,
+                    left:
+                      dot % 2 === 0 ? `${80 - dot * 5}%` : `${10 + dot * 5}%`,
                   }}
                   animate={{
                     y: [0, -15, 0],
@@ -871,7 +939,7 @@ function ServicesSection() {
       </div>
 
       {/* Section bottom decoration */}
-      <motion.div 
+      <motion.div
         className="mt-16 w-24 h-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
         initial={{ width: 0 }}
         whileInView={{ width: 96 }}

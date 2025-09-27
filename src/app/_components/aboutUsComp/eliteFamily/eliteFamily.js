@@ -54,21 +54,23 @@ export default function EliteFamily() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-10">
-          <motion.h2
-            id="elite-family-heading"
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
-            style={{
-              background: LOGO_GRADIENT,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            The Elite Family
-          </motion.h2>
+          <span className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-gray-800">
+            🌟 Guiding Minds
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+            <span className="text-slate-900">The</span>{" "}
+            <span
+              className="inline-block"
+              style={{
+                background: LOGO_GRADIENT,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Elite Family
+            </span>
+          </h2>
 
           <motion.div
             initial={{ scaleX: 0.6, opacity: 0 }}

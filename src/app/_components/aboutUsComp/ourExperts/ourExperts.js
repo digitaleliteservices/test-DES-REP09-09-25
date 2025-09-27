@@ -6,6 +6,9 @@ import { PenTool, Monitor, Code, Megaphone, Users } from "lucide-react";
 import CurtainFooter from "@/app/curtainraiser/curtainRaiser";
 import Footer from "@/app/footer/page";
 
+const LOGO_GRADIENT =
+  "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
+
 const EXPERTS = [
   {
     group: "Graphic Designer",
@@ -67,21 +70,42 @@ export default function OurExperts() {
         <div className="max-w-7xl mx-auto px-6">
           {/* Heading */}
           <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+            <span className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-sm sm:text-base inline-block mb-4 text-gray-800">
+              🌟 Trusted Professionals
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
               <span className="text-slate-900">Our</span>{" "}
               <span
-                className="inline-block text-slate-900"
-                //   style={{
-                //     background:
-                //       "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)",
-                //     WebkitBackgroundClip: "text",
-                //     WebkitTextFillColor: "transparent",
-                //     backgroundClip: "text",
-                //   }}
+                className="inline-block"
+                style={{
+                  background: LOGO_GRADIENT,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
               >
                 Experts
               </span>
             </h2>
+            {/* <div
+                      className="mt-4 h-1 rounded-full mx-auto"
+                      style={{
+                        width: 160,
+                        background: LOGO_GRADIENT,
+                        backgroundSize: "200% 100%",
+                        boxShadow: "0 8px 28px rgba(44,109,246,0.10)",
+                      }}
+                    /> */}
+            <motion.div
+              initial={{ scaleX: 0.6, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="mx-auto mt-4 h-1 w-36 rounded-full"
+              style={{
+                background: "linear-gradient(90deg,#00E5FF,#2C6DF6,#FF8A00)",
+                opacity: 0.14,
+              }}
+            />
             <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
               Compact profiles of the teams powering design, development, and
               growth at Digital Elite Services.
@@ -97,29 +121,23 @@ export default function OurExperts() {
             viewport={{ once: true, amount: 0.25 }}
           >
             {EXPERTS.map((exp, idx) => {
-              const initials = exp.names
-                .map((n) =>
-                  n
-                    .split(" ")
-                    .map((p) => p[0])
-                    .slice(0, 2)
-                    .join("")
-                )
-                .join(" • ")
-                .toUpperCase();
-
               const accentFrom = exp.accent[0];
               const accentTo = exp.accent[1];
 
               return (
                 <motion.article
                   key={exp.group + idx}
-                  className="relative bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-lg transition-shadow"
+                  className="relative rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
                   variants={cardVariants}
                   whileHover="hover"
                   tabIndex={0}
                   aria-labelledby={`expert-${idx}`}
                   role="group"
+                  style={{
+                    // Light gradient background with low opacity
+                    background: `linear-gradient(135deg, ${accentFrom}11, ${accentTo}11)`,
+                    border: `1px solid ${accentTo}33`,
+                  }}
                 >
                   <div className="flex items-start gap-4">
                     {/* avatar / icon box */}
@@ -127,7 +145,7 @@ export default function OurExperts() {
                       className="w-14 h-14 rounded-lg grid place-items-center text-white font-semibold text-sm flex-shrink-0"
                       style={{
                         background: `linear-gradient(135deg, ${accentFrom}, ${accentTo})`,
-                        boxShadow: `0 10px 24px ${accentTo}22`,
+                        boxShadow: `0 10px 24px ${accentTo}44`,
                       }}
                       aria-hidden
                     >

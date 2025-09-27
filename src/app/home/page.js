@@ -31,7 +31,7 @@ export default function Home() {
   if (loading) return <Loader />;
   return (
     <div className="relative">
-      <SplashCursor/>
+      <SplashCursor />
       {/* <SmoothCursor/> */}
       <Navbar />
       {/* <Hero /> */}

@@ -88,3 +88,73 @@ const Loader = () => {
 };
 
 export default Loader;
+
+// "use client";
+
+// import Image from "next/image";
+// import { useEffect, useState } from "react";
+// import logo from "../../../../public/assets/DES_LOGO4.png";
+
+// const Loader = () => {
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const timer = setTimeout(() => setLoading(false), 2000);
+//     return () => clearTimeout(timer);
+//   }, []);
+
+//   if (!loading) return null;
+
+//   return (
+//     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gradient">
+//       <div className="relative w-40 h-40 flex items-center justify-center">
+//         {/* Revolving Circle */}
+//         <div className="absolute w-56 h-56 rounded-full animate-spin-slow border-ring"></div>
+
+//         {/* Logo */}
+//         <Image src={logo} alt="logo" className="w-28 h-28 relative z-10" />
+//       </div>
+
+//       <style jsx>{`
+//         .bg-gradient {
+//           background: #f0f9ff; /* very light blue */
+//         }
+
+//         .border-ring {
+//           background: conic-gradient(
+//             from 0deg,
+//             #3b82f6,
+//             #60a5fa,
+//             #06b6d4,
+//             #3b82f6
+//           ); /* subtle blue ring */
+//           -webkit-mask: radial-gradient(
+//             farthest-side,
+//             transparent calc(100% - 6px),
+//             black 0
+//           );
+//           mask: radial-gradient(
+//             farthest-side,
+//             transparent calc(100% - 6px),
+//             black 0
+//           );
+//         }
+
+//         .animate-spin-slow {
+//           animation: spin 3s linear infinite;
+//         }
+
+//         @keyframes spin {
+//           0% {
+//             transform: rotate(0deg);
+//           }
+//           100% {
+//             transform: rotate(360deg);
+//           }
+//         }
+//       `}</style>
+//     </div>
+//   );
+// };
+
+// export default Loader;

@@ -3,9 +3,12 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import whatWeOffer from "../../../../../public/assets/whatweoffer2.jpg";
-import companyLogo from "../../../../../public/assets/DES_LOGO4.png";
+// import whatWeOffer from "../../../../../public/assets/whatweoffer2.jpg";
+// import companyLogo from "../../../../../public/assets/DES_LOGO4.png";
 
+const CLOUD_BASE = "https://res.cloudinary.com/dxdgk4v3t/image/upload";
+const whatWeOffer = `${CLOUD_BASE}/v1758956903/whatweoffer2_g8sknk.jpg`;
+const companyLogo = `${CLOUD_BASE}/v1758957308/DES_LOGO4_qggcbp.png`;
 const LOGO_GRADIENT =
   "linear-gradient(90deg,#00E5FF 0%,#2C6DF6 52%,#FF8A00 100%)";
 
@@ -55,6 +58,7 @@ const PreWhatWeOffer = () => {
 
               <div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-left">
+                  <span className="text-slate-900">About</span>{" "}
                   <span
                     className="inline-block"
                     style={{
@@ -64,7 +68,7 @@ const PreWhatWeOffer = () => {
                       backgroundClip: "text",
                     }}
                   >
-                    ABOUT COMPANY
+                    Company
                   </span>
                 </h2>
 
