@@ -6,36 +6,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // ✅ Page-level SEO
-export const metadata = {
-  title:
-    "Contact Us | Digital Elite Services - Best Digital Marketing Agency in Bangalore",
-  description:
-    "Get expert digital marketing services including SEO, PPC, social media marketing, and web development from Digital Elite Services in Bangalore.",
-  keywords:
-    "Digital marketing services, Social media marketing, SEO services, PPC advertising, Web development, Branding services, Online marketing, E-commerce marketing, Lead generation, Email marketing",
-  openGraph: {
-    title:
-      "Contact Us | Digital Elite Services - Digital Marketing Experts in Bangalore",
-    description:
-      "Reach out to Digital Elite Services for professional web development and digital marketing solutions in Bangalore.",
-    type: "website",
-    url: "https://digitaleliteservices.in/contact", // 👈 use your actual contact page URL
-    images: ["/favicon.ico"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact Us | Digital Elite Services",
-    description:
-      "Get expert digital marketing services from Digital Elite Services in Bangalore.",
-    images: ["/favicon.ico"],
-  },
-  alternates: {
-    canonical: "https://digitaleliteservices.in/contact",
-  },
-  other: {
-    author: "Digital Elite Services",
-  },
-};
+
 const OurContact = () => {
   const [formData, setFormData] = useState({
     name: "",
