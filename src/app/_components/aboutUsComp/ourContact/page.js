@@ -5,7 +5,37 @@ import { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+// ✅ Page-level SEO
+export const metadata = {
+  title:
+    "Contact Us | Digital Elite Services - Best Digital Marketing Agency in Bangalore",
+  description:
+    "Get expert digital marketing services including SEO, PPC, social media marketing, and web development from Digital Elite Services in Bangalore.",
+  keywords:
+    "Digital marketing services, Social media marketing, SEO services, PPC advertising, Web development, Branding services, Online marketing, E-commerce marketing, Lead generation, Email marketing",
+  openGraph: {
+    title:
+      "Contact Us | Digital Elite Services - Digital Marketing Experts in Bangalore",
+    description:
+      "Reach out to Digital Elite Services for professional web development and digital marketing solutions in Bangalore.",
+    type: "website",
+    url: "https://digitaleliteservices.in/contact", // 👈 use your actual contact page URL
+    images: ["/favicon.ico"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Digital Elite Services",
+    description:
+      "Get expert digital marketing services from Digital Elite Services in Bangalore.",
+    images: ["/favicon.ico"],
+  },
+  alternates: {
+    canonical: "https://digitaleliteservices.in/contact",
+  },
+  other: {
+    author: "Digital Elite Services",
+  },
+};
 const OurContact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -73,24 +103,7 @@ const OurContact = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#181625] relative overflow-hidden  ">
-     {/* Add SEO Head */}
-      <Head>
-        <title>Contact Us | Digital Elite Services - Best Digital Marketing Agency in Bangalore</title>
-        <meta name="description" content="Get expert digital marketing services including SEO, PPC, social media marketing, and web development from Digital Elite Services in Bangalore." />
-        <meta name="keywords" content="Digital marketing services, Social media marketing, SEO services, PPC advertising, Web development, Branding services, Online marketing, E-commerce marketing, Lead generation, Email marketing" />
-        <meta name="author" content="Digital Elite Services" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {/* Open Graph */}
-        <meta property="og:title" content="Contact Us | Digital Elite Services - Digital Marketing Experts in Bangalore" />
-        <meta property="og:description" content="Reach out to Digital Elite Services for professional web development and digital marketing solutions in Bangalore." />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Contact Us | Digital Elite Services" />
-        <meta name="twitter:description" content="Get expert digital marketing services from Digital Elite Services in Bangalore." />
-      </Head>
+    
     
       {/* Purple glow at bottom */}
       <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-blue-400/50 to-transparent pointer-events-none" />

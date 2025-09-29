@@ -23,6 +23,36 @@ import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 import PostLoaderImage from "../postloaderimage/postloaderimage";
 
+
+export const metadata = {
+  title:
+    "Digital Elite Services | Web Development, Graphic Design & Digital Marketing",
+  description:
+    "Digital Elite Services offers expert web development, graphic design, and digital marketing solutions to grow your business effectively.",
+  keywords:
+    "Web development, Graphic design, Digital marketing, SEO services, Social media marketing, E-commerce solutions, Branding services, Online advertising",
+  openGraph: {
+    title: "Digital Elite Services - Your All In One Digital Partner",
+    description:
+      "Professional web development, graphic design, and digital marketing services to boost your brand's online presence.",
+    type: "website",
+    url: "https://digitaleliteservices.in/",
+    images: ["/favicon.ico"], // replace with real homepage banner image
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Digital Elite Services - Web Development & Marketing Experts",
+    description:
+      "Grow your business with expert solutions in web development, design, and digital marketing from Digital Elite Services.",
+    images: ["/favicon.ico"],
+  },
+  alternates: {
+    canonical: "https://digitaleliteservices.in",
+  },
+  other: {
+    author: "Digital Elite Services",
+  },
+};
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [showPostImage, setShowPostImage] = useState(false);
