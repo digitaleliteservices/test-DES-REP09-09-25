@@ -1,13 +1,21 @@
 "use client";
 import Head from 'next/head';
 
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../../_components/loader/page";
+
 // ✅ Page-level SEO
 
 const OurContact = () => {
+
+ const [loadingSpin, setLoadingSpin] = useState(true);
+
+
+
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -71,6 +79,13 @@ const OurContact = () => {
       setLoading(false);
     }
   };
+
+    useEffect(() => {
+    const timer = setTimeout(() => setLoadingSpin(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loadingSpin) return <Loader />;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#181625] relative overflow-hidden  ">
