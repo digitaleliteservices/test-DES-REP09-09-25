@@ -2,6 +2,7 @@
 
 import { WineOff } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import Loader from "../../../_components/loader/page";
 
 // Approach items
 const approach = [
@@ -151,6 +152,8 @@ const CloseIcon = () => (
 
 const OurServicesComp = () => {
   const [openIdx, setOpenIdx] = useState(null);
+ const [loadingSpin, setLoadingSpin] = useState(true);
+
 
   useEffect(() => {
     // only run on client
@@ -189,7 +192,13 @@ const OurServicesComp = () => {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+  
+    useEffect(() => {
+    const timer = setTimeout(() => setLoadingSpin(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
+  if (loadingSpin) return <Loader />;
   return (
     <section className="relative w-full min-h-screen overflow-hidden text-white bg-[#0c101e]">
       {/* === BRANDED BACKDROP GRADIENT — BRIGHTER === */}

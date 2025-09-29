@@ -11,10 +11,18 @@ import Spiral from "@/spiral/page";
 import EliteFamily from "./eliteFamily/eliteFamily";
 import OurExperts from "./ourExperts/ourExperts";
 import PreWhatWeOffer from "./preWeOffer/page";
+import { useState, useEffect } from "react";
+import Loader from "../../_components/loader/page";
 
 
 const AboutUsComp = () => {
-  
+  const [loading, setLoading] = useState(true);
+   useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) return <Loader />;
+
   return (
     <>
       <HeroSection />
