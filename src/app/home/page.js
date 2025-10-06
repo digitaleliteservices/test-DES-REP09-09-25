@@ -21,7 +21,7 @@ import Essence from "../essence/page";
 import SplashCursor from "@/components/SplashCursor";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
-import PostLoaderImage from "../postloaderimage/postloaderimage";
+// import PostLoaderImage from "../postloaderimage/postloaderimage";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -111,14 +111,14 @@ export default function Home() {
             className="relative z-50 pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <PostLoaderImage
+            {/* <PostLoaderImage
               title="Happy Dussehra!"
               message="Wishing you a joyful and prosperous Dussehra from the whole team. May your celebrations be bright and your projects shine."
               ctaText="Explore Offers"
               secondaryText="Maybe later"
               imgSrc="/assets/dussera3.jpg"
               onClose={() => setShowPostImage(false)}
-            />
+            /> */}
           </div>
         </div>
       )}
