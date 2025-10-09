@@ -112,7 +112,7 @@ export default function EliteFamily() {
                 Leadership Team
               </h4>
               <p className="mt-3 text-sm text-slate-600 max-w-sm">
-                Under our leadership, Digital Elite Services is committed to
+                Digital Elite Services is committed to
                 helping businesses strengthen their online presence, engage
                 audiences and achieve measurable growth in today's dynamic
                 digital landscape.
