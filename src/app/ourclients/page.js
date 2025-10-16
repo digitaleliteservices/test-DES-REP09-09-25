@@ -10,7 +10,7 @@ const clients = [
   { name: "DHS", src: "/assets/DHS.png", url: "https://defencehousingsociety.com/" },
   { name: "RRPL", src: "/assets/clientlogo.png", url: "https://rajavrukshagroup.in/" },
   { name: "Plumeria", src: "/assets/Plumeria.png", url: "https://plumeriaresort.in/" },
-  { name: "SriMatru", src: "/assets/SriMathru2.jpg", url: "https://srimatru.in/" },
+  { name: "SriMatru", src: "/assets/SriMathru3.png", url: "https://srimatru.in/" },
   { name: "North East Reality", src: "/assets/logo-NER2.png", url: "https://northeastreality.in/" },
   { name: "Gnanasamrudhi", src: "/assets/gnanasamrudhi.png" },
 ];
